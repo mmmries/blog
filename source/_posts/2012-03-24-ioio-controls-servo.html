@@ -1,0 +1,22 @@
+---
+layout: post
+title: "IOIO Controls a Servo"
+date: 2012-03-24
+comments: false
+---
+
+<div class='post'>
+<div class='posterous_autopost'><p>I'm turning into a posting maniac. &nbsp;I'm just getting excited about how close I am to getting a household robot pet. &nbsp;This afternoon I modified the HelloIOIO sample application to include a slider bar that controls an RC servo. &nbsp;I follow a similar approach to&nbsp;<a href="http://trandi.wordpress.com/2011/07/03/android-ioio-rc-servo-or-esc/">http://trandi.wordpress.com/2011/07/03/android-ioio-rc-servo-or-esc/</a>.</p>  <p>Here is a quick video.</p>  <p><iframe src="http://www.youtube.com/embed/nXtNI_mffLY" frameborder="0" height="315" width="560"></iframe></p></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Michael Ries</div>
+<div class='content'>
+I am really happy with how easy the IOIO is to use so far and I think that switching to a roomba wouldn&#39;t be much of an issue.  I would suggest you check out https://github.com/ytai/ioio/wiki/UART for details on sending UART signals that the roomba can understand over its SCI.  <br /><br />Also check the voltage logic levels for the Roomba SCI.  I remember that when I played with a roomba last time that it was not using 3.3v which is the standard logic level that my board used (the IOIO defaults to 3.3v as well).  I had to add a small signal converter board which I got instructions for at http://blog.makezine.com/2008/02/29/how-to-make-a-roomba-seri/<br /><br />Good luck and please leave another comment if you make progress! Also check out makerhome.ca where these posts and posts by my buddy duane are both shared.</div>
+</div>
+<div class='comment'>
+<div class='author'>kleekru</div>
+<div class='content'>
+Looks like you are on your way.  I have a working roomBa telepresence bot based on Roomba and ROS.  I want to replace the onboard laptop with an Android tablet I just received and it seems reasonable to use te IOIO board to talk to the Roomba and an onboard BS2.  Let me know if you have any insight for controlling the Room a from Android via the IOIO</div>
+</div>
+</div>
