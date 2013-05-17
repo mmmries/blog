@@ -4,3 +4,10 @@
 body > header {
   background-color: #8DD6D6;
 }
+
+div.file-data table.lines.highlight{
+  width: 100%;
+  td {
+    font-size: 9pt;
+  }
+}
