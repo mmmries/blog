@@ -2,7 +2,7 @@
 layout: post
 title: "you should sleep on it"
 date: 2013-10-09 18:23
-comments: true
+comments: false
 categories: programming
 published: false
 ---
