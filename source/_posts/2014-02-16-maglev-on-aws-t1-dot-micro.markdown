@@ -57,7 +57,7 @@ There was an additional log file in the same directoy called maglev_8207pcmon.lo
 
 A little bit of googling led me to [a Gemstone/S article](http://programminggems.wordpress.com/2012/04/06/configuring-shared-memory/) which explained a bit about the shared memory, but in this case the maglev installer had set all the correct values for shared memory settings and the stone was still failing to start. So I checked the system.conf file for maglev which included the SHR_PAGE_CACHE_SIZE_KB setting. It was defaulted to ~1GB of shared memory, but a t1.micro has less than 600MB so I changed the setting like this:
 
-``` /usr/local/rvm/rubies/maglev-head/etc/system.conf
+```text /usr/local/rvm/rubies/maglev-head/etc/system.conf
 #SHR_PAGE_CACHE_SIZE_KB = 1000000;
 SHR_PAGE_CACHE_SIZE_KB = 307200;
 ```
