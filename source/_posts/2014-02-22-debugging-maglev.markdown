@@ -3,7 +3,7 @@ layout: post
 title: "Debugging Maglev"
 date: 2014-02-22 10:36
 comments: true
-categories: ruby maglev
+categories: ruby maglev puma
 ---
 
 ## TL/DR; Maglev still has a way to go, but they provide some very low-level information to help debug.
