@@ -16,13 +16,13 @@ But it turns out that I wasn't too far off. [Tim's IO.select fix](https://github
 
 I have never wished so much that a program would just crash and fail rather than hang. Since I have no experience running a real debugger or profiler in Maglev I had to fall back to the tried and trusty "puts debugging" technique. This also meant going on a deep dive through [Puma's](http://puma.io/) [codebase](https://github.com/puma/puma).
 
-It has been a while since I had last worked on a codebase that made heavy use of Thread, mutexes and reactors. Luckily for me Puma uses all of them at the same time! Eventually I tracked down the hanging to a call to IO.read_nonblock. I wrote [a little gist](https://gist.github.com/hqmq/9278656) to narrow down the problem to a simpler space and [submitted an issue](https://github.com/MagLev/maglev/issues/338) on the Maglev repo. After the fast fix I got from Tim on the IO.select problem I figured submitting an issue was probably good enough.
+It has been a while since I had last worked on a codebase that made heavy use of Thread, mutexes and reactors. Luckily for me Puma uses all of them at the same time! Eventually I found the call to IO.read_nonblock that was causing the issue. I wrote [a little gist](https://gist.github.com/hqmq/9278656) to narrow down the problem and [submitted an issue](https://github.com/MagLev/maglev/issues/338) on the Maglev repo. After the fast fix I got from Tim on the IO.select problem I figured submitting an issue was probably good enough.
 
 ## The Journey
 
 This morning at work I had a nagging feeling. My "Open Source Conscience" was burning. Why was I waiting for someone else to fix the bug? I am definitely not qualified to try to fix low-level issues on a language implementation, but I should at least try.
 
-So on my lunch break I sat on a couch with my laptop and started reading through source code. [Johnny T](https://github.com/johnnyt) suggested I take a look at how [Rubinius](http://rubini.us/) implemented the method, but Rubinius was using lots of things specific to their implementation of an IO object whereas Maglev was leaning heavily on the smalltalk/Gemstone implementation of IO. So there wasn't much shared code to lean on.
+So on my lunch break I sat on a couch with my laptop and started reading through source code. [Johnny T](https://github.com/johnnyt) suggested I take a look at how [Rubinius](http://rubini.us/) implemented the method, but Rubinius was using lots of things specific to their implementation of an IO object whereas Maglev was leaning heavily on the smalltalk/Gemstone implementation of IO. So there wasn't much in common.
 
 Then it dawned on me that read_nonblock was really just a wrapper around a system level call. There shouldn't be much implementation to even look at. Gemstone definitely runs other web servers and they certainly must be using some of the same sort of IO primitives as puma uses. So I went back to my dear friend IRB.
 
@@ -38,7 +38,7 @@ irb(main):002:0> (sock.methods - Object.methods).sort
 => ["<<", "accept", "accept_nonblock", "addr", "all?", "any?", "bind", "binmode", "bytes", "chars", "close", "close_read", "close_write", "closed?", "collect", "connect", "connect_nonblock", "connected?", "count", "cycle", "detect", "drop", "drop_while", "each", "each_byte", "each_char", "each_cons", "each_line", "each_slice", "each_with_index", "ensure_open_and_readable", "ensure_open_and_writable", "entries", "enum_cons", "enum_slice", "enum_with_index", "eof?", "fcntl", "fileno", "find", "find_all", "find_index", "first", "flush", "fsync", "getbyte", "getc", "getpeername", "gets", "getsockname", "getsockopt", "grep", "group_by", "inject", "isatty", "lineno", "lineno=", "lines", "listen", "map", "max", "max_by", "member?", "min", "min_by", "minmax", "minmax_by", "none?", "one?", "partition", "peeraddr", "pid", "print", "printf", "putc", "puts", "read", "read_nonblock", "readchar", "readline", "readlines", "readpartial", "recv", "recv_nonblock", "recvfrom", "recvfrom_nonblock", "reduce", "reject", "reopen", "reverse_each", "rewind", "seek", "select", "set_blocking", "setsockopt", "shutdown", "sort", "sort_by", "sorter", "stat", "sync", "sync=", "sysaccept", "sysread", "sysseek", "syswrite", "take", "take_while", "to_i", "to_io", "tty?", "ungetc", "write", "zip"]
 ```
 
-Sitting nearby the read methods there was something called recv_nonblock. A quick grep through the codebase showed that this method accepts two parameters, a maximum number of bytes to read and an optional string buffer to copy bytes into.  That sounds almost exactly like read_nonblock. 
+Sitting nearby the read methods there was something called recv_nonblock. A quick grep through the codebase showed that this method accepts two parameters, a maximum number of bytes to read and an optional string buffer to copy bytes into.  That sounds just like read_nonblock.
 
 ## The Solution
 
@@ -59,7 +59,7 @@ YES! Puma 2.8.0 runs out of the box on magelv (once Tim's pull request gets merg
 ## How Fast Is It???
 
 Running the same "Hello World" rack app as my previous post here are the quick numbers by testing with "ab -n 1000 -c 10 http://127.0.0.1:9292/"
-<table>
+<table style="text-align: right;" cellpadding="10">
   <thead>
     <tr>
       <th>&nbsp;</th>
