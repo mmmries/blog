@@ -12,7 +12,7 @@ My last few posts have been about my adventures of trying to get Puma to run on 
 
 # The City On a Hill
 
-As I explored this idea I was awe struck to realize how much of my code, and how much of my time thinking about code was being spent on that barrier. I had not programmed with a database in mind since the early days of my programming experience. I had brainwashed myself into thinking of my code in terms of the relational tables that would store my data.
+As I explored this idea I was awe struck to realize how much of my code, and how much of my time thinking about code was being spent on that barrier. I had been programming with a database in mind since the early days of my programming experience. I had brainwashed myself into thinking of my code in terms of the relational tables that would store my data.
 
 You might think that removing the [Object-Relational Impedance Mismatch](http://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) is a matter of convenience. Clearly not all of the logic you spend your time working on is focused on bridging that gap. So does it give you an extra 10% or maybe even 20% of your programming bandwidth back?
 
@@ -36,7 +36,7 @@ About a month ago I took some time off of Maglev to prepare a [presentation](htt
 
 After much googling that turned up nothing of interest I remembered [PStore](http://www.ruby-doc.org/stdlib-2.1.1/libdoc/pstore/rdoc/PStore.html) which is in the Ruby Standard Library!  It supports thread-safe transactional access to a persistent root. It even notices if the same object exists multiple times in the object graph and will maintain that referential integrity. I love you PStore!
 
-The main difference from a true object database is that it does not persist object definitions. So if you define class and then make a bunch of instances and save them, you can only pull them back out again if your current process has loaded the definition for that class. This has turned out not to be a huge limitation in terms of my experimentation right now. I'm already used to tools that have to load my whole app into memory on boot.
+The main difference from a true object database is that it does not persist object definitions. So if you define a class and then make a bunch of instances and save them, you can only pull them back out again if your current process has loaded the definition for that class. This has turned out not to be a huge limitation in terms of my experimentation right now. I'm already used to tools that have to load my whole app into memory on boot.
 
 # A Sample
 
@@ -91,4 +91,4 @@ Total:          4    5   1.7      4      32
 
 Clearly the PStore approach is not going to scale very well. Loading the full database on every request will become a bottlneck that can't be ignored.  But as a way to explore what it feels like to program with persistent objects it is _amazing_.
 
-At some point I hope that an open source project could make a viable alternative to using the Gemstone system. The pure object persistence Maglev represents requires language level bindings so that new object ids don't collide with persisted object ids (plus many other concerns). Those are not easy problems to solve, but I hope that someone besides the old school of Smalltalkers can make it possible.
+At some point I hope that an open source project will make a viable alternative to using the Gemstone system. The pure object persistence Maglev represents requires language level bindings so that new object ids don't collide with persisted object ids (plus many other concerns). Those are not easy problems to solve, but I hope that someone besides the old school of Smalltalkers will make it possible.
