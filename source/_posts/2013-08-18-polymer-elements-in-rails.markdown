@@ -12,6 +12,8 @@ We picked a comic book collection as the simplistic app. You can see the [code](
 
 I wrote up an implementation using [Polymer Elements](http://polymer-project.org) which is basically a way to write custom HTML elements that encapsulate details of javascript, css and html.
 
+<!--more-->
+
 ## Where to Start???
 I wanted to start with implementing a small but interesting feature of the UI. In the application.html.erb layout there is a little sidebar that shows a list of comic books with a count of how many issues each comic book has. The initial erb looks like this:
 

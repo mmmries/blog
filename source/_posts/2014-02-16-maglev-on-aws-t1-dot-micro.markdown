@@ -8,6 +8,8 @@ categories: ruby maglev aws
 
 ## TL/DR; If you want to run maglev on a small AWS instance you probably need to reduce the shared page cache size. Try adjusting the SHR_PAGE_CACHE_SIZE_KB setting in system.conf
 
+<!--more-->
+
 ## The Problem
 [Maglev](http://maglev.github.io/) is really awesome and I want to make a few toy apps and host them on my t1.micro AWS instance.
 

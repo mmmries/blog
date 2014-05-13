@@ -8,7 +8,11 @@ categories: ruby
 
 ## TL\DR; Want to play with an object database? Skip Maglev and play with PStore.
 
-My last few posts have been about my adventures of trying to get Puma to run on [Maglev](http://maglev.github.io/). That adventure began because [Johnny T](https://twitter.com/Johnny_T) infected my brain with the the idea of persistent objects. The idea that I could stop making applications in terms of relational tables and just create object graphs that can be persisted with ACID transactions.
+My last few posts have been about my adventures of trying to get Puma to run on [Maglev](http://maglev.github.io/). That adventure began because [Johnny T](https://twitter.com/Johnny_T) infected my brain with the the idea of persistent objects.
+
+<!--more-->
+
+The idea that I could stop making applications in terms of relational tables and just create object graphs that can be persisted with ACID transactions.
 
 # The City On a Hill
 

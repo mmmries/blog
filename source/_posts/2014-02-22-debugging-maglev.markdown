@@ -10,6 +10,8 @@ categories: ruby maglev puma
 
 [Puma](http://puma.io/) is a really powerful webserver and that is something that Maglev really needs. As far as I can find the only webserver option that Maglev users have today is Webrick. I love that ruby comes with Webrick out of the box as a fast and easy way to make an HTTP server, but the benchmark below tells the story of why maglev also needs a production-ready webserver:
 
+<!--more-->
+
 ```text Ruby 2.1.0 hello world rack app benchmark, 1000 requests, 10 at a time
                   mean   +/-sd
 Webrick       26ms   5.5ms

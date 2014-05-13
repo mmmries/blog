@@ -11,6 +11,8 @@ published: false
 
 I was recently watching the [Katrina Owen Play-by-Play](https://peepcode.com/products/play-by-play-kytrinyx) video and had an interesting experience.
 
+<!--more-->
+
 I watched the first half of the video and had to pause it for a few days. While watching the first half of the video the pacing felt just right. As Katrina was struggling to read through the code and reason about what it was doing I was asking most of the same questions about what was going on. I found myself occasionally rewinding to see the m3u8 file to get the context of what was happening.
 
 A few days later when I picked up where I had left off the pacing of the video felt really slow. I kept feeling impatient because Geoffrey or Katrina would be asking a question that I already knew the answer to. It felt like they were taking a long time to see a refactoring that was staring them in the face.

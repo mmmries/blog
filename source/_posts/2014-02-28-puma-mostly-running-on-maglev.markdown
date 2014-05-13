@@ -12,6 +12,8 @@ My [last post](/blog/2014/02/26/puma-runs-on-maglev) was a perfect example of wh
 
 But it turns out that I wasn't too far off. [Tim's IO.select fix](https://github.com/MagLev/maglev/tree/tim/github313) got us past the first hurdle and once he had fixed that puma would run, but it would hang on every request.
 
+<!--more-->
+
 ## The Problem
 
 I have never wished so much that a program would just crash and fail rather than hang. Since I have no experience running a real debugger or profiler in Maglev I had to fall back to the tried and trusty "puts debugging" technique. This also meant going on a deep dive through [Puma's](http://puma.io/) [codebase](https://github.com/puma/puma).

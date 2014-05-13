@@ -9,7 +9,9 @@ published: true
 
 ## Edit: After writing this I discovered that there was an problem with my GEM_PATH environment variable so puma was actually running under MRI. No Wonder it was running at almost the exact same speed as MRI :) Sorry for the false information.
 
-In my last post I talked about debugging my problems when trying to get puma running under maglev.  In just a few short days I've gotten help on teh mailing list, at a users group and on the [Maglev](https://github.com/MagLev/maglev/issues/313) github repo. The result of that help is that I can run puma under Maglev!
+In my last post I talked about debugging my problems when trying to get puma running under maglev.  In just a few short days I've gotten help on the mailing list, at a users group and on the [Maglev](https://github.com/MagLev/maglev/issues/313) github repo. The result of that help is that I can run puma under Maglev!
+
+<!--more-->
 
 ## What patches?
 
