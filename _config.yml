@@ -63,13 +63,13 @@ default_asides: [asides/recent_posts.html, asides/snapshots.html]
 # ----------------------- #
 
 # Github repositories
-github_user: hqmq
+github_user: mmmries
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user: hqmq_
+twitter_user: mmmries
 twitter_tweet_button: true
 
 # Google +1
