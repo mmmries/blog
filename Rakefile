@@ -4,7 +4,7 @@ require "stringex"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
-ssh_user       = "ec2-user@ec2-54-162-181-147.compute-1.amazonaws.com"
+ssh_user       = "ec2-user@devblog.riesd.com"
 ssh_port       = "22"
 document_root  = "/home/ec2-user/devblog"
 rsync_delete   = true
