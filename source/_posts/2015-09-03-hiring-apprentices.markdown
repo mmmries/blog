@@ -31,55 +31,77 @@ There are also serious bias issues throughout the software industry and especial
 
 This is not scientific research, but it seemed there was a large pool of extremely talented and hard-working people that was underutilized.
 
-# Teaching
+# The Gap
 
-On our team we usually only considered hiring someone if they had a full year of professional programming experience.
-This is partially because our team has no managers and no task assignment so it is easy to get lost in the weeds if you don't have your own discipline for staying focused as an engineer.
-But this meant that if we wanted to make an apprenticeship work for us, we needed  the apprentices to have a skill and experience level similar to someone with one full year of professional experience.
+On our team, we usually only considered hiring someone if they had programmed professionally for at least a year.
+This is partially because our team has no managers and no task assignment is great for engineers with a lot of experience, but makes getting lost as a junior developer very easy.
+If we wanted to make an apprenticeship work for us, we needed the apprentices to have a skill and experience level similar to someone with one full year of professional experience.
 
-But I didn't think it should actually take a year to gain that experience and those skills.
+Does it actually take a year to gain that experience?
 
-It is all too common for people to have a first programming job where they get assigned a laundry list of bugs and work alone [spending lots of time](http://www.happybearsoftware.com/how-to-survive-your-first-year-as-a-programmer.html) on just a few small conceptual misunderstandings.
-In my own experience my first two jobs wasted a lot of time because the experienced people on the team were too busy to provide guidance on which things were worth learning and which things I should skip until later.
+My first two jobs wasted a lot of time because the experienced people on the team were too busy to provide guidance.
+I often spent countless hours trying to track down a single bug.
+I remember losing sleep over a database query that took too long no matter what index I tried to create.
+Later another programmer explained how indices are handled in the database and it was immediately obvious why my we needed to change the schema rather than add an index.
 I rarely got feedback on my projects unless they broke something in production.
+How much faster could I have gained "1 year of experience" if I had spent just an hour or two on those issues?
+What learning experiences would I have missed out on?
 
-I'm not qualified to write a decent curriculum, but I think that we can deliberately make a lot of time for smart people to talk through what they are learning.
-I think that with this kind of feedback the apprentices will significantly outpace the rate at which I learned things as a new developer.
-I also think that by hiring apprentices in a group and giving them tasks as a group, they will do a lot of learning as a team.
-This will help prepare them for the very chaotic and collaborative environment on the MX engineering team, and also speed up their learning because they spend time teaching and learning from people with a similar experience level.
+I also had a few experiences at my second job where the company was short handed and they gave a project to me and another new engineer.
+Neither of us was qualified to tackle these projects, but we both learned an immense amount because we felt responsible for the outcome and we learned constantly from one another.
+There was no friction about who was working faster, or who had more experience.
+We just worked really hard to make the project work and learned a lot along the way.
 
-Based on the two ideas above we planned a mentorship model where each apprentice has a mentor assigned.
-This direct mentor has between 1 and 3 years of professional experience and sets aside one hour each day to helping their apprentice.
-The apprentice should ask for the type of help that they think will be most helpful to them.
-They might ask to pair program, answer a specific programming question, figure out a bug or go on a walk and discuss a career in software.
-The point is to give as much control as possible to the apprentice and let the mentor provide feedback.
-We also have a "senior mentor" that changes each week.
-The senior mentor gives 90 minutes of their week to each apprentice with the same basic premise as the direct mentor.
+Talking to other engineers, I found that my experience was not unique.
+Learning to program is often fraught with huge wastes of time and only occasionally do you find yourself in a context where the learning comes quickly.
+I had no good way to calculate how inefficient this process might be, so I made a guess that __we could fill this gap with a three month apprenticeship__.
 
-
-# Knowing The Audience
+# What Makes a Good Apprentice?
 
 We had a lot of discussions internally about who we wanted to bring in as apprentices.
 Would we consider hiring people with no programming experience at all?
 Did long-term potential mean more than their current skill set?
 What evidence of long-term potential were we looking for?
 
-The biggest concern that I had was that we might hire people as apprentices, spend 3 months of their time, 3 months of our time and not be able to teach them enough to be successful engineers on our team.
-That was pretty much my definition of failure.
+My biggest fear was that we might hire people as apprentices, spend 3 months of their time and our time and find that they had not closed the gap in skills and experience.
+That is my definition of failure.
 
-To mitigate this risk we decided to aim our apprenticeship at people with enough programming experience that they could build some sort of a web-based [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) app.
+To mitigate this risk we decided to aim our apprenticeship at people with enough programming experience that they could already build some sort of web-based [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) app.
 We preferred experience in Ruby because that would be the tool they would be using in the apprenticeship.
+We felt that this skill requirement was higher than we wanted, but we didn't have enough evidence yet to try filling a bigger gap in skills.
 
 We decided that once someone had met that minimum bar we wanted to heavily weight our decision towards long-term potential.
 The evidence we would look for was a track record of being self-motivated to learn new things and tackle hard problems.
 
-This was still a somewhat ambiguous criteria, but we were comfortable with the ambiguity because we knew that we were going outside the normal hiring practices. We already had a hypothesis that using those standard practices had left a large pool of awesome engineers struggling to get a job during the first few years of their careers.
+This was still a somewhat ambiguous criteria, but we were comfortable with the ambiguity because we knew that we were going outside the normal hiring practices.
+
+# What Makes A Good Apprenticeship?
+
+I liked the idea of a set curriculum for a few reasons, but my attempts to write a curriculum were pretty bad.
+Being a developer is not the same as being an educator.
+
+Around this time I stopped thinking of how to teach more efficiently and started to think, "how can the apprentices learn four times more efficiently than I did?"
+This change in focus felt right.
+It wasn't our job to fill the gap.
+We needed to create a context where the apprentices could be in that sweet spot of learning.
+I decided that being part of a team of peers and having access to help from more experienced developers were the two key things we would focus on.
+
+The peer aspect would be handled by hiring apprentices in a group.
+They would be assigned projects as a team to encourage collaboration.
+
+For mentorship we decided to have a direct mentor and a rotating schedule of senior mentors.
+This direct mentor has between 1 and 3 years of professional experience and sets aside one hour each day to helping their apprentice.
+Senior mentors have 5+ years of experience and are on a rotating schedule to help provide a broader range of experiences.
+Each week there is a single senior mentor who makes 90 minutes available to each apprentice.
+Apprentices mostly dictate the way mentorship time is to be used.
+Mentors make the resource available, apprentices choose how to use that resource to make their learning time efficient.
 
 # The Plan
 
-At this point we had a few ideas about who to teach and how to teach them.
+At this point we had a few ideas about who we wanted to find and how we wanted to help them learn.
 None of these ideas were founded on research or expertise.
 What could go wrong?
 In typical developer fashion we assumed we could significantly change outcomes by applying just a few simple rules to a complex system.
 
-Despite the lack of credentials for these ideas, I continued to feel convinced that running an apprenticeship in this way would have made my early development life a lot better. Surprisingly my company went along with the idea and we started planning for an apprenticeship that would run from September to December 2015.
+Despite the lack of credentials for these ideas, I continued to feel convinced that participating in this type of apprenticeship would have made my early development life a lot better.
+Surprisingly, my company went along with the idea and we started planning for an apprenticeship that would run from September to December 2015.
