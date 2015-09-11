@@ -3,7 +3,7 @@ layout: post
 title: "Hiring Apprentices"
 date: 2015-09-09 14:44:39 -0600
 comments: true
-categories: hiring, apprenticeship, mentoring, ruby
+categories: hiring apprenticeship mentoring ruby
 ---
 
 The [MX](http://mx.com/) apprenticeship has been a lot of work and fun so far.
@@ -11,22 +11,25 @@ This blog post is the beginning of an effort to document what I've learned along
 
 # The Goal
 
-Initially I got interested in the idea of an apprenticeship while listening to the [ruby rogues episode with Joe Mastey and Jill Lynch](https://devchat.tv/ruby-rogues/190-rr-apprenticeship-with-joseph-mastey-and-jill-lynch-of-enova).
-I help to organize a [local ruby meetup group](http://utruby.org/#uv.rb) so I liked the idea of helping new engineers.
-I also love my job at MX so I liked the idea of helping to grow our team.
+I initially got interested in the idea of an apprenticeship while listening to the [ruby rogues episode with Joe Mastey and Jill Lynch](https://devchat.tv/ruby-rogues/190-rr-apprenticeship-with-joseph-mastey-and-jill-lynch-of-enova).
+I help organize a [local ruby meetup group](http://utruby.org/#uv.rb), so I liked the idea of helping new engineers.
+I also love my job at MX and want to see the team grow.
 
-When I discussed the idea of an apprenticeship with people at MX, the first thing I had to do was nail down what our objective was. "Helping new engineers" wasn't going to cut it.
+My early motivation was focused on facilitating the learning that comes with a first professional programming job, but I knew that goal of the apprenticeship needed to be focused on the company sponsoring it.
+I decided that the primary objective was to __add amazing engineers to the MX team__.
 
-We decided that the primary objective was to __add amazing engineers to the team__.
+<!--more-->
 
-# Amazing Apprentices
+# Amazing People
 
-Based on my experience in the local Ruby community I believed that there were some really amazing programmers who were self-taught or graduating from bootcamps that were struggling to find first jobs.
+Based on my experience in the local Ruby community, I believed there were some really amazing programmers who were self-taught that were struggling to find a first job programming.
+I also met many bootcamp graduates with the same problem.
 
-The shortage of senior engineers at pretty much every company has made it really difficult to get a job as a junior developer. Lots of companies think that they can't afford to hire junior engineers because they don't have enough senior people to train them.
+The shortage of senior engineers at pretty much every company has made it really difficult to get a job as a junior developer.
+Lots of companies think they can't hire junior engineers because they don't have enough senior people to train them.
 There are also serious bias issues throughout the software industry and especially in the hiring processes.
 
-So we had a hypothesis that there was a large pool of extremely talented and hard-working people that was underutilized.
+This is not scientific research, but it seemed there was a large pool of extremely talented and hard-working people that was underutilized.
 
 # Teaching
 
