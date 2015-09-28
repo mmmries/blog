@@ -32,7 +32,6 @@ Here are a few that caught our attention:
 * [Aristides Perez](http://aperezmontan.github.io/) came out of the DevBootcamp program and had a good overview of some of this projects.
 * [Jean Simon](http://www.jeansimon.me/mx) is an excellent of example of keeping it very simple. There is very little visually happening, but the writing was compelling to us.
 * [Cam Kidman](http://cam.thefitdeveloper.com/) is one of the only examples I've seen where calling out your strengths *and weaknesses* came off really well.
-* [Andrew Lewin](http://tranquil-reef-9090.herokuapp.com/) made a functional application, but included an about page to provide some context and linked to his github.
 
 ## Evaluation
 
