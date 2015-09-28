@@ -28,7 +28,7 @@ They could use videos, animations, gifs, etc.
 We ended up receiving 55 applications and they were as different from each other as we were hoping.
 Here are a few that caught our attention:
 
-* [Danielle Hunter](http://danhunter.github.io/) created a page that was compelling both visually and as a narrative (protip: read the recommendation at the bottom).
+* [Danielle Hunter](http://dahunter.github.io/) created a page that was compelling both visually and as a narrative (protip: read the recommendation at the bottom).
 * [Aristides Perez](http://aperezmontan.github.io/) came out of the DevBootcamp program and had a good overview of some of this projects.
 * [Jean Simon](http://www.jeansimon.me/mx) is an excellent of example of keeping it very simple. There is very little visually happening, but the writing was compelling to us.
 * [Cam Kidman](http://cam.thefitdeveloper.com/) is one of the only examples I've seen where calling out your strengths *and weaknesses* came off really well.
