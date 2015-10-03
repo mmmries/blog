@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hiring Apprentices"
+title: "Planning An Apprenticeship"
 date: 2015-09-09 14:44:39 -0600
 comments: true
 categories: hiring apprenticeship mentoring ruby
