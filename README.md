@@ -15,3 +15,7 @@ docker push hqmq/blog:[[DATE]]
 ```
 
 And finally login to rancher and upgrade the blog service to use the new tag that you just built and pushed.
+
+## Developing
+
+When working on new content you can run `bundle exec jekyll server` and browser to `http://localhost:4000/` to check out your changes.
