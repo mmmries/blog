@@ -10,8 +10,11 @@ Building in production mode means that google anlytics will be enabled etc.
 Now run
 
 ```
-docker build -t hqmq/blog:2018-07-28 .
-docker push hqmq/blog:2018-07-28
+date=2018-07-28
+docker build -t hqmq/blog:$date .
+docker tag hqmq/blog:$date hqmq/blog:latest
+docker push hqmq/blog:$date
+docker push hqmq/blog:latest
 ```
 
 And finally login to rancher and upgrade the blog service to use the new tag that you just built and pushed.
