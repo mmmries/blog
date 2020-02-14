@@ -1,24 +1,23 @@
-## Deploying
+# Blog
 
-After updating the content make sure to run
+My personal blog
 
-```
-JEKYLL_ENV=production bundle exec jekyll build
-```
+## Writing
 
-Building in production mode means that google anlytics will be enabled etc.
-Now run
+When I'm writing locally for this blog make sure to start the syntax highlighting server and then run:
 
-```
-date=2018-07-28
-docker build -t hqmq/blog:$date .
-docker tag hqmq/blog:$date hqmq/blog:latest
-docker push hqmq/blog:$date
-docker push hqmq/blog:latest
+```shell
+$ mix deps.get
+$ mix phx.server
 ```
 
-And finally login to rancher and upgrade the blog service to use the new tag that you just built and pushed.
+## Syntax Highlighting
 
-## Developing
+In order to support syntax highlighting for a variety of languages I am using the [syntect_server](https://github.com/sourcegraph/syntect_server) project.
+You can easily start this up locally via docker:
 
-When working on new content you can run `bundle exec jekyll server` and browser to `http://localhost:4000/` to check out your changes.
+```
+$ docker run -it --rm --name=syntect_server -p 9238:9238 sourcegraph/syntect_server
+```
+
+No syntax highlighting is required at runtime, only while compiling posts.
