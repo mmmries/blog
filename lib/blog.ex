@@ -15,7 +15,21 @@ defmodule Blog do
 
   @posts Enum.sort_by(posts, & &1.date, {:desc, Date})
 
+  def get_post(date, slug) do
+    IO.inspect({:get_post, date, slug})
+    case find_post(date, slug) do
+      nil -> {:error, :not_found}
+      post -> {:ok, post}
+    end
+  end
+
   def list_posts do
     @posts
+  end
+
+  defp find_post(date, slug) do
+    Enum.find(@posts, fn(post) ->
+      post.date == date and post.slug == slug
+    end)
   end
 end
