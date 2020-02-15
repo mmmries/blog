@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "polymer elements in rails"
-date: 2013-08-18 21:26
-comments: true
-tags: programming ruby
+title = "polymer elements in rails"
+tags = ["programming", "ruby"]
 ---
 
 Recently for our [local ruby meetup group](http://utruby.org/#uv.rb) we had a frontend Battle Royale. The idea was to make a simplistic rails app that could serve as a starting point and then implement a frontend in several different ways (ember, angular, etc) so that we can compare the costs and benefits of these different techniques.

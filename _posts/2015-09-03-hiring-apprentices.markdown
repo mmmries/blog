@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Planning An Apprenticeship"
-date: 2015-09-09 14:44:39 -0600
-comments: true
-tags: hiring apprenticeship mentoring ruby
+title = "Planning An Apprenticeship"
+tags = ["hiring", "apprenticeship", "mentoring", "ruby"]
 ---
 
 The [MX](http://mx.com/) apprenticeship has been a lot of work and fun so far.

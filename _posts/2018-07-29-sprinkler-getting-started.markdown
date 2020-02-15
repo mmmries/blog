@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Getting Started With the Sprinkler Project"
-date: 2018-07-29 11:18:00 -0600
-comments: false
-tags: elixir nerves sprinkler meetup
+title = "Getting Started With the Sprinkler Project"
+tags = ["elixir", "nerves", "sprinkler", "meetup"]
 ---
 
 The [Nerves Remote Meetup](https://twitter.com/NervesMeetup) is kicking off this coming Wednesday.

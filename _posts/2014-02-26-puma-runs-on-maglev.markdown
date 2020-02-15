@@ -1,10 +1,6 @@
 ---
-layout: post
-title: "Puma runs on Maglev"
-date: 2014-02-26 21:22
-comments: true
-tags: ruby maglev puma
-published: true
+title = "Puma runs on Maglev"
+tags = ["ruby", "maglev", "puma"]
 ---
 
 ## Edit: After writing this I discovered that there was an problem with my GEM_PATH environment variable so puma was actually running under MRI. No Wonder it was running at almost the exact same speed as MRI :) Sorry for the false information.

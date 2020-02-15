@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Controlling a Servo with Artoo"
-date: 2014-05-12 21:51:15 -0600
-comments: true
-tags: ruby artoo friendly-bot digispark
+title = "Controlling a Servo with Artoo"
+tags = ["ruby", "artoo", "friendly-bot", "digispark"]
 ---
 
 Now that I have [some basic facial recognition](/blog/2014/04/25/facial-recognition-with-spyglass/) working we need to be able to control the direction of the camera. The first step to do this is to get some wires connected from my laptop to a servo and send signals that control the motion of the servo.

@@ -1,9 +1,9 @@
 ---
-layout: post
-title: "puma mostly running on maglev"
-date: 2014-02-28 22:43
-comments: true
-tags: ruby maglev puma
+layout = "post"
+title = "puma mostly running on maglev"
+date = "2014-02-28 22:43"
+comments = true
+tags = ["ruby", "maglev", "puma"]
 ---
 
 ## TL\DR; Puma runs on maglev with a few caveats. Full support is around the corner?

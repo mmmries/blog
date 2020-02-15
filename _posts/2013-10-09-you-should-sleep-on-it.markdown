@@ -1,10 +1,7 @@
 ---
-layout: post
-title: "you should sleep on it"
-date: 2013-10-09 18:23
-comments: false
-categories: programming
-published: false
+title = "you should sleep on it"
+categories = "programming"
+published = false
 ---
 
 ### TL;DR If you are thinking about refactoring something, go sleep before you start.

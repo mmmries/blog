@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Maglev on AWS t1.micro"
-date: 2014-02-16 10:23
-comments: true
-tags: ruby maglev aws
+title = "Maglev on AWS t1.micro"
+tags = ["ruby", "maglev", "aws"]
 ---
 
 ## TL/DR; If you want to run maglev on a small AWS instance you probably need to reduce the shared page cache size. Try adjusting the SHR_PAGE_CACHE_SIZE_KB setting in system.conf

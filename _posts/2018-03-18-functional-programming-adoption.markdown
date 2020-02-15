@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Functional Programming Adoption"
-date: 2018-03-18 17:42:00 -1000
-comments: false
-tags: functional adoption
+title = "Functional Programming Adoption"
+tags = ["functional", "adoption"]
 ---
 
 __TL/DR; looking at global averages may not be a very good way to make decisions about programming__

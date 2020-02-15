@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Debugging Maglev"
-date: 2014-02-22 10:36
-comments: true
-tags: ruby maglev puma
+title = "Debugging Maglev"
+tags = ["ruby", "maglev", "puma"]
 ---
 
 ## TL/DR; Maglev still has a way to go, but they provide some very low-level information to help debug.

@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Selecting Apprentices"
-date: 2015-09-27 14:56:40 -0600
-comments: true
-tags: interviewing hiring apprenticeship mentoring ruby
+title = "Selecting Apprentices"
+tags = ["interviewing", "hiring", "apprenticeship", "mentoring", "ruby"]
 ---
 
 > This is the second post on my experience running the [MX ruby apprenticeship program](http://www.mx.com/company/apprenticeships/).

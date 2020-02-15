@@ -1,10 +1,8 @@
 ---
-layout: post
-title: "Facial Recognition With Spyglass"
-date: 2014-04-25 21:40:38 -0600
-comments: true
-tags: ruby opencv spyglass friendly-bot
+title = "Facial Recognition With Spyglass"
+tags = ["ruby", "opencv", "spyglass", "friendly-bot"]
 ---
+
 The first step in working towards [Friendly Bot](/blog/2014/04/23/planning-friendly-bot) is to get some code working that can capture an image from a webcam and detect a face in it.
 I knew that [OpenCV](http://opencv.org/) had facilities for doing facial recognition, but I was hoping to avoid some of the documentation pain that I have heard about from other people.
 I did a quick search for rubygems that wrapped opencv and found [spyglass](https://github.com/andremedeiros/spyglass) by [André Medeiros](https://twitter.com/superdealloc).

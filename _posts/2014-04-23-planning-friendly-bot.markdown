@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Planning Friendly Bot"
-date: 2014-04-23 21:14:01 -0600
-comments: true
-tags: robotics artoo opencv beagleboneblack ruby friendly-bot
+title = "Planning Friendly Bot"
+tags = ["robotics", "artoo", "opencv", "beagleboneblack", "ruby", "friendly-bot"]
 ---
 
 In many ways Robotics was my first tech love. I remember my dad bringing home a broken printer from work and I took it apart and used the parts to make a little machine that had some LED eyes and drove itself forward and backward.  It wasn't really a robot, but it got me so interested in robotics that I started learning to program.

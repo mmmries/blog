@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "PStore is Amazing"
-date: 2014-03-25 21:35
-comments: true
-tags: ruby
+title = "PStore is Amazing"
+tags = ["ruby"]
 ---
 
 ## TL\DR; Want to play with an object database? Skip Maglev and play with PStore.

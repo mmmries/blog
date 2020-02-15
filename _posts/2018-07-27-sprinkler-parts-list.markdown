@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Sprinkler Project Parts List"
-date: 2018-07-27 10:49:00 -0600
-comments: false
-tags: elixir nerves sprinkler meetup
+title = "Sprinkler Project Parts List"
+tags = ["elixir", "nerves", "sprinkler", "meetup"]
 ---
 
 The [nerves remote meetup](/2018/07/03/nerves-sprinkler-meetup.html) is getting started soon and it seemed like a good idea to get a parts list put together.

@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Initial Commit"
-date: 2013-04-06 00:06
-comments: true
-tags: development
+title = "Initial Commit"
+tags = ["development"]
 ---
 
 ## Geek-O-System

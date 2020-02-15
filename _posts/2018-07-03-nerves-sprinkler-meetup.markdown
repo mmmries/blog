@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "Nerves Project Meetup Plans"
-date: 2018-07-03 20:28:00 -0700
-comments: false
-tags: elixir nerves sprinkler meetup
+title = "Nerves Project Meetup Plans"
+tags = ["elixir", "nerves", "sprinkler", "meetup"]
 ---
 
 I'm going to be hosting a monthly remote meetup to learn about [nerves](https://nerves-project.org/).

@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "file encodings and strict tsv"
-date: 2013-05-15 10:19
-comments: true
-tags: programming ruby tab-separated
+title = "file encodings and strict tsv"
+tags = ["programming", "ruby", "tab-separated"]
 ---
 
 One of the things I deal with at work is receiving batch files from vendors. We usually ask the vendors to send us data in tab-separated format. [Tab-separated formatting](http://www.iana.org/assignments/media-types/text/tab-separated-values) is an extremely simple format that gets around problems of escaping characters by simply disallowing tabs inside of a column.

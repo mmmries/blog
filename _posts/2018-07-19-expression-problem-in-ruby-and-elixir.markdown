@@ -1,9 +1,6 @@
 ---
-layout: post
-title: "The Expression Problem in Ruby and Elixir"
-date: 2018-07-19 08:09:00 -0600
-comments: false
-tags: elixir ruby expression-problem
+title = "The Expression Problem in Ruby and Elixir"
+tags = ["elixir", "ruby", "expression-problem"]
 ---
 
 > TL/DR; If you want to get a quick overview of the expression problem and how it is addressed in Elixir you can [check out this presentation](https://youtu.be/sJvfCE6PFxY) by Kevin Rockwood.
