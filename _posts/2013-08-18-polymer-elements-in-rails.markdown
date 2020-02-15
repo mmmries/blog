@@ -14,7 +14,7 @@ I wrote up an implementation using [Polymer Elements](http://polymer-project.org
 ## Where to Start???
 I wanted to start with implementing a small but interesting feature of the UI. In the application.html.erb layout there is a little sidebar that shows a list of comic books with a count of how many issues each comic book has. The initial erb looks like this:
 
-```html sidebar erb template
+```html
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">Books</li>
@@ -39,7 +39,7 @@ This looked to me like a good chance to encapsulate some details. Wouldn't it be
 
 Lets ignore the details of using a well class and li elements to represent this list.  Let's just think of it as a sidebar element. So what does the definition of a basic sidebar element look like?
 
-```html comics-sidebar.html a polymer element
+```html
   <link rel="import" href="/polymer/polymer-elements/polymer-ajax/polymer-ajax.html" />
   <polymer-element name="comics-sidebar" attributes="">
     <template>

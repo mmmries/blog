@@ -17,7 +17,7 @@ You can see the [full diff here for reference](https://github.com/mmmries/sprink
 We start by adding `{:nerves_init_gadget, "~> 0.4"}` to our target deps and add `:nerves_init_gadget` the init list of `shoehorn` in our `config/config.exs` file.
 At the bottom of our `config/config.exs` we add some configuration that will load our existing public ssh key to make that an authorized key for our device
 
-```
+```elixir
 config :nerves_firmware_ssh,
   authorized_keys: [
     File.read!(Path.join(System.user_home!(), ".ssh/id_rsa.pub"))
@@ -34,7 +34,7 @@ config :logger, backends: [RingLogger]
 
 Now we add configuration for the `:nerves_init_gadget` library to specify the DNS name of our device, tell it which network interface to watch and tell it to give us an ssh terminal port.
 
-```
+```elixir
 config :nerves_init_gadget,
   ifname: "wlan0",
   address_method: :dhcp,
@@ -48,7 +48,7 @@ And finally we add configuration for how to connect to the WiFi.
 We use environment variables to set the WiFi ssid and passkey.
 You'll notice that we set these in our commands to build and push firmware images.
 
-```
+```elixir
 key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
  config :nerves_network, :default,
   wlan0: [
@@ -62,7 +62,7 @@ key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
 
 Mount your MicroSD card to the host machine and run a command like:
 
-```
+```shell
 MIX_TARGET=rpi3 NERVES_NETWORK_SSID=MyWiFi NERVES_NETWORK_PSK=MyPassword mix do deps.get, firmware, firmware.burn
 ```
 
@@ -105,13 +105,13 @@ You can see [the full diff here for reference](https://github.com/mmmries/sprink
 We start by adding `{:nerves_leds, "~> 0.8"}` to our target deps.
 Then in our `config/config.exs` file we add some configuration to give our status led the name `:status`.
 
-```
+```elixir
 config :nerves_leds, names: [status: "led0"]
 ```
 
 While we are in the file we are also going to tell [shoehorn](https://hex.pm/packages/shoehorn) that it needs to start `:runtime_tools` and `:nerves_leds` at boot time.
 
-```
+```elixir
 config :shoehorn,
   init: [:nerves_runtime, :nerves_init_gadget, :runtime_tools, :nerves_leds],
   app: Mix.Project.config()[:app]
@@ -122,7 +122,7 @@ We write a small [GenServer](https://hexdocs.pm/elixir/1.6.6/GenServer.html) to 
 See the `lib/sprinkler/blinky.ex` file in the diff link above for details.
 Then in our `lib/sprinkler/application.ex` file we add this process to our supervision tree like this:
 
-```
+```elixir
   def children(_target) do
     [
       {Sprinkler.Blinky, nil}
@@ -136,7 +136,7 @@ Now when our application starts up it will call `Sprinkler.Blinky.start_child(ni
 
 We can build the firmware image and push it to our device with a single command.
 
-```
+```shell
 MIX_TARGET=rpi3 NERVES_NETWORK_SSID=MyWiFi NERVES_NETWORK_PSK=MyPassword mix do deps.get, firmware, firmware.push sprinkler.local
 ```
 
