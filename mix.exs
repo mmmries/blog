@@ -44,6 +44,7 @@ defmodule Blog.MixProject do
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
       {:stemmer, "~> 1.0"},
+      {:toml, "~> 0.6.1"},
 
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:floki, ">= 0.0.0", only: :test}
