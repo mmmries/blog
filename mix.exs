@@ -41,13 +41,13 @@ defmodule Blog.MixProject do
 
       {:bayesic, "~> 0.1"},
       {:earmark, "~> 1.3"},
+      {:floki, "~> 0.25"},
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
       {:stemmer, "~> 1.0"},
       {:toml, "~> 0.6.1"},
 
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:floki, ">= 0.0.0", only: :test}
     ]
   end
 end
