@@ -5,6 +5,10 @@ defmodule BlogWeb.PageController do
     render(conn, "index.html")
   end
 
+  def about(conn, _param) do
+    render(conn, "about.html")
+  end
+
   def post(conn, %{"year" => year, "month" => month, "day" => day, "slug" => slug}) do
     with {:ok, date} <- date(year, month, day),
           slug <- trim_slug(slug),
