@@ -1,9 +1,7 @@
 defmodule Highlight do
   @moduledoc """
   Adapted from https://github.com/elixir-lang/ex_doc/blob/d5cde30f55c7e0cde486ec3878067aee82ccc924/lib/ex_doc/highlighter.ex
-  This module assumes that you have a [syntect server](https://github.com/sourcegraph/syntect_server)
-  running locally. It highlights code by sending it to the API
-  of that server and returns HTML.
+  This module works along with the prism.js additions that are loaded into the application layout.
   """
 
    @doc """
@@ -18,10 +16,10 @@ defmodule Highlight do
    end
 
    defp highlight_code_block(_full_block, lang, code, _outer_opts) do
-    filename = sample_filename(lang)
-    IO.inspect({:highlight, lang, filename})
-    {:ok, highlighted} = code(filename, code |> unescape_html() |> IO.iodata_to_binary())
-    ~s(<code class="#{lang}">#{highlighted}</code>)
+    #filename = sample_filename(lang)
+    #IO.inspect({:highlight, lang, filename})
+    #{:ok, highlighted} = code(filename, code |> unescape_html() |> IO.iodata_to_binary())
+    ~s(<pre class="language-#{lang}"><code class="language-#{lang}">#{code}</code></pre>)
    end
 
    defp sample_filename("ruby"), do: "example.rb"

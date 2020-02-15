@@ -13,6 +13,10 @@ $ mix phx.server
 
 ## Syntax Highlighting
 
+> Note: I've temporarily switched to using prism.js (loaded from a CDN) for code highlighting.
+> I would prefer to have a compile-time dependency rather than a run-time dependency for the user, but I couldn't get Elixir highlighting correctly.
+> See https://github.com/sourcegraph/syntect_server/issues/27 for details.
+
 In order to support syntax highlighting for a variety of languages I am using the [syntect_server](https://github.com/sourcegraph/syntect_server) project.
 You can easily start this up locally via docker:
 
