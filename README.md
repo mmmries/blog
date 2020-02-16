@@ -25,3 +25,14 @@ $ docker run -it --rm --name=syntect_server -p 9238:9238 sourcegraph/syntect_ser
 ```
 
 No syntax highlighting is required at runtime, only while compiling posts.
+
+## Deploying
+
+To build a release, run the command (change out the date and version number):
+
+```
+$ docker build -t hqmq/blog:2020.02.15.1
+$ docker tag hqmq/blog:2020.02.15.1 hqmq/blog:latest
+$ docker push hqmq/blog:2020.02.15.1
+$ docker push hqmq/blog:latest
+```
