@@ -1,17 +1,13 @@
-<main class="page-content" aria-label="Content">
-  <div class="wrapper">
-    <div class="home">
+<div class="home">
 
-      <h1 class="page-heading">Posts</h1>
+  <h1 class="page-heading">Posts</h1>
 
-      <ul class="post-list">
-        <%= for post <- Blog.list_posts() do %>
-          <li>
-            <span class="post-meta"><%= post.date %></span>
-            <h2><%= post_link(post) %></h2>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</main>
+  <ul class="post-list">
+    <%= for post <- Blog.list_posts() do %>
+      <li>
+        <span class="post-meta"><%= post.date %></span>
+        <h2><%= post_link(post) %></h2>
+      </li>
+    <% end %>
+  </ul>
+</div>
