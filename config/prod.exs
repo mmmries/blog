@@ -10,8 +10,17 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :blog, BlogWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [
+    port: String.to_integer(System.get_env("PORT") || "4000"),
+    transport_options: [socket_opts: [:inet6]]
+  ],
+  url: [host: "devblog.riesd.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  # normally secret key base is not commmitted, but in our ase there is no app authentication and spoofing a session
+  # is not a security concern. This is also why we skip origin checks
+  secret_key_base: "6twmBc5jsFuEW+UGTleRzieApmOpcx6mmvjvZrBHF7QYxj2LJ2d18ob0KgMfs+lozd8dQe7lmhVpUzdTHBid1w==",
+  check_origin: false,
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -49,7 +58,3 @@ config :logger, level: :info
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
-
-# Finally import the config/prod.secret.exs which loads secrets
-# and configuration from environment variables.
-import_config "prod.secret.exs"
