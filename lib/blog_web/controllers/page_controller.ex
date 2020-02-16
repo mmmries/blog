@@ -20,6 +20,12 @@ defmodule BlogWeb.PageController do
     end
   end
 
+  def tag(conn, %{"name" => tag}) do
+    tag = trim_slug(tag)
+    posts = Blog.get_posts_by_tag(tag)
+    render(conn, "tag.html", tag: tag, posts: posts)
+  end
+
   defp date(year, month, day) do
     [year, month, day] |> Enum.join("-") |> Date.from_iso8601()
   end

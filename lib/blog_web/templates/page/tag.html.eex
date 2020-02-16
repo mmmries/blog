@@ -1,0 +1,10 @@
+<h2><%= @tag %></h2>
+<ul>
+  <%= for post <- @posts do %>
+    <li>
+      <%= post_link(post) %>
+      
+(<%= Date.to_iso8601(post.date) %> | Tags: <%= Enum.join(post.tags, ", ") %>)
+    </li>
+  <% end %>
+</ul>

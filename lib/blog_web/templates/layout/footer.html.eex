@@ -6,7 +6,9 @@
       <div class="footer-col footer-col-1">
         <h3>tags</h3>
         <div id="tag-cloud">
-          TODO: Compile tag links
+          <%= for tag <- Blog.list_tags() do %>
+            <%= link(tag, class: "set-1", to: "/tags/#{tag}.html") %>&nbsp;
+          <% end %>
         </div>
       </div>
 

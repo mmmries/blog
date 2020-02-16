@@ -19,6 +19,7 @@ defmodule BlogWeb.Router do
 
     get "/", PageController, :index
     get "/about/", PageController, :about
+    get "/tags/:name", PageController, :tag
     get "/:year/:month/:day/:slug", PageController, :post
   end
 
