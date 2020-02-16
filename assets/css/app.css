@@ -135,7 +135,7 @@
  /**
   * Clearfix
   */
- .wrapper:after, .footer-col-wrapper:after {
+ .wrapper:after, .col-wrapper:after {
    content: "";
    display: table;
    clear: both; }
@@ -226,39 +226,39 @@
    list-style: none;
    margin-left: 0; }
  
- .footer-col-wrapper {
+ .col-wrapper {
    font-size: 15px;
    color: #828282;
    margin-left: -15px; }
  
- .footer-col {
+ .col {
    float: left;
    margin-bottom: 15px;
    padding-left: 15px; }
  
- .footer-col-1 {
+ .col-1 {
    width: -webkit-calc(35% - (30px / 2));
    width: calc(35% - (30px / 2)); }
  
- .footer-col-2 {
+ .col-2 {
    width: -webkit-calc(20% - (30px / 2));
    width: calc(20% - (30px / 2)); }
  
- .footer-col-3 {
+ .col-3 {
    width: -webkit-calc(45% - (30px / 2));
    width: calc(45% - (30px / 2)); }
  
  @media screen and (max-width: 800px) {
-   .footer-col-1,
-   .footer-col-2 {
+   .col-1,
+   .col-2 {
      width: -webkit-calc(50% - (30px / 2));
      width: calc(50% - (30px / 2)); }
  
-   .footer-col-3 {
+   .col-3 {
      width: -webkit-calc(100% - (30px / 2));
      width: calc(100% - (30px / 2)); } }
  @media screen and (max-width: 600px) {
-   .footer-col {
+   .col {
      float: none;
      width: -webkit-calc(100% - (30px / 2));
      width: calc(100% - (30px / 2)); } }
@@ -457,3 +457,48 @@
      color: #008080; }
    .highlight .il {
      color: #099; }
+
+/* Global Search */
+.global-search {
+  width: 100%;
+  position: relative;
+}
+.global-search input {
+  margin-top: 10px;
+  font-size: 20pt;
+  padding: 0px;
+  width: 100%;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items a {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items a:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+/* Panda SVG */
+svg.panda {
+  max-width: 400px;
+  max-height: 400px;
+}

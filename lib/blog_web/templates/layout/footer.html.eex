@@ -2,8 +2,8 @@
 
   <div class="wrapper">
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
+    <div class="col-wrapper">
+      <div class="col col-1">
         <h3>tags</h3>
         <div id="tag-cloud">
           <%= for tag <- Blog.list_tags() do %>
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="footer-col footer-col-2">
+      <div class="col col-2">
         <ul class="contact-list">
           <li>
             Geek-O-System
@@ -39,9 +39,9 @@
         </ul>
       </div>
 
-      <div class="footer-col footer-col-3">
+      <div class="col col-3">
         <a href="http://showoff.riesd.com/">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <svg class="panda" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <style>
               @-webkit-keyframes spin {
                 0% { -webkit-transform: rotate(0deg); }
