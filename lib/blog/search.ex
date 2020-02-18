@@ -25,8 +25,10 @@ defmodule Blog.Search do
     Regex.scan(~r{\b\w+\b}, str)
     |> Enum.reduce(MapSet.new(), fn(matches, set) ->
       word = hd(matches)
-      set = word |> Stemmer.stem() |> trigrams() |> Enum.into(set)
+      stem = Stemmer.stem(word)
+      set = stem |> trigrams() |> Enum.into(set)
       set = word |> trigrams() |> Enum.into(set)
+      set = [word, stem] |> Enum.into(set)
       set
     end)
   end
