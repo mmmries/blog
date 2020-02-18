@@ -24,7 +24,7 @@ defmodule BlogWeb.SearchLive do
   end
 
   def handle_event("search", %{"search" => query}, socket) do
-    socket = socket |> assign(:matches, Blog.search(query, 5))
+    socket = socket |> assign(:matches, Blog.SearchServer.query(query))
     socket = if socket.assigns.turning_off do
       socket |> assign(:turning_off, false)
     else
