@@ -31,9 +31,7 @@ No syntax highlighting is required at runtime, only while compiling posts.
 To build a release, run the command (change out the date and version number):
 
 ```
-$ export DATE_TAG="2020.02.19.1"
-$ docker build -t hqmq/blog:$DATE_TAG .
-$ docker tag hqmq/blog:$DATE_TAG hqmq/blog:latest
-$ docker push hqmq/blog:$DATE_TAG
-$ docker push hqmq/blog:latest
+$ mix publish
+# if you want to use a specific tag, just pass it as the first argument
+$ mix publish 2020.02.23.2
 ```
