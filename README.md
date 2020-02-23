@@ -33,7 +33,7 @@ To build a release, run the command (change out the date and version number):
 ```
 $ export DATE_TAG="2020.02.19.1"
 $ docker build -t hqmq/blog:$DATE_TAG .
-$ docker tag hqmq/blog:2020.02.15.1 hqmq/blog:latest
-$ docker push hqmq/blog:2020.02.15.1
+$ docker tag hqmq/blog:$DATE_TAG hqmq/blog:latest
+$ docker push hqmq/blog:$DATE_TAG
 $ docker push hqmq/blog:latest
 ```

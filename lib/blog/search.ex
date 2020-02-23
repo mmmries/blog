@@ -22,7 +22,7 @@ defmodule Blog.Search do
   end
 
   def tokenize(str) do
-    Regex.scan(~r{\b\w+\b}, str)
+    Regex.scan(~r{\b\w+\b}, String.downcase(str))
     |> Enum.reduce(MapSet.new(), fn(matches, set) ->
       word = hd(matches)
       stem = Stemmer.stem(word)
