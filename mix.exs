@@ -35,7 +35,7 @@ defmodule Blog.MixProject do
       {:phoenix, "~> 1.4.13"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_view, "~> 0.7.1"},
+      {:phoenix_live_view, "~> 0.7"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
 
