@@ -1,15 +1,13 @@
 ---
-title = "Bring Your Own Blinky"
+title = "Build Your Own Blinky"
 tags = ["elixir","nerves","led"]
 ---
 
-The [Nerves Remote Meetup](https://nerves.group/) has been running for a while now and it's been really fun to meet new people.
-I've met friends as close as my same city and as far away as Japan and South America 🌏🌎🌍.
-To help encourage more people to learn about [Nerves](https://www.nerves-project.org/), we are going to be starting a collaborative project for anyone interested.
-This project can be as simple as a hello world project or as complicated as reporting data from multiple sensors.
-Anyone wanting to try a project is encouraged to [join our slack group](https://join.slack.com/t/nerves-meetup/shared_invite/zt-7b95x0tv-hiM519At5R7ldzHTRq74pQ) and ask questions about how to get started.
+For the next [Nerves Remote Meetup](https://nerves.group/) we want to invite you to build a device.
+The project we'll be building can be adapted to people brand new to nerves (a couple hours following a walkthrough) or experienced community members wanting to try something new.
+Come build a device, [join our slack group](https://join.slack.com/t/nerves-meetup/shared_invite/zt-7b95x0tv-hiM519At5R7ldzHTRq74pQ), ask questions and share what you learn.
 
-## Bring Your Own Blinky
+## What to Build
 
 The challenge is to build a nerves device that communicates via LED(s).
 If you're brand new to Nerves, you could get started with [the blinky project](https://hexdocs.pm/nerves/getting-started.html).
