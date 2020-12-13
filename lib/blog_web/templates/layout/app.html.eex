@@ -13,7 +13,7 @@
     <%= render BlogWeb.LayoutView, "header.html", conn: @conn %>
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <%= render @view_module, @view_template, assigns %>
+        <%= @inner_content %>
       </div>
     </main>
     <%= render BlogWeb.LayoutView, "footer.html", [] %>

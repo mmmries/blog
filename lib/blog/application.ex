@@ -8,6 +8,7 @@ defmodule Blog.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
       # Starts a worker by calling: Blog.Worker.start_link(arg)
