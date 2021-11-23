@@ -5,7 +5,7 @@ defmodule Blog do
 
   alias Blog.Post
 
-  posts_paths = "_posts/*" |> Path.wildcard() |> Enum.sort()
+  posts_paths = :code.priv_dir(:blog) |> Path.join("_posts/*") |> Path.wildcard() |> Enum.sort()
 
   posts =
     for post_path <- posts_paths do
