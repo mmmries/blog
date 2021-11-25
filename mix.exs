@@ -10,7 +10,8 @@ defmodule Blog.MixProject do
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: releases()
     ]
   end
 
@@ -59,6 +60,15 @@ defmodule Blog.MixProject do
 
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev}
+    ]
+  end
+
+  defp releases do
+    [
+      blog: [
+        include_executables_for: [:unix],
+        cookie: "7HdDx0YmOdv6YyBo_4UXC7n7vb5LiHTP13iXWh7GMjCUuM8apX9q7Q=="
+      ]
     ]
   end
 end
