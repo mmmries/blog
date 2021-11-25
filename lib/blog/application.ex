@@ -6,7 +6,8 @@ defmodule Blog.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
+    Showoff.RecentDrawings.init()
+
     children = [
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the endpoint when the application starts

@@ -10,8 +10,14 @@ defmodule BlogWeb.Router do
     plug :fetch_live_flash
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :showoff do
+    plug :put_root_layout, {BlogWeb.LayoutView, :root}
+  end
+
+  scope host: "showoff.", alias: BlogWeb do
+    pipe_through [:browser, :showoff]
+
+    live "/", ShowoffLive
   end
 
   scope "/", BlogWeb do
@@ -22,9 +28,4 @@ defmodule BlogWeb.Router do
     get "/tags/:name", PageController, :tag
     get "/:year/:month/:day/:slug", PageController, :post
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", BlogWeb do
-  #   pipe_through :api
-  # end
 end
