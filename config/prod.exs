@@ -10,11 +10,16 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :blog, BlogWeb.Endpoint,
+  force_ssl: [
+    host: nil,
+    hsts: true,
+    rewrite_on: [:x_forwarded_proto]
+  ],
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
     transport_options: [socket_opts: [:inet6]]
   ],
-  url: [host: "devblog.riesd.com", port: 80],
+  url: [host: "blog.riesd.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   # normally secret key base is not commmitted, but in our ase there is no app authentication and spoofing a session
   # is not a security concern. This is also why we skip origin checks
