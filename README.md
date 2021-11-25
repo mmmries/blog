@@ -18,6 +18,14 @@ This blog is deployed using [Fly](https://fly.io).
 When changes are ready to be published, make sure [you have installed flyctl](https://fly.io/docs/hands-on/installing/) and then run `fly deploy` in the home directory.
 If you are on an M1 mac there may be some architecture issues, so you need to run `fly deploy --remote-only` to build the docker image on a remote host.
 
+## Interacting With Production
+
+There are two easy ways to connect to the production instance of this application.
+You can use `fly ssh console` to easily jump onto the shell of the production instance.
+This is handy for checking out files etc, and you can also quickly jump into the app with `/app/blog/bin/blog remote` to jump into an IEx shell connected to the running application.
+
+We also have a helper `./remote_connect.sh` which can connect a local vm to the production instance so you can use things like `:observer.start()` to introspect the production instance.
+
 ## Showoff
 
 This application also hosts the showoff tool which is a tool to learn about programming and SVG.
