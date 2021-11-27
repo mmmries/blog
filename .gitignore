@@ -35,3 +35,6 @@ npm-debug.log
 
 # Ignore the wireguard configuration file that contains sensitive credentials
 /wireguard_fly.conf
+
+# We ignore this tmp directory which is used for development
+/tmp

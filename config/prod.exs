@@ -27,6 +27,8 @@ config :blog, BlogWeb.Endpoint,
   check_origin: false,
   server: true
 
+config :blog, :showoff_dets_dir, "/dets"
+
 # Do not print debug messages in production
 config :logger, level: :info
 
