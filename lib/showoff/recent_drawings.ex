@@ -1,32 +1,33 @@
 defmodule Showoff.RecentDrawings do
+  alias __MODULE__
   alias Showoff.Drawing
 
   @doc "this function opens the DETS table used to store drawings, it should be called when the application starts"
   def init do
-    filename = Application.app_dir(:blog)
-               |> Path.join("priv/drawings/recent.dets")
+    filename = Showoff.dets_dir()
+               |> Path.join("drawings.dets")
                |> String.to_charlist()
-    {:ok, _table_name} = :dets.open_file(Showoff.RecentDrawings, file: filename)
+    {:ok, _table_name} = :dets.open_file(RecentDrawings, file: filename)
   end
 
-  def add_drawing(%Drawing{}=drawing) do
+  def add_drawing(room_name, %Drawing{}=drawing) do
     id = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-    true = :dets.insert_new(__MODULE__, {id, drawing})
-    publish_updated_list()
+    true = :dets.insert_new(__MODULE__, {{room_name, id}, drawing})
+    publish_updated_list(room_name)
   end
 
-  def list do
-    :dets.match(__MODULE__, :"$1")
+  def list(room_name) do
+    :dets.match(RecentDrawings, {{room_name, :"$1"}, :"$2"})
     |> Enum.sort()
     |> Enum.reverse()
-    |> Enum.map(fn([{_id, drawing}]) -> drawing end)
+    |> Enum.map(fn([_id, drawing]) -> drawing end)
   end
 
-  defp publish_updated_list do
+  defp publish_updated_list(room_name) do
     BlogWeb.Endpoint.broadcast(
-      "recent_drawings",
+      "recent_drawings:#{room_name}",
       "update",
-      %{recent: list()}
+      %{recent: list(room_name)}
     )
   end
 end

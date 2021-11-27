@@ -3,16 +3,15 @@ defmodule BlogWeb.ShowoffLive do
   import Phoenix.HTML.Tag
   alias Showoff.RecentDrawings
 
-  def mount(_params, _session, socket) do
-    if connected?(socket) do
-      :ok = BlogWeb.Endpoint.subscribe("recent_drawings")
-    end
+  def mount(%{"room_name" => room_name}, _session, socket) do
+    :ok = BlogWeb.Endpoint.subscribe("recent_drawings:#{room_name}")
 
     socket = socket
              |> update_drawing("")
+             |> assign(:room_name, room_name)
              |> assign(:drawing_text, "")
              |> assign(:err, "")
-             |> assign(:recent, RecentDrawings.list())
+             |> assign(:recent, RecentDrawings.list(room_name))
              |> assign(:svg, nil)
     {:ok, socket}
   end
@@ -27,9 +26,10 @@ defmodule BlogWeb.ShowoffLive do
   end
 
   def handle_event("publish", %{"drawing_text" => text}, socket) do
+    room_name = socket.assigns.room_name
     case Showoff.text_to_drawing(text) do
       {:ok, drawing} ->
-        RecentDrawings.add_drawing(drawing)
+        RecentDrawings.add_drawing(room_name, drawing)
         {:noreply, assign(socket, :err, "")}
       {:error, _err} ->
         socket = socket |> assign(:err, "an error occured trying to draw that") |> assign(:drawing_text, text)
