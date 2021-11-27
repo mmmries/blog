@@ -17,6 +17,7 @@ defmodule BlogWeb.Router do
   scope host: "showoff.", alias: BlogWeb do
     pipe_through [:browser, :showoff]
 
+    get "/", ShowoffController, :index
     live "/rooms/:room_name", ShowoffLive
   end
 
