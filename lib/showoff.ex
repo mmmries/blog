@@ -1,9 +1,19 @@
 defmodule Showoff do
   alias Showoff.Drawing
 
+  def dets_dir do
+    case Application.get_env(:blog, :showoff_dets_dir) do
+      nil ->
+        Application.app_dir(:blog) |> Path.join("tmp")
+
+      directory ->
+        directory
+    end
+  end
+
   def text_to_drawing(text) do
     case text_to_svg(text) do
-      {:ok, svg} -> {:ok, %Drawing{svg: svg, text: text}}
+      {:ok, svg} -> {:ok, %Drawing{author: nil, svg: svg, text: text}}
       {:error, err} -> {:error, err}
     end
   end
