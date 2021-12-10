@@ -4,7 +4,7 @@ defmodule Showoff do
   def dets_dir do
     case Application.get_env(:blog, :showoff_dets_dir) do
       nil ->
-        Application.app_dir(:blog) |> Path.join("tmp")
+        :code.priv_dir(:blog) |> Path.join("drawings")
 
       directory ->
         directory
