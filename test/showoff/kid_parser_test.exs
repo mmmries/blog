@@ -10,6 +10,12 @@ defmodule Showoff.KidParserTest do
     test "with attributes" do
       assert parse("rect x=10 y=10") == {:ok, [{"rect", %{"x" => 10, "y" => 10}, nil}]}
     end
+
+    test "parsing attributes with complex values" do
+      assert parse("g transform=rotate(180,50,50)") == {:ok, [
+        {"g", %{"transform" => "rotate(180,50,50)"}, nil}
+      ]}
+    end
   end
 
   describe "special shapes" do

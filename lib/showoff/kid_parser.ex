@@ -66,7 +66,7 @@ defmodule Showoff.KidParser do
                   |> ignore(ascii_char([?=]))
                   |> choice([
                     integer(min: 1),
-                    attr_name
+                    ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
                   ])
   shape = wrap(
             ascii_string([?a..?z], min: 1, max: 12)
