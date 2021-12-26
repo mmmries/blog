@@ -77,13 +77,13 @@
 
 .showoff button {
   font-size: 15pt;
-  background-color: #91cf93;
-  border: #4CAF50 solid 6px;
-  color: black;
+  background-color: #6ac06c;
+  color: white;
   padding: 16px;
   cursor: pointer;
   border-radius: 8px;
   transition-duration: 0.4s;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .showoff button:hover {
