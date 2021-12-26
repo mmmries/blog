@@ -1,7 +1,4 @@
 <form phx-submit="publish" phx-change="draw">
-  <div style="float:left; width:100px; height: 100px">
-    <input type="image" src={BlogWeb.Endpoint.static_path("/assets/images/share_button.svg")} />
-  </div>
   <div class="showoff">
     <div class="row">
       <div class="screen" id="screen">
@@ -14,6 +11,10 @@
           <%= for example <- Showoff.Examples.list() do %>
             <%= content_tag(:div, {:safe, example.svg}, class: "example", phx_click: "example", phx_value_text: example.text) %>
           <% end %>
+        </div>
+        <br />
+        <div class="row">
+          <button id="share-drawing" value="publish">Share Your Drawing With The Class</button>
         </div>
       </div>
     </div>
