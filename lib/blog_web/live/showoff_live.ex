@@ -27,7 +27,7 @@ defmodule BlogWeb.ShowoffLive do
 
   def handle_event("publish", %{"drawing_text" => text}, socket) do
     room_name = socket.assigns.room_name
-    case Showoff.text_to_drawing(text) do
+    case Showoff.kid_text_to_drawing(text, "anonymous") do
       {:ok, drawing} ->
         RecentDrawings.add_drawing(room_name, drawing)
         {:noreply, assign(socket, :err, "")}
@@ -43,7 +43,7 @@ defmodule BlogWeb.ShowoffLive do
   end
 
   defp update_drawing(socket, text) do
-    case Showoff.text_to_svg(text) do
+    case Showoff.kid_text_to_svg(text) do
       {:ok, svg} ->
         assign(socket, :svg, svg)
       {:error, _err} ->

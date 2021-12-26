@@ -1,9 +1,48 @@
 /* This file is for your main application css. */
 
-/*
-@import "./phoenix.css";
-@import "../../deps/phoenix_live_view/assets/css/live_view.css";
-*/
+@import "./liveview.css";
+@import "./showoff.css";
+
+/* Alerts and form errors used by phx.new */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert p {
+  margin-bottom: 0;
+}
+.alert:empty {
+  display: none;
+}
+.invalid-feedback {
+  color: #a94442;
+  display: block;
+  margin: -1rem 0 2rem;
+}
+
+/******************************************************************************************
+ * 
+ * Most of the rest of this CSS is inherited from the CSS theme that I carried over from
+ * when my blog was generated with a static site generator tool
+ *
+ ******************************************************************************************/
 
 /**
  * Reset some basic elements
@@ -152,6 +191,11 @@
  /**
   * Site header
   */
+/* override phoenix style */
+  header nav a {
+    display: inline;
+  }
+
  .site-header {
    border-top: 5px solid #424242;
    border-bottom: 1px solid #e8e8e8;
@@ -501,92 +545,4 @@
 svg.panda {
   max-width: 400px;
   max-height: 400px;
-}
-
-/* Showoff Styles */
-.showoff div.row {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-
-  /* -webkit-prefixed */
-  display: -webkit-flex;
-  -webkit-flex-flow: row wrap;
-  -webkit-justify-content: center;
-  -webkit-align-content: center;
-  -webkit-align-items: center;
-
-  /* -ms-prefixed */
-  display: -ms-flex;
-  -ms-flex-flow: row wrap;
-  -ms-justify-content: center;
-  -ms-align-content: center;
-  -ms-align-items: center;
-}
-
-.showoff .error {
-  color: red;
-  font-size: 11pt;
-}
-  
-.showoff .screen {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: center;
-
-  /* -webkit- prefixed */
-  display: -webkit-flex;
-  -webkit-flex-flow: row wrap;
-  -webkit-justify-content: center;
-  -webkit-align-content: center;
-
-  /* -ms- prefixed */
-  display: -ms-flex;
-  -ms-flex-flow: row wrap;
-  -ms-justify-content: center;
-  -ms-align-content: center;
-
-  border: 5px dashed black;
-
-  height: 600px;
-  width: 600px;
-  margin: 20px;
-}
-  
-.showoff .screen.large {
-  height: 800px;
-  width: 800px;
-}
-
-.showoff .input {
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-grow: 1;
-  width: 400px;
-  margin: 20px;
-  padding: 20px;
-  background-color: #eeeeee;
-  border-radius: 10px;
-}
-
-.showoff .input textarea {
-  width: 100%;
-  height: 200px;
-  clear: both;
-
-  font-size: 11pt;
-  font-family: Courier, Consolas;
-}
-
-.showoff svg { height: 100%; width: 100%; }
-
-.showoff .example {
-  height: 100px;
-  width: 100px;
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid grey;
 }

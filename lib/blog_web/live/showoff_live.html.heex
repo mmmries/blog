@@ -1,34 +1,32 @@
-<div class="showoff">
-  <div class="row">
-    <h1>Scratchpad: Try Drawing Something!</h1>
-  </div>
-
-  <div class="row">
-    <div class="screen" id="screen">
-      <%= if @svg, do: {:safe, @svg} %>
-    </div>
-    <div class="input">
-      <form phx-submit="publish" phx-change="draw">
+<form phx-submit="publish" phx-change="draw">
+  <div class="showoff">
+    <div class="row">
+      <div class="screen" id="screen">
+        <%= if @svg, do: {:safe, @svg} %>
+      </div>
+      <div class="input">
         <textarea name="drawing_text"><%= @drawing_text %></textarea>
-        <button name="action" value="publish">Publish This Drawing</button>
-      </form>
-      <p class="error"><%= @err %></p>
-      <h4>Examples - Click to Try Them Out</h4>
-      <div class="row examples">
-        <%= for example <- Showoff.Examples.list() do %>
-          <%= content_tag(:div, {:safe, example.svg}, class: "example", phx_click: "example", phx_value_text: example.text) %>
-        <% end %>
+        <p class="error"><%= @err %></p>
+        <div class="row examples">
+          <%= for example <- Showoff.Examples.list() do %>
+            <%= content_tag(:div, {:safe, example.svg}, class: "example", phx_click: "example", phx_value_text: example.text) %>
+          <% end %>
+        </div>
+        <br />
+        <div class="row">
+          <button id="share-drawing" value="publish">Share Your Drawing With The Class</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <h1>Recent Published Drawings</h1>
-  </div>
+    <div class="row">
+      <h1>Drawings From Your Class</h1>
+    </div>
 
-  <div class="row recents">
-    <%= for recent <- @recent do %>
-      <%= content_tag(:div, {:safe, recent.svg}, class: "example", phx_click: "example", phx_value_text: recent.text) %>
-    <% end %>
+    <div class="row recents">
+      <%= for recent <- @recent do %>
+        <%= content_tag(:div, {:safe, recent.svg}, class: "example", phx_click: "example", phx_value_text: recent.text) %>
+      <% end %>
+    </div>
   </div>
-</div>
+</form>

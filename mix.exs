@@ -51,11 +51,12 @@ defmodule Blog.MixProject do
       {:telemetry_poller, "~> 1.0"},
 
       {:bayesic, "~> 0.1"},
-      {:chunky_svg, "~> 0.1"},
+      {:chunky_svg, "~> 0.2"},
       {:earmark, "~> 1.3"},
       {:floki, "~> 0.25"},
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
+      {:nimble_parsec, "~> 1.2"},
       {:stemmer, "~> 1.0"},
       {:toml, "~> 0.6.1"},
 

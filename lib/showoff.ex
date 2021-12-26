@@ -4,10 +4,24 @@ defmodule Showoff do
   def dets_dir do
     case Application.get_env(:blog, :showoff_dets_dir) do
       nil ->
-        Application.app_dir(:blog) |> Path.join("tmp")
+        :code.priv_dir(:blog) |> Path.join("drawings")
 
       directory ->
         directory
+    end
+  end
+
+  def kid_text_to_drawing(text, author) do
+    case kid_text_to_svg(text) do
+      {:ok, svg} -> {:ok, %Drawing{author: author, svg: svg, text: text}}
+      {:error, err} -> {:error, err}
+    end
+  end
+
+  def kid_text_to_svg(text) do
+    case Showoff.KidParser.parse(text) do
+      {:ok, terms} -> term_to_svg(terms)
+      _other -> {:error, "can't draw"}
     end
   end
 

@@ -48,6 +48,7 @@ config :blog, BlogWeb.Endpoint,
       ~r"lib/blog_web/(live|views)/.*(ex)$",
       ~r"lib/blog_web/templates/.*(eex)$",
       ~r"lib/blog/post.ex$",
+      ~r"lib/showoff/examples.ex",
       ~r"priv/_posts/.*$"
     ]
   ]
