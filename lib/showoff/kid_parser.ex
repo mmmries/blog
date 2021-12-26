@@ -178,6 +178,11 @@ defmodule Showoff.KidParser do
             ascii_string([?a..?z], min: 1, max: 12)
             |> optional(wrap(repeat(ignore(repeat(whitespace)) |> wrap(attr_pair))))
           )
+
+  comment =
+    string("'")
+    |> ascii_string([not: ?\n..?\r], min: 0)
+
   defcombinatorp(:shape, shape)
 
   newline = choice([
@@ -185,5 +190,10 @@ defmodule Showoff.KidParser do
     string("\r\n")
   ])
 
-  defcombinatorp(:shapes, shape |> optional(repeat(ignore(repeat(newline)) |> concat(shape))))
+  line = choice([
+    ignore(comment),
+    shape
+  ])
+
+  defcombinatorp(:shapes, line |> optional(repeat(ignore(repeat(newline)) |> concat(line))))
 end

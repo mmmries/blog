@@ -2,6 +2,16 @@ defmodule Showoff.KidParserTest do
   use ExUnit.Case, async: true
   import Showoff.KidParser, only: [parse: 1]
 
+  describe "comments" do
+    test "just a single comment" do
+      assert parse("' This is a comment") == {:ok, []}
+    end
+
+    test "comments before a shape" do
+      assert parse("'This is a rectangle\r\n\nrect") == {:ok, [{"rect", %{}, nil}]}
+    end
+  end
+
   describe "svg shapes" do
     test "parsing a rect" do
       assert parse("rect") == {:ok, [{"rect", %{}, nil}]}
