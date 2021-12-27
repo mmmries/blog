@@ -167,13 +167,10 @@ defmodule Showoff.KidParser do
 
   whitespace = ascii_char([32, ?\t])
                |> times(min: 1)
-  attr_name = ascii_string([?a..?z], min: 1, max: 20)
+  attr_name = ascii_string([?a..?z, ?-], min: 1, max: 20)
   attr_pair = attr_name
                   |> ignore(ascii_char([?=]))
-                  |> choice([
-                    integer(min: 1),
-                    ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
-                  ])
+                  |> ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
   shape = wrap(
             ascii_string([?a..?z], min: 1, max: 12)
             |> optional(wrap(repeat(ignore(repeat(whitespace)) |> wrap(attr_pair))))

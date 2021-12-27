@@ -18,12 +18,18 @@ defmodule Showoff.KidParserTest do
     end
 
     test "with attributes" do
-      assert parse("rect x=10 y=10") == {:ok, [{"rect", %{"x" => 10, "y" => 10}, nil}]}
+      assert parse("rect x=10 y=10") == {:ok, [{"rect", %{"x" => "10", "y" => "10"}, nil}]}
     end
 
     test "parsing attributes with complex values" do
       assert parse("g transform=rotate(180,50,50)") == {:ok, [
         {"g", %{"transform" => "rotate(180,50,50)"}, nil}
+      ]}
+    end
+
+    test "parsing hyphenated attributes" do
+      assert parse("circle stroke-width=0.5") == {:ok, [
+        {:circle, %{:cx => 50, :cy => 50, :fill => "black", :r => 25, "stroke-width" => "0.5"}, nil}
       ]}
     end
   end
@@ -41,7 +47,7 @@ defmodule Showoff.KidParserTest do
 
     test "parsing multiple shapes" do
       assert parse("pentagon cx=25\r\nsquare\r\nhexagon") == {:ok, [
-        {:pentagon, %{cx: 25, cy: 50, fill: "black", r: 25}},
+        {:pentagon, %{cx: "25", cy: 50, fill: "black", r: 25}},
         {:square, %{cx: 50, cy: 50, fill: "black", r: 25}},
         {:hexagon, %{cx: 50, cy: 50, fill: "black", r: 25}}
       ]}
