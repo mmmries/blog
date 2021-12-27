@@ -163,14 +163,23 @@ defmodule Showoff.KidParser do
   defp maybe_to_atom("fill"), do: :fill
   defp maybe_to_atom(other), do: other
 
+  defp to_float(pieces) do
+    pieces |> Enum.join("") |> String.to_float()
+  end
+
   defparsec :pparse, parsec(:shapes)
 
   whitespace = ascii_char([32, ?\t])
                |> times(min: 1)
   attr_name = ascii_string([?a..?z, ?-], min: 1, max: 20)
+  attr_value = choice([
+    map(wrap(ascii_string([?0..?9], min: 1) |> string(".") |> ascii_string([?0..?9], min: 1)), :to_float),
+    integer(min: 1),
+    ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
+  ])
   attr_pair = attr_name
                   |> ignore(ascii_char([?=]))
-                  |> ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
+                  |> concat(attr_value)
   shape = wrap(
             ascii_string([?a..?z], min: 1, max: 12)
             |> optional(wrap(repeat(ignore(repeat(whitespace)) |> wrap(attr_pair))))
