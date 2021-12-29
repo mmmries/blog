@@ -13,7 +13,8 @@ defmodule Blog.Application do
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
       # Starts a worker by calling: Blog.Worker.start_link(arg)
-      {Blog.SearchServer, nil}
+      {Blog.SearchServer, nil},
+      {Ml.MnistServer, nil}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
