@@ -185,6 +185,7 @@ export default {
       let originalImageData = ctx.getImageData(0, 0, width, height)
       const opts = {resizeWidth: 28, resizeHeight: 28}
       createImageBitmap(originalImageData, 0, 0, width, height, opts).then(function(bm){
+        clearCanvas(resized, resized_ctx)
         resized_ctx.drawImage(bm, 0, 0)
         let imageData = resized_ctx.getImageData(0, 0, 28, 28)
         for(let i = 0; i < 28 * 28; i++) {
