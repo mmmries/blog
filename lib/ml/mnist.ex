@@ -9,7 +9,7 @@ defmodule Ml.Mnist do
     |> Nx.from_binary(type)
     |> Nx.reshape({elem(shape, 0), 784})
     |> Nx.divide(255.0)
-    |> Nx.ceil() # I want to test against simple black-white inputs, so I'm forcing everything to 0.0 or 1.0
+    |> Nx.round() # I want to test against simple black-white inputs, so I'm forcing everything to 0.0 or 1.0
     |> Nx.to_batched_list(32)
     # Test split
     |> Enum.split(1750)
