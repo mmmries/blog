@@ -1,11 +1,15 @@
 defmodule Ml.Mnist do
   require Axon
 
+  @model_file :code.priv_dir(:blog) |> Path.join("mnist/model.bin")
+  @state_file :code.priv_dir(:blog) |> Path.join("mnist/model_state.bin")
+
   defp transform_images({bin, type, shape}) do
     bin
     |> Nx.from_binary(type)
     |> Nx.reshape({elem(shape, 0), 784})
     |> Nx.divide(255.0)
+    |> Nx.ceil() # I want to test against simple black-white inputs, so I'm forcing everything to 0.0 or 1.0
     |> Nx.to_batched_list(32)
     # Test split
     |> Enum.split(1750)
@@ -63,10 +67,18 @@ defmodule Ml.Mnist do
 
     IO.write("\n\n")
 
-    {model, model_state}
+    File.write!(@model_file, :erlang.term_to_binary(model))
+    File.write!(@state_file, :erlang.term_to_binary(model_state))
   end
 
-  def predict(model, state, pixels) do
+  def load do
+    {
+      @model_file |> File.read!() |> :erlang.binary_to_term(),
+      @state_file |> File.read!() |> :erlang.binary_to_term()
+    }
+  end
+
+  def predict({model, state}, pixels) do
     input =
       pixels
       |> :binary.list_to_bin()

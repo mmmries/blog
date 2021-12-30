@@ -12,9 +12,7 @@ defmodule Blog.Application do
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
-      # Starts a worker by calling: Blog.Worker.start_link(arg)
-      {Blog.SearchServer, nil},
-      {Ml.MnistServer, nil}
+      {Blog.SearchServer, nil}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
