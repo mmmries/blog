@@ -15,7 +15,7 @@ Technology is clearly the solution to my problem.
 I need to be told when to water my plants, or even better, have them water themselves.
 We'll start with a soil moisture sensor.
 
-![capacitive soil sensor](/assets/images/2019-05-18/capacitive_sensor.jpg)
+![capacitive soil sensor](/images/2019-05-18/capacitive_sensor.jpg)
 
 > Photo courtesy of http://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/
 
@@ -28,7 +28,7 @@ This is known as an analog interface and is a very simple concept, but if you ar
 All of [the pins](https://pinout.xyz/) on the raspberry pi are digital pins meaning that they can only be read as `0` or `1` depending on whether the voltage is closer to `0` or `3.3` volts.
 We will need something that converts the analog signal into a digital signal that the raspberry pi can read.
 
-![ADS1115 Analog to Digital Converter](/assets/images/2019-05-18/ads1115.jpg)
+![ADS1115 Analog to Digital Converter](/images/2019-05-18/ads1115.jpg)
 
 > Photo courtesy of https://www.adafruit.com/product/1085
 
@@ -67,7 +67,7 @@ We'll need to take a look at [the datasheet for the ADS1115](http://www.ti.com/l
 These 16 bits of data tell us 9 different things about how the chip is currently operating.
 That's a lot of information packed into the space of just two ascii characters.
 
-![Config Register](/assets/images/2019-05-18/ADS1115_Config_Register.png)
+![Config Register](/images/2019-05-18/ADS1115_Config_Register.png)
 
 Luckily, we can use [Elixir's binary pattern matching syntax](https://hexdocs.pm/elixir/Kernel.SpecialForms.html#%3C%3C%3E%3E/1) to pull out this information.
 Binary pattern matching allows us to ask for information by expressing how we expect the information to be laid out across the bytes.

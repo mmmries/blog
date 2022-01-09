@@ -49,7 +49,7 @@ I pulled [Phoenix Live View](https://github.com/phoenixframework/phoenix_live_vi
 Each time the user changes the input box an event is sent back to the live view process which in turn queries the `SearchServer` process and then updates the list of results.
 This is all done in ~1-2ms and I didn't have to name any endpoints or decide on how to render results etc.
 
-![network timing for searches](/assets/images/2020-02-18/query_network_timing.png)
+![network timing for searches](/images/2020-02-18/query_network_timing.png)
 
 You can see that the it takes ~100ms for my fingers to type the next letter, but the time to send the query and get a response is only ~1ms.
 

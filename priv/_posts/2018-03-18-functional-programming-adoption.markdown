@@ -30,7 +30,7 @@ One common way of measuring adoption in companies is to count the number of job 
 So I grabbed a few languages/tools and searched indeed.com and stackoverflow for job postings. I used the same search terms for each (you can see [the raw data here](https://gist.github.com/mmmries/3162c3e7ff6d7628390def3bdfc21cda#file-language_job_postings-csv)).
 Breaking the data down into buckets of functional languages, object-oriented languages and languages that do both (scala and javascript) looks like this:
 
-![job postings chart](/assets/images/2018-03-18/job_postings_by_language_type.png)
+![job postings chart](/images/2018-03-18/job_postings_by_language_type.png)
 
 The data from indeed.com seems to mirror the language popularity indexes, but the stackoverflow job postings look quite different.
 The stackoverflow jobs seem to show that nearly half of all job postings have some relation to functional programming.

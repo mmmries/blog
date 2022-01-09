@@ -19,7 +19,7 @@ This should work for anyone following along with the meetup or for people watchi
 For this project we are planning to re-use most of the existing wiring that your sprinkler control board has avaiable.
 Here is a picture of my sprinkler control board.
 
-![sprinkler control board](/assets/images/2018-07-27/sprinkler_control_board.jpg)
+![sprinkler control board](/images/2018-07-27/sprinkler_control_board.jpg)
 
 The main 24VAC power line comes into the top-left and I plan to just tap into those in order to power the relays.
 The small boxes in the middle are the power inputs for each of the valves so I plan to wire my relays to those same inputs.
