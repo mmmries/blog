@@ -6,7 +6,7 @@ ARG RUNNER_IMAGE="debian:bullseye-20210902-slim"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential curl git \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir

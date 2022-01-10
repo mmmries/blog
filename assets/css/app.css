@@ -546,3 +546,11 @@ svg.panda {
   max-width: 400px;
   max-height: 400px;
 }
+
+#mnist_sketchpad {
+  background-color: black;
+}
+
+#mnist_resized {
+  background-color: black;
+}

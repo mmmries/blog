@@ -1,0 +1,15 @@
+<h1>Draw a Number</h1>
+
+<canvas id="mnist_sketchpad" height="140" width="140" phx-hook="MnistDraw" />
+
+<button id="mnist_clear">Clear</button>
+<button id="mnist_guess">Guess</button>
+
+<canvas id="mnist_resized" height="28" width="28" />
+
+<br />
+<br />
+
+<%= if @guess do %>
+  <p>Guess: <%= @guess %> with <%= @probability %> confidence</p>
+<% end %>

@@ -28,5 +28,9 @@ defmodule BlogWeb.Router do
     get "/about/", PageController, :about
     get "/tags/:name", PageController, :tag
     get "/:year/:month/:day/:slug", PageController, :post
+
+    live_session :default, root_layout: {BlogWeb.LayoutView, :root} do
+      live "/mnist", MnistLive
+    end
   end
 end

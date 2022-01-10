@@ -61,7 +61,13 @@ defmodule Blog.MixProject do
       {:toml, "~> 0.6.1"},
 
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "~> 1.2", only: :dev}
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+
+      # machine learning stuff
+      {:axon, "~> 0.1.0-dev", github: "elixir-nx/axon", sha: "8834a30c6c1764a7298ebc987d2d39f860e683e5"},
+      {:exla, "~> 0.1.0-dev", github: "elixir-nx/nx", sparse: "exla", sha: "328a5b04c662cedecf9b8dca24d0a814ae39d2a3"},
+      {:nx, "~> 0.1.0-dev", github: "elixir-nx/nx", sparse: "nx", override: true, sha: "328a5b04c662cedecf9b8dca24d0a814ae39d2a3"},
+      {:scidata, "~> 0.1", only: [:dev]}
     ]
   end
 
