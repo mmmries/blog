@@ -2,6 +2,7 @@ defmodule BlogWeb.ShowoffLive do
   use Phoenix.LiveView
   import Phoenix.HTML.Tag
   alias Showoff.RecentDrawings
+  require Logger
 
   def mount(%{"room_name" => room_name}, _session, socket) do
     :ok = BlogWeb.Endpoint.subscribe("recent_drawings:#{room_name}")
@@ -13,6 +14,7 @@ defmodule BlogWeb.ShowoffLive do
              |> assign(:err, "")
              |> assign(:recent, RecentDrawings.list(room_name))
              |> assign(:svg, nil)
+             |> assign(:alt, false)
     {:ok, socket}
   end
 
@@ -20,6 +22,13 @@ defmodule BlogWeb.ShowoffLive do
     socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
     {:noreply, socket}
   end
+
+  def handle_event("example", %{"id" => id}, %{assigns: %{alt: true}} = socket) do
+    id = String.to_integer(id)
+    RecentDrawings.delete(socket.assigns.room_name, id)
+    {:noreply, socket}
+  end
+
   def handle_event("example", %{"text" => text}, socket) do
     socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
     {:noreply, socket}
@@ -35,6 +44,16 @@ defmodule BlogWeb.ShowoffLive do
         socket = socket |> assign(:err, "an error occured trying to draw that") |> assign(:drawing_text, text)
         {:noreply, socket}
     end
+  end
+
+  def handle_event("keydown", %{"key" => "Alt"}, socket) do
+    socket = assign(socket, :alt, true)
+    {:noreply, socket}
+  end
+
+  def handle_event("keyup", %{"key" => "Alt"}, socket) do
+    socket = assign(socket, :alt, false)
+    {:noreply, socket}
   end
 
   def handle_info(%{event: "update", payload: %{recent: recent}}, socket) do

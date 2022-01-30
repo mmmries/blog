@@ -16,11 +16,16 @@ defmodule Showoff.RecentDrawings do
     publish_updated_list(room_name)
   end
 
+  def delete(room_name, id) do
+    :dets.delete(__MODULE__, {room_name, id})
+    publish_updated_list(room_name)
+  end
+
   def list(room_name) do
     :dets.match(RecentDrawings, {{room_name, :"$1"}, :"$2"})
     |> Enum.sort()
     |> Enum.reverse()
-    |> Enum.map(fn([_id, drawing]) -> drawing end)
+    |> Enum.map(fn([id, drawing]) -> {id, drawing} end)
   end
 
   defp publish_updated_list(room_name) do

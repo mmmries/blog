@@ -1,4 +1,4 @@
-<form phx-submit="publish" phx-change="draw">
+<form phx-submit="publish" phx-change="draw" phx-window-keydown="keydown" phx-key="Alt" phx-window-keyup="keyup">
   <div class="showoff">
     <div class="row">
       <div class="screen" id="screen">
@@ -24,8 +24,8 @@
     </div>
 
     <div class="row recents">
-      <%= for recent <- @recent do %>
-        <%= content_tag(:div, {:safe, recent.svg}, class: "example", phx_click: "example", phx_value_text: recent.text) %>
+      <%= for {id, recent} <- @recent do %>
+        <%= content_tag(:div, {:safe, recent.svg}, class: "example", phx_click: "example", phx_value_text: recent.text, phx_value_id: id) %>
       <% end %>
     </div>
   </div>
