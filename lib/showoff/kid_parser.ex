@@ -4,8 +4,9 @@ defmodule Showoff.KidParser do
   def parse(str) do
     try do
       with {:ok, raw, _, _, _, _} <- pparse(str),
-          tuples when is_list(tuples) <- convert_to_tuples(raw) do
-        {:ok, Enum.reverse(tuples)}
+          tuples when is_list(tuples) <- convert_to_tuples(raw),
+          tuples <- nest(Enum.reverse(tuples)) do
+        {:ok, tuples}
       end
     rescue
       _ -> {:error, "invalid shape"}
@@ -125,32 +126,32 @@ defmodule Showoff.KidParser do
     "vkern"
   ]
 
-  def convert_to_tuple([str]) when is_binary(str) do
-    convert_to_tuple([str, []])
+  def convert_to_tuple([whitespace, str]) when is_binary(str) do
+    convert_to_tuple([whitespace, str, []])
   end
 
-  def convert_to_tuple([shape, attributes]) when shape in @polygons do
+  def convert_to_tuple([whitespace, shape, attributes]) when shape in @polygons do
     attributes = Enum.reduce(attributes, @default_attributes, fn [name, value], attrs ->
       name = maybe_to_atom(name)
       Map.put(attrs, name, value)
     end)
     shape = String.to_existing_atom(shape)
-    {shape, attributes}
+    {Enum.count(whitespace), shape, attributes}
   end
 
-  def convert_to_tuple(["circle", attributes]) do
+  def convert_to_tuple([whitespace, "circle", attributes]) do
     attributes = Enum.reduce(attributes, @default_attributes, fn [name, value], attrs ->
       name = maybe_to_atom(name)
       Map.put(attrs, name, value)
     end)
-    {:circle, attributes, nil}
+    {Enum.count(whitespace), :circle, attributes, nil}
   end
 
-  def convert_to_tuple([shape, attributes]) when shape in @svg_tags do
+  def convert_to_tuple([whitespace, shape, attributes]) when shape in @svg_tags do
     attributes = Enum.reduce(attributes, %{}, fn [key, value], map ->
       Map.put(map, key, value)
     end)
-    {shape, attributes, nil}
+    {Enum.count(whitespace), shape, attributes, nil}
   end
 
   def convert_to_tuple([_shape, _attributes]) do
@@ -162,6 +163,47 @@ defmodule Showoff.KidParser do
   defp maybe_to_atom("r"), do: :r
   defp maybe_to_atom("fill"), do: :fill
   defp maybe_to_atom(other), do: other
+
+  # Takes in a flat list of tuples and turns it into a nested list depending on depth of indentation
+  #
+  # Each tuple in the list is either a 3 tuple of {depth, tag_name, attributes} or a pseudo nested
+  # 4 tuple of {depth, tag_name, attributes, children} where `children` will always be nil. The
+  # 3 tuples represent special shapes that cannot have children and get expanded by ChunkySVG.
+
+  # In the nested structure that we return, the depth elements will all be removed and we will have
+  # taken any deeper indentations and nested them as the children the element before them.
+  defp nest(tuples) do
+    {nested, []} = nest(tuples, 0, [])
+    nested
+  end
+
+  def nest([], _previous_depth, in_progress) do
+    {Enum.reverse(in_progress), []}
+  end
+
+  def nest([tuple | rest], depth, in_progress) do
+    tuple_depth = elem(tuple, 0)
+    cond do
+      tuple_depth == depth ->
+        in_progress = [strip_depth(tuple) | in_progress]
+        nest(rest, depth, in_progress)
+
+      tuple_depth > depth ->
+        {nested_list, rest} = nest([tuple | rest], tuple_depth, [])
+        in_progress = append_children(in_progress, Enum.reverse(nested_list))
+        nest(rest, depth, in_progress)
+
+      tuple_depth < depth ->
+        {in_progress, [tuple | rest]}
+    end
+  end
+
+  defp strip_depth({_d, tag, attrs, nil}), do: {tag, attrs, nil}
+  defp strip_depth({_d, tag, attrs}), do: {tag, attrs}
+
+  defp append_children([{tag, attrs, nil} | rest], children) do
+    [{tag, attrs, children} | rest]
+  end
 
   defp to_float(pieces) do
     pieces |> Enum.join("") |> String.to_float()
@@ -181,7 +223,8 @@ defmodule Showoff.KidParser do
                   |> ignore(ascii_char([?=]))
                   |> concat(attr_value)
   shape = wrap(
-            ascii_string([?a..?z], min: 1, max: 12)
+            optional(wrap(repeat(whitespace)))
+            |> ascii_string([?a..?z], min: 1, max: 12)
             |> optional(wrap(repeat(ignore(repeat(whitespace)) |> wrap(attr_pair))))
           )
 

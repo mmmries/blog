@@ -61,6 +61,25 @@ defmodule Showoff.KidParserTest do
     end
   end
 
+  describe "grouping" do
+    test "whitespace is significant for grouping child shapes" do
+      text = """
+      g transform=scale(2,2)
+        circle r=20 fill=red
+        circle r=10 fill=black
+      square
+      """
+
+      assert parse(text) == {:ok, [
+        {"g", %{"transform" => "scale(2,2)"}, [
+          {:circle, %{r: 20, fill: "red", cx: 50, cy: 50}, nil},
+          {:circle, %{r: 10, fill: "black", cx: 50, cy: 50}, nil}
+        ]},
+        {:square, %{cx: 50, cy: 50, fill: "black", r: 25}}
+      ]}
+    end
+  end
+
   test "invalid syntax" do
     assert {:error, _message, _str, _, _, _} = parse("_-+/*#%&(*&")
   end
