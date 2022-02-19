@@ -2,15 +2,15 @@ defmodule Showoff.KidParser do
   import NimbleParsec
 
   def parse(str) do
-    #try do
+    try do
       with {:ok, raw, _, _, _, _} <- pparse(str),
           tuples when is_list(tuples) <- convert_to_tuples(raw),
           tuples <- nest(Enum.reverse(tuples)) do
         {:ok, tuples}
       end
-    #rescue
-    #  _ -> {:error, "invalid shape"}
-    #end
+    rescue
+      _ -> {:error, "invalid shape"}
+    end
   end
 
   def convert_to_tuples(raw) do
