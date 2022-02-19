@@ -2,15 +2,15 @@ defmodule Showoff.KidParser do
   import NimbleParsec
 
   def parse(str) do
-    try do
+    #try do
       with {:ok, raw, _, _, _, _} <- pparse(str),
           tuples when is_list(tuples) <- convert_to_tuples(raw),
           tuples <- nest(Enum.reverse(tuples)) do
         {:ok, tuples}
       end
-    rescue
-      _ -> {:error, "invalid shape"}
-    end
+    #rescue
+    #  _ -> {:error, "invalid shape"}
+    #end
   end
 
   def convert_to_tuples(raw) do
@@ -205,20 +205,25 @@ defmodule Showoff.KidParser do
     [{tag, attrs, children} | rest]
   end
 
-  defp to_float(pieces) do
-    pieces |> Enum.join("") |> String.to_float()
+  defp maybe_to_num(str) do
+    cond do
+      Regex.match?(~r{\A\d+\z}, str) ->
+        String.to_integer(str)
+
+      Regex.match?(~r{\A[+-]?([0-9]*[.])?[0-9]+\z}, str) ->
+        String.to_float(str)
+
+      true ->
+        str
+    end
   end
 
   defparsec :pparse, parsec(:shapes)
 
   whitespace = ascii_char([32, ?\t])
                |> times(min: 1)
-  attr_name = ascii_string([?a..?z, ?-], min: 1, max: 20)
-  attr_value = choice([
-    map(wrap(ascii_string([?0..?9], min: 1) |> string(".") |> ascii_string([?0..?9], min: 1)), :to_float),
-    integer(min: 1),
-    ascii_string([?a..?z, ?A..?Z, ?0..?9, ?!..?/], min: 1)
-  ])
+  attr_name = ascii_string([?a..?z, ?-, ?A..?Z], min: 1, max: 20)
+  attr_value = map(ascii_string([?!, ?#..?~], min: 1), :maybe_to_num)
   attr_pair = attr_name
                   |> ignore(ascii_char([?=]))
                   |> concat(attr_value)

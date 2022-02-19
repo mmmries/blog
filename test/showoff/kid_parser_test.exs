@@ -27,6 +27,12 @@ defmodule Showoff.KidParserTest do
       ]}
     end
 
+    test "parsing attributes that start with an integer" do
+      assert parse("animate dur=10s") == {:ok, [
+        {"animate", %{"dur" => "10s"}, nil}
+      ]}
+    end
+
     test "parsing hyphenated attributes" do
       assert parse("circle stroke-width=0.5") == {:ok, [
         {:circle, %{:cx => 50, :cy => 50, :fill => "black", :r => 25, "stroke-width" => 0.5}, nil}
@@ -76,6 +82,19 @@ defmodule Showoff.KidParserTest do
           {:circle, %{r: 10, fill: "black", cx: 50, cy: 50}, nil}
         ]},
         {:square, %{cx: 50, cy: 50, fill: "black", r: 25}}
+      ]}
+    end
+
+    test "grouping with animate tags" do
+      text = """
+      rect x=25 y=25 height=50 width=50
+        animate attributeName=rx values=0;5;0 dur=10s repeatCount=indefinite
+      """
+
+      assert parse(text) == {:ok, [
+        {"rect", %{"height" => 50, "width" => 50, "x" => 25, "y" => 25}, [
+          {"animate", %{"attributeName" => "rx", "values" => "0;5;0", "dur" => "10s", "repeatCount" => "indefinite"}, nil}
+        ]}
       ]}
     end
   end
