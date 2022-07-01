@@ -8,7 +8,10 @@ defmodule Blog.Application do
   def start(_type, _args) do
     Showoff.LocalDrawings.init()
 
+    cluster_config = Application.get_env(:libcluster, :topologies)
+
     children = [
+      {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]},
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
