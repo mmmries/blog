@@ -7,7 +7,7 @@ import Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :blog, BlogWeb.Endpoint,
-  http: [port: 4001],
+  http: [port: String.to_integer(System.get_env("PORT") || "4001")],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -62,3 +62,7 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+if System.get_env("DETS_DIR") do
+  config :blog, :showoff_dets_dir, System.get_env("DETS_DIR")
+end

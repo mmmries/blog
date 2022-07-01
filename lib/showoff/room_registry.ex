@@ -1,6 +1,16 @@
 defmodule Showoff.RoomRegistry do
   use GenServer
-  alias Showoff.{RoomsPresence, RecentDrawings}
+  alias Showoff.{RoomsPresence, LocalDrawings}
+  @topic "rooms"
+
+  @spec lookup_name(String.t()) :: list(node())
+  def lookup_name(name) do
+    case RoomsPresence.get_by_key(@topic, name) do
+      [] -> []
+      %{metas: metas} ->
+        Enum.map(metas, & &1.node)
+    end
+  end
 
   def register(name) do
     GenServer.call(__MODULE__, {:register, name})
@@ -12,7 +22,7 @@ defmodule Showoff.RoomRegistry do
 
   @impl GenServer
   def init(nil) do
-    RecentDrawings.all_room_names()
+    LocalDrawings.all_room_names()
     |> Enum.each(fn name ->
       {:ok, _} = track_presence(name)
     end)
@@ -27,6 +37,6 @@ defmodule Showoff.RoomRegistry do
   end
 
   defp track_presence(name) do
-    RoomsPresence.track(self(), "rooms", name, %{node: Node.self()})
+    RoomsPresence.track(self(), @topic, name, %{node: Node.self()})
   end
 end
