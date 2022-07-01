@@ -13,7 +13,10 @@ defmodule Blog.Application do
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
       # Starts a worker by calling: Blog.Worker.start_link(arg)
-      {Blog.SearchServer, nil}
+      {Blog.SearchServer, nil},
+      # Keep track of which servers are hosting which rooms
+      Showoff.RoomsPresence,
+      Showoff.RoomRegistry
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

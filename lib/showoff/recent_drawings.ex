@@ -16,6 +16,12 @@ defmodule Showoff.RecentDrawings do
     publish_updated_list(room_name)
   end
 
+  def all_room_names do
+    :dets.match(RecentDrawings, {{:"$1", :_}, :_})
+    |> Enum.map(&hd/1)
+    |> Enum.into(MapSet.new())
+  end
+
   def delete(room_name, id) do
     :dets.delete(__MODULE__, {room_name, id})
     publish_updated_list(room_name)
@@ -29,6 +35,7 @@ defmodule Showoff.RecentDrawings do
   end
 
   defp publish_updated_list(room_name) do
+    Showoff.RoomRegistry.register(room_name)
     BlogWeb.Endpoint.broadcast(
       "recent_drawings:#{room_name}",
       "update",
