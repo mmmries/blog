@@ -6,7 +6,7 @@ defmodule Blog.Application do
   use Application
 
   def start(_type, _args) do
-    Showoff.RecentDrawings.init()
+    Showoff.LocalDrawings.init()
 
     children = [
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},

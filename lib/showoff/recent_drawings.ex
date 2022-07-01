@@ -1,45 +1,36 @@
 defmodule Showoff.RecentDrawings do
-  alias __MODULE__
-  alias Showoff.Drawing
+  @moduledoc """
+  Module to interact with drawings across the cluster
 
-  @doc "this function opens the DETS table used to store drawings, it should be called when the application starts"
-  def init do
-    filename = Showoff.dets_dir()
-               |> Path.join("drawings.dets")
-               |> String.to_charlist()
-    {:ok, _table_name} = :dets.open_file(RecentDrawings, file: filename)
-  end
+  This module handles finding where a room is being hosted
+  in the cluster and then using the LocalDrawings on that
+  host.
+  """
 
-  def add_drawing(room_name, %Drawing{}=drawing) do
-    id = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-    true = :dets.insert_new(__MODULE__, {{room_name, id}, drawing})
-    publish_updated_list(room_name)
-  end
+  alias Showoff.{LocalDrawings, RoomRegistry}
 
-  def all_room_names do
-    :dets.match(RecentDrawings, {{:"$1", :_}, :_})
-    |> Enum.map(&hd/1)
-    |> Enum.into(MapSet.new())
+  def add_drawing(room_name, drawing) do
+    proxy(room_name, LocalDrawings, :add_drawing, [room_name, drawing])
   end
 
   def delete(room_name, id) do
-    :dets.delete(__MODULE__, {room_name, id})
-    publish_updated_list(room_name)
+    proxy(room_name, LocalDrawings, :delete, [room_name, id])
   end
 
   def list(room_name) do
-    :dets.match(RecentDrawings, {{room_name, :"$1"}, :"$2"})
-    |> Enum.sort()
-    |> Enum.reverse()
-    |> Enum.map(fn([id, drawing]) -> {id, drawing} end)
+    proxy(room_name, LocalDrawings, :list, [room_name])
   end
 
-  defp publish_updated_list(room_name) do
-    Showoff.RoomRegistry.register(room_name)
-    BlogWeb.Endpoint.broadcast(
-      "recent_drawings:#{room_name}",
-      "update",
-      %{recent: list(room_name)}
-    )
+  defp lookup_node(room_name) do
+    case RoomRegistry.lookup_name(room_name) do
+      [] -> Node.self()
+      [node] -> node
+    end
+  end
+
+  @timeout 5_000
+  defp proxy(room_name, module, fun, args) do
+    node = lookup_node(room_name)
+    :erpc.call(node, module, fun, args, @timeout)
   end
 end
