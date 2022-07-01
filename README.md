@@ -32,3 +32,23 @@ This application also hosts the showoff tool which is a tool to learn about prog
 In order to access it you need to make a request with a hostname prefixed by `showoff.*`.
 The easiest way to do this in development is to add an entry to `/etc/hosts` that points `showoff.local` to `127.0.0.1`.
 Then in your browser you can go to `http://showoff.local:4001`.
+
+### Clustering
+
+Showoff is designed to run with low-latency in multiple regions. Each node of the project has its own local
+DETS storage, and we use phoenix presence to coordinate which rooms are hosted on each node. If you want
+to simulate this locally, you can run multiple beams like this:
+
+```
+$ mkdir tmp/lhr
+$ mkdir tmp/sfo
+$ PORT=4001 DETS_DIR=tmp/lhr iex --name lhr@127.0.0.1 -S mix
+```
+
+And in a separate console start the sfo node with:
+
+```
+$ PORT=4002 DETS_DIR=tmp/sfo iex --name sfo@127.0.0.1 -S mix
+```
+
+Now you can access `http://showoff.local:4001` or `http://showoff.local:4002`.
