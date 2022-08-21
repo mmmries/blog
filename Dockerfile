@@ -1,7 +1,7 @@
 # Based on https://github.com/fly-apps/hello_elixir/blob/main/Dockerfile
 
 ARG BUILDER_IMAGE="hexpm/elixir:1.14.0-rc.1-erlang-25.0.4-debian-bullseye-20220801"
-ARG RUNNER_IMAGE="debian-bullseye-20220801"
+ARG RUNNER_IMAGE="debian:bullseye-20220801"
 
 FROM ${BUILDER_IMAGE} as builder
 
