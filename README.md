@@ -9,7 +9,7 @@ It should reload immediately when changes are made.
 
 ```shell
 $ mix deps.get
-$ iex -S mix phx.server
+$ iex --name blog@127.0.0.1 -S mix phx.server
 ```
 
 ## Deploying
