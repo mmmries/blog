@@ -25,13 +25,17 @@ defmodule BlogWeb.SearchLive do
 
   def handle_event("search", %{"search" => query}, socket) do
     socket = socket |> assign(:matches, Blog.SearchServer.query(query))
-    socket = if socket.assigns.turning_off do
-      socket |> assign(:turning_off, false)
-    else
-      socket
-    end
+
+    socket =
+      if socket.assigns.turning_off do
+        socket |> assign(:turning_off, false)
+      else
+        socket
+      end
+
     {:noreply, socket}
   end
+
   def handle_event("deactivate", _params, socket) do
     Process.send_after(self(), :turn_off, 500)
     socket = socket |> assign(:turning_off, true)
@@ -39,11 +43,13 @@ defmodule BlogWeb.SearchLive do
   end
 
   def handle_info(:turn_off, socket) do
-    socket = if socket.assigns.turning_off do
-      socket |> assign(:turning_off, false) |> assign(:matches, [])
-    else
-      socket
-    end
+    socket =
+      if socket.assigns.turning_off do
+        socket |> assign(:turning_off, false) |> assign(:matches, [])
+      else
+        socket
+      end
+
     {:noreply, socket}
   end
 end

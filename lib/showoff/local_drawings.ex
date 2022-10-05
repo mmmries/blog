@@ -10,13 +10,15 @@ defmodule Showoff.LocalDrawings do
 
   @doc "this function opens the DETS table used to store drawings, it should be called when the application starts"
   def init do
-    filename = Showoff.dets_dir()
-               |> Path.join("drawings.dets")
-               |> String.to_charlist()
+    filename =
+      Showoff.dets_dir()
+      |> Path.join("drawings.dets")
+      |> String.to_charlist()
+
     {:ok, _table_name} = :dets.open_file(LocalDrawings, file: filename)
   end
 
-  def add_drawing(room_name, %Drawing{}=drawing) do
+  def add_drawing(room_name, %Drawing{} = drawing) do
     id = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
     true = :dets.insert_new(__MODULE__, {{room_name, id}, drawing})
     publish_updated_list(room_name)
@@ -37,11 +39,12 @@ defmodule Showoff.LocalDrawings do
     :dets.match(LocalDrawings, {{room_name, :"$1"}, :"$2"})
     |> Enum.sort()
     |> Enum.reverse()
-    |> Enum.map(fn([id, drawing]) -> {id, drawing} end)
+    |> Enum.map(fn [id, drawing] -> {id, drawing} end)
   end
 
   defp publish_updated_list(room_name) do
     Showoff.RoomRegistry.register(room_name)
+
     BlogWeb.Endpoint.broadcast(
       "recent_drawings:#{room_name}",
       "update",
