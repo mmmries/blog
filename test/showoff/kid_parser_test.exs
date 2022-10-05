@@ -99,6 +99,13 @@ defmodule Showoff.KidParserTest do
     end
   end
 
+  test "parsing quoted arguments" do
+    text = ~S{circle cx="40" cy="30"}
+    assert parse(text) == {:ok, [
+      {:circle, %{cx: 40, cy: 30, r: 25, fill: "black"}, nil}
+    ]}
+  end
+
   test "invalid syntax" do
     assert {:error, _message, _str, _, _, _} = parse("_-+/*#%&(*&")
   end

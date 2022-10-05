@@ -30,6 +30,7 @@ defmodule Showoff.KidParser do
   }
 
   @polygons [
+    "arc",
     "triangle",
     "square",
     "pentagon",
@@ -135,7 +136,7 @@ defmodule Showoff.KidParser do
       name = maybe_to_atom(name)
       Map.put(attrs, name, value)
     end)
-    shape = String.to_existing_atom(shape)
+    shape = String.to_atom(shape)
     {Enum.count(whitespace), shape, attributes}
   end
 
@@ -218,15 +219,35 @@ defmodule Showoff.KidParser do
     end
   end
 
+  defp not_quote(<<?", _::binary>>, context, _, _), do: {:halt, context}
+  defp not_quote(_, context, _, _), do: {:cont, context}
+
   defparsec :pparse, parsec(:shapes)
 
   whitespace = ascii_char([32, ?\t])
                |> times(min: 1)
   attr_name = ascii_string([?a..?z, ?-, ?A..?Z], min: 1, max: 20)
-  attr_value = map(ascii_string([?!, ?#..?~], min: 1), :maybe_to_num)
+  bare_attr_value = map(ascii_string([?!, ?#..?~], min: 1), :maybe_to_num)
+  quoted_attr_value = ignore(ascii_char([?"]))
+                      |> repeat_while(
+                        choice([
+                          ~S(\") |> string() |> replace(?"),
+                          utf8_char([])
+                        ]),
+                        {:not_quote, []}
+                      )
+                      |> ignore(ascii_char([?"]))
+                      |> reduce({List, :to_string, []})
+                      |> map(:maybe_to_num)
+
   attr_pair = attr_name
                   |> ignore(ascii_char([?=]))
-                  |> concat(attr_value)
+                  |> concat(
+                    choice([
+                      bare_attr_value,
+                      quoted_attr_value
+                    ])
+                  )
   shape = wrap(
             optional(wrap(repeat(whitespace)))
             |> ascii_string([?a..?z], min: 1, max: 12)
