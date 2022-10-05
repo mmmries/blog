@@ -30,7 +30,6 @@ defmodule Showoff.KidParser do
   }
 
   @polygons [
-    "arc",
     "triangle",
     "square",
     "pentagon",
