@@ -10,7 +10,7 @@ defmodule Showoff.TermParserTest do
     {"{:circle, %{cx: 50, cy: 50}, nil}", {:circle, %{cx: 50, cy: 50}, nil}}
   ]
 
-  Enum.each(@succesful_examples, fn({text, term}) ->
+  Enum.each(@succesful_examples, fn {text, term} ->
     @text text
     @term term
     test "can parse #{text}" do
@@ -23,7 +23,7 @@ defmodule Showoff.TermParserTest do
     "%{\"a\" => a}",
     "IO.puts(nil)"
   ]
-  Enum.each(@non_literal_examples, fn(text) ->
+  Enum.each(@non_literal_examples, fn text ->
     @text text
     test "cannot parse #{text}" do
       assert parse(@text) == {:error, "string contains non-literal term(s)"}

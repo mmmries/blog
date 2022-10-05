@@ -7,7 +7,7 @@ defmodule SimpleXML do
   It doesn't support attributes. The content of a tag is
   either another tag or a text node.
   """
-  defparsec :parse, parsec(:node)
+  defparsec(:parse, parsec(:node))
 
   tag = ascii_string([?a..?z, ?A..?Z], min: 1)
   text = ascii_string([not: ?<], min: 1)
@@ -15,12 +15,14 @@ defmodule SimpleXML do
   opening_tag = ignore(string("<")) |> concat(tag) |> ignore(string(">"))
   closing_tag = ignore(string("</")) |> concat(tag) |> ignore(string(">"))
 
-  defcombinatorp :node,
-                 opening_tag
-                 |> repeat(lookahead_not(string("</")) |> choice([parsec(:node), text]))
-                 |> wrap()
-                 |> concat(closing_tag)
-                 |> post_traverse(:match_and_emit_tag)
+  defcombinatorp(
+    :node,
+    opening_tag
+    |> repeat(lookahead_not(string("</")) |> choice([parsec(:node), text]))
+    |> wrap()
+    |> concat(closing_tag)
+    |> post_traverse(:match_and_emit_tag)
+  )
 
   defp match_and_emit_tag(_rest, [tag, [tag, text]], context, _line, _offset),
     do: {[{String.to_atom(tag), [], text}], context}

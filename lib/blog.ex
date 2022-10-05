@@ -23,7 +23,7 @@ defmodule Blog do
   end
 
   def get_posts_by_tag(tag) do
-    Enum.filter(@posts, fn(post) ->
+    Enum.filter(@posts, fn post ->
       tag in post.tags
     end)
   end
@@ -33,11 +33,11 @@ defmodule Blog do
   end
 
   def list_tags do
-    @posts |> Enum.flat_map(&( Map.get(&1, :tags, []))) |> Enum.uniq() |> Enum.sort()
+    @posts |> Enum.flat_map(&Map.get(&1, :tags, [])) |> Enum.uniq() |> Enum.sort()
   end
 
   defp find_post(date, slug) do
-    Enum.find(@posts, fn(post) ->
+    Enum.find(@posts, fn post ->
       post.date == date and post.slug == slug
     end)
   end

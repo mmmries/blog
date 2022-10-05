@@ -13,7 +13,7 @@ defmodule Showoff.Examples do
   ]
 
   def list do
-    Enum.map(@list, fn (text) ->
+    Enum.map(@list, fn text ->
       {:ok, drawing} = Showoff.kid_text_to_drawing(text, "Example")
       drawing
     end)

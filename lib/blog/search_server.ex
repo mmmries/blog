@@ -15,17 +15,21 @@ defmodule Blog.SearchServer do
   end
 
   def handle_continue(:build_index, _state) do
-    {micros, index} = :timer.tc(fn ->
-      Blog.Search.build_index(Blog.list_posts())
-    end)
+    {micros, index} =
+      :timer.tc(fn ->
+        Blog.Search.build_index(Blog.list_posts())
+      end)
+
     Logger.info("it took #{micros}µs to build the text index")
     {:noreply, index}
   end
 
   def handle_call({:query, query}, _from, index) do
-    {micros, response} = :timer.tc(fn ->
-      Blog.Search.search(index, query)
-    end)
+    {micros, response} =
+      :timer.tc(fn ->
+        Blog.Search.search(index, query)
+      end)
+
     Logger.info("it took #{micros}µs to query")
     {:reply, response, index}
   end

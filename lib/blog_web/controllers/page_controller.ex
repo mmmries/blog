@@ -11,10 +11,9 @@ defmodule BlogWeb.PageController do
 
   def post(conn, %{"year" => year, "month" => month, "day" => day, "slug" => slug}) do
     with {:ok, date} <- date(year, month, day),
-          slug <- trim_slug(slug),
-         {:ok, post} <- Blog.get_post(date, slug)
-    do
-     render(conn, "post.html", post: post)
+         slug <- trim_slug(slug),
+         {:ok, post} <- Blog.get_post(date, slug) do
+      render(conn, "post.html", post: post)
     else
       _ -> raise Phoenix.Router.NoRouteError, conn: conn, router: BlogWeb.Router
     end

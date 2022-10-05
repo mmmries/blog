@@ -6,7 +6,9 @@ defmodule Showoff.RoomRegistry do
   @spec lookup_name(String.t()) :: list(node())
   def lookup_name(name) do
     case RoomsPresence.get_by_key(@topic, name) do
-      [] -> []
+      [] ->
+        []
+
       %{metas: metas} ->
         Enum.map(metas, & &1.node)
     end

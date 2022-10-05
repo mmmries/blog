@@ -49,7 +49,6 @@ defmodule Blog.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-
       {:bayesic, "~> 0.1"},
       {:chunky_svg, "~> 0.2"},
       {:earmark, "~> 1.3"},
@@ -60,7 +59,6 @@ defmodule Blog.MixProject do
       {:nimble_parsec, "~> 1.2"},
       {:stemmer, "~> 1.0"},
       {:toml, "~> 0.6.1"},
-
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev}
     ]
