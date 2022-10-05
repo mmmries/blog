@@ -46,6 +46,14 @@ defmodule Showoff.KidParserTest do
                    nil}
                 ]}
     end
+
+    test "parsing camelCased tag names" do
+      assert parse("clipPath id=bottom") ==
+               {:ok,
+                [
+                  {"clipPath", %{"id" => "bottom"}, nil}
+                ]}
+    end
   end
 
   describe "special shapes" do

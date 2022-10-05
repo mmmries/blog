@@ -264,7 +264,7 @@ defmodule Showoff.KidParser do
   shape =
     wrap(
       optional(wrap(repeat(whitespace)))
-      |> ascii_string([?a..?z], min: 1, max: 12)
+      |> ascii_string([?a..?z, ?A..?Z], min: 1, max: 12)
       |> optional(wrap(repeat(ignore(repeat(whitespace)) |> wrap(attr_pair))))
     )
 
