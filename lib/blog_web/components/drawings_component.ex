@@ -3,9 +3,9 @@ defmodule BlogWeb.DrawingsComponent do
 
   def list(assigns) do
     ~H"""
-      <div class="row">
+      <div class="flex flex-row items-center flex-wrap">
         <%= for drawing <- @drawings do %>
-          <div class="example" phx-click="example" phx-value-text={drawing.text} phx-value-id={drawing.id}>
+          <div class="w-28 h-28 m-2 p-1 gb" phx-click="example" phx-value-text={drawing.text} phx-value-id={drawing.id}>
             <%= {:safe, drawing.svg} %>
           </div>
         <% end %>
