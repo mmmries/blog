@@ -27,7 +27,7 @@ defmodule Blog.MixProject do
 
   defp aliases do
     [
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "tailwind default --minify", "phx.digest"]
     ]
   end
 
@@ -58,6 +58,7 @@ defmodule Blog.MixProject do
       {:makeup_erlang, "~> 0.1.0"},
       {:nimble_parsec, "~> 1.2"},
       {:stemmer, "~> 1.0"},
+      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:toml, "~> 0.6.1"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev}

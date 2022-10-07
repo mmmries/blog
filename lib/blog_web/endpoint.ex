@@ -23,7 +23,7 @@ defmodule BlogWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :blog,
-    gzip: false,
+    gzip: true,
     only: ~w(assets fonts images favicon.ico robots.txt keybase.txt)
 
   # Code reloading can be explicitly enabled under the

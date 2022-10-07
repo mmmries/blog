@@ -13,7 +13,8 @@ config :blog, BlogWeb.Endpoint,
   check_origin: false,
   server: true,
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -45,7 +46,7 @@ config :blog, BlogWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"lib/blog_web/(live|views)/.*(ex)$",
+      ~r"lib/blog_web/(components|live|views)/.*(ex)$",
       ~r"lib/blog_web/templates/.*(eex)$",
       ~r"lib/blog/post.ex$",
       ~r"lib/showoff/examples.ex",

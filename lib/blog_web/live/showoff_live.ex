@@ -1,8 +1,6 @@
 defmodule BlogWeb.ShowoffLive do
   use Phoenix.LiveView
-  import Phoenix.HTML.Tag
   alias Showoff.RecentDrawings
-  require Logger
 
   def mount(%{"room_name" => room_name}, _session, socket) do
     :ok = BlogWeb.Endpoint.subscribe("recent_drawings:#{room_name}")

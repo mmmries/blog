@@ -93,10 +93,6 @@
 
 .showoff svg { height: 100%; width: 100%; }
 
-.showoff .example {
-  height: 100px;
-  width: 100px;
-  margin: 5px;
-  padding: 5px;
+.gb {
   border: 1px solid grey;
 }
