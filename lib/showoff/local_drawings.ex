@@ -39,7 +39,7 @@ defmodule Showoff.LocalDrawings do
     :dets.match(LocalDrawings, {{room_name, :"$1"}, :"$2"})
     |> Enum.sort()
     |> Enum.reverse()
-    |> Enum.map(fn [id, drawing] -> {id, drawing} end)
+    |> Enum.map(fn [id, drawing] -> %{drawing | id: id} end)
   end
 
   defp publish_updated_list(room_name) do

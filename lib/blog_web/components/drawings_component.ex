@@ -5,7 +5,7 @@ defmodule BlogWeb.DrawingsComponent do
     ~H"""
       <div class="row">
         <%= for drawing <- @drawings do %>
-          <div class="example" phx-click="example" phx-value-text={drawing.text}>
+          <div class="example" phx-click="example" phx-value-text={drawing.text} phx-value-id={drawing.id}>
             <%= {:safe, drawing.svg} %>
           </div>
         <% end %>
