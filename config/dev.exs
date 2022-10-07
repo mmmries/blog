@@ -46,7 +46,7 @@ config :blog, BlogWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"lib/blog_web/(live|views)/.*(ex)$",
+      ~r"lib/blog_web/(components|live|views)/.*(ex)$",
       ~r"lib/blog_web/templates/.*(eex)$",
       ~r"lib/blog/post.ex$",
       ~r"lib/showoff/examples.ex",
