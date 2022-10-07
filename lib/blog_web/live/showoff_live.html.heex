@@ -7,11 +7,7 @@
       <div class="input">
         <textarea name="drawing_text"><%= @drawing_text %></textarea>
         <p class="error"><%= @err %></p>
-        <div class="row examples">
-          <%= for example <- Showoff.Examples.list() do %>
-            <%= content_tag(:div, {:safe, example.svg}, class: "example", phx_click: "example", phx_value_text: example.text) %>
-          <% end %>
-        </div>
+        <BlogWeb.DrawingsComponent.list message="Ohai" drawings={Showoff.Examples.list()} />
         <br />
         <div class="row">
           <button id="share-drawing" value="publish">Share Your Drawing With The Class</button>
