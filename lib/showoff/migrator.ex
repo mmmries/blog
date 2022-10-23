@@ -6,7 +6,7 @@ defmodule Showoff.Migrator do
   end
 
   def init(nil) do
-    Ecto.Migrator.run(Showoff.Repo, :up, all: true) |> IO.inspect(label: "migration")
+    Ecto.Migrator.run(Showoff.Repo, :up, all: true)
     {:ok, nil}
   end
 end
