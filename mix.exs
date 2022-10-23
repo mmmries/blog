@@ -45,6 +45,7 @@ defmodule Blog.MixProject do
       {:phoenix_html, "~> 3.1"},
       {:phoenix_live_view, "~> 0.16"},
       {:phoenix_live_dashboard, "~> 0.5"},
+      {:ecto_sqlite3, "~> 0.8.2"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.6"},

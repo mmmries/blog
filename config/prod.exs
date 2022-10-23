@@ -30,6 +30,11 @@ config :blog, BlogWeb.Endpoint,
 
 config :blog, :showoff_dets_dir, "/dets"
 
+config :blog, Showoff.Repo,
+  database: "/dets/sketches.sqlite3",
+  auto_vacuum: :full,
+  pool_size: 5
+
 # Do not print debug messages in production
 config :logger, level: :info
 

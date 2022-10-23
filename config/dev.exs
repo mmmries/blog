@@ -17,6 +17,10 @@ config :blog, BlogWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+path = Path.join([__DIR__, "..", "tmp", "sketches_dev.sqlite3"])
+config :blog, Showoff.Repo,
+    database: path
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

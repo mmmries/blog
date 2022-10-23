@@ -13,9 +13,10 @@ defmodule Blog.Application do
     children = [
       {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]},
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
+      Showoff.Repo,
+      {Showoff.Migrator, nil},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
-      # Starts a worker by calling: Blog.Worker.start_link(arg)
       {Blog.SearchServer, nil},
       # Keep track of which servers are hosting which rooms
       Showoff.RoomsPresence,
