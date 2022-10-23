@@ -3,3 +3,4 @@ deps
 assets/node_modules
 priv/static/assets
 tmp
+.elixir_ls
