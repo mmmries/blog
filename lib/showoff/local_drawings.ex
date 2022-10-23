@@ -1,54 +1,85 @@
 defmodule Showoff.LocalDrawings do
   @moduledoc """
-  This represents the local DETS storage for rooms and drawings
+  This represents the local SQlite storage for rooms and drawings
 
   This module is an internal API and is usually accessed from the `Showoff.RecentDrawings` module.
   """
 
-  alias __MODULE__
+  import Ecto.Query
+  # TODO remove this
   alias Showoff.Drawing
+  alias Showoff.{Repo, Room, Sketch}
 
-  @doc "this function opens the DETS table used to store drawings, it should be called when the application starts"
-  def init do
-    filename =
-      Showoff.dets_dir()
-      |> Path.join("drawings.dets")
-      |> String.to_charlist()
-
-    {:ok, _table_name} = :dets.open_file(LocalDrawings, file: filename)
+  def add_drawing(room_name, %Drawing{} = drawing) when is_binary(room_name) do
+    room_name
+    |> room_name_to_id()
+    |> add_drawing(drawing)
   end
 
-  def add_drawing(room_name, %Drawing{} = drawing) do
-    id = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-    true = :dets.insert_new(__MODULE__, {{room_name, id}, drawing})
-    publish_updated_list(room_name)
+  def add_drawing(room_id, %Drawing{} = drawing) when is_integer(room_id) do
+    result =
+      Sketch.changeset(%{
+        room_id: room_id,
+        source: drawing.text,
+        svg: drawing.svg
+      })
+      |> Repo.insert()
+
+    case result do
+      {:ok, _sketch} ->
+        publish_updated_list(room_id)
+
+      other ->
+        other
+    end
   end
 
   def all_room_names do
-    :dets.match(LocalDrawings, {{:"$1", :_}, :_})
-    |> Enum.map(&hd/1)
-    |> Enum.into(MapSet.new())
+    from(r in Room, select: r.name) |> Repo.all()
   end
 
-  def delete(room_name, id) do
-    :dets.delete(__MODULE__, {room_name, id})
-    publish_updated_list(room_name)
+  def delete(_room_name, id) do
+    case Repo.get(Sketch, id) do
+      nil ->
+        :already_deleted
+
+      sketch ->
+        Repo.delete!(sketch)
+        publish_updated_list(sketch.room_id)
+    end
   end
 
-  def list(room_name) do
-    :dets.match(LocalDrawings, {{room_name, :"$1"}, :"$2"})
-    |> Enum.sort()
-    |> Enum.reverse()
-    |> Enum.map(fn [id, drawing] -> %{drawing | id: id} end)
+  def list(room_name) when is_binary(room_name) do
+    room_name
+    |> room_name_to_id()
+    |> list()
   end
 
-  defp publish_updated_list(room_name) do
-    Showoff.RoomRegistry.register(room_name)
+  def list(room_id) when is_integer(room_id) do
+    from(s in Sketch,
+      where: s.room_id == ^room_id,
+      order_by: s.id
+    )
+    |> Repo.all()
+  end
 
+  def room_name_to_id(room_name) do
+    case Repo.get_by(Room, name: room_name) do
+      nil ->
+        room = Repo.insert!(%Room{name: room_name})
+        Showoff.RoomRegistry.register(room_name)
+        room.id
+
+      %Room{id: room_id} ->
+        room_id
+    end
+  end
+
+  defp publish_updated_list(room_id) do
     BlogWeb.Endpoint.broadcast(
-      "recent_drawings:#{room_name}",
+      "recent_drawings:#{room_id}",
       "update",
-      %{recent: list(room_name)}
+      %{recent: list(room_id)}
     )
   end
 end

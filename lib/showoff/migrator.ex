@@ -9,4 +9,13 @@ defmodule Showoff.Migrator do
     Ecto.Migrator.run(Showoff.Repo, :up, all: true)
     {:ok, nil}
   end
+
+  def migrate_from_dets_to_ecto do
+    filename =
+      Showoff.dets_dir()
+      |> Path.join("drawings.dets")
+      |> String.to_charlist()
+
+    {:ok, _table_name} = :dets.open_file(LocalDrawings, file: filename)
+  end
 end

@@ -3,15 +3,17 @@ defmodule BlogWeb.ShowoffLive do
   alias Showoff.RecentDrawings
 
   def mount(%{"room_name" => room_name}, _session, socket) do
-    :ok = BlogWeb.Endpoint.subscribe("recent_drawings:#{room_name}")
+    room_id = RecentDrawings.room_id(room_name)
+    :ok = BlogWeb.Endpoint.subscribe("recent_drawings:#{room_id}")
 
     socket =
       socket
       |> update_drawing("")
       |> assign(:room_name, room_name)
+      |> assign(:room_id, room_id)
       |> assign(:drawing_text, "")
       |> assign(:err, "")
-      |> assign(:recent, RecentDrawings.list(room_name))
+      |> assign(:recent, RecentDrawings.list(room_id))
       |> assign(:svg, nil)
       |> assign(:alt, false)
 
