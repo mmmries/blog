@@ -41,8 +41,13 @@ defmodule BlogWeb.ShowoffLive do
 
     case Showoff.kid_text_to_drawing(text, "anonymous") do
       {:ok, drawing} ->
-        RecentDrawings.add_drawing(room_name, drawing)
-        {:noreply, assign(socket, :err, "")}
+        case RecentDrawings.add_drawing(room_name, drawing) do
+          :ok ->
+            {:noreply, assign(socket, :err, "")}
+
+          {:error, changeset} ->
+            {:noreply, assign(socket, :err, err_message(changeset))}
+        end
 
       {:error, _err} ->
         socket =
@@ -77,5 +82,12 @@ defmodule BlogWeb.ShowoffLive do
       {:error, _err} ->
         assign(socket, :svg, nil)
     end
+  end
+
+  defp err_message(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {msg, _opts} -> msg end)
+    |> Map.values()
+    |> List.flatten()
+    |> Enum.join(", ")
   end
 end
