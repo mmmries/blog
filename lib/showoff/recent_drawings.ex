@@ -21,6 +21,10 @@ defmodule Showoff.RecentDrawings do
     proxy(room_name, LocalDrawings, :list, [room_name])
   end
 
+  def room_id(room_name) do
+    proxy(room_name, LocalDrawings, :room_name_to_id, [room_name])
+  end
+
   defp lookup_node(room_name) do
     case RoomRegistry.lookup_name(room_name) do
       [] -> Node.self()

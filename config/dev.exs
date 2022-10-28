@@ -18,8 +18,7 @@ config :blog, BlogWeb.Endpoint,
   ]
 
 path = Path.join([__DIR__, "..", "tmp", "sketches_dev.sqlite3"])
-config :blog, Showoff.Repo,
-    database: path
+config :blog, Showoff.Repo, database: path
 
 # ## SSL Support
 #
