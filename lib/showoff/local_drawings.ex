@@ -59,7 +59,7 @@ defmodule Showoff.LocalDrawings do
   def list(room_id) when is_integer(room_id) do
     from(s in Sketch,
       where: s.room_id == ^room_id,
-      order_by: s.id
+      order_by: [desc: s.id]
     )
     |> Repo.all()
   end
