@@ -12,13 +12,13 @@ defmodule Blog.Application do
       {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]},
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       Showoff.Repo,
+      {Showoff.Migrator, nil},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
       {Blog.SearchServer, nil},
       # Keep track of which servers are hosting which rooms
       Showoff.RoomsPresence,
-      Showoff.RoomRegistry,
-      {Showoff.Migrator, nil}
+      Showoff.RoomRegistry
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
