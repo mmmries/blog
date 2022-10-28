@@ -9,6 +9,7 @@ defmodule Showoff.Migrator do
 
   def init(nil) do
     Ecto.Migrator.run(Showoff.Repo, :up, all: true)
+    migrate_from_dets_to_ecto()
     {:ok, nil}
   end
 
