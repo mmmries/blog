@@ -6,6 +6,7 @@ defmodule Blog.Application do
   use Application
 
   def start(_type, _args) do
+    Showoff.Migrator.migrate_from_dets_to_ecto()
     cluster_config = Application.get_env(:libcluster, :topologies)
 
     children = [

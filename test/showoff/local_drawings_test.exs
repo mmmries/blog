@@ -13,7 +13,7 @@ defmodule Showoff.LocalDrawingsTest do
 
   test "duplicate drawings are rejected" do
     {:ok, drawing} = Showoff.kid_text_to_drawing("circle", "anonymous")
-    assert :ok = LocalDrawings.add_drawing("room", drawing)
+    assert {:ok, _sketch} = LocalDrawings.add_drawing("room", drawing)
 
     assert {:error, changeset} = LocalDrawings.add_drawing("room", drawing)
     refute changeset.valid?

@@ -26,11 +26,12 @@ defmodule Showoff.LocalDrawings do
       |> Repo.insert()
 
     case result do
-      {:ok, _sketch} ->
+      {:ok, sketch} ->
         publish_updated_list(room_id)
+        {:ok, sketch}
 
-      other ->
-        other
+      {:error, changeset} ->
+        {:error, changeset}
     end
   end
 
