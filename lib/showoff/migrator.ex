@@ -42,6 +42,7 @@ defmodule Showoff.Migrator do
     end)
 
     :dets.close(Migrator)
+
     destination =
       Showoff.dets_dir()
       |> Path.join("_migrated.drawings.dets")

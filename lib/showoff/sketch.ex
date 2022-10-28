@@ -15,6 +15,9 @@ defmodule Showoff.Sketch do
     |> validate_required([:room_id, :source, :svg])
     |> validate_length(:source, min: 3, max: 10_000)
     |> validate_length(:svg, min: 3, max: 10_000)
-    |> unique_constraint([:room_id, :source], name: "sketches_room_id_source_index", message: "this picture has already been shared")
+    |> unique_constraint([:room_id, :source],
+      name: "sketches_room_id_source_index",
+      message: "this picture has already been shared"
+    )
   end
 end
