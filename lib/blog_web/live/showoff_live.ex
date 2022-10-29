@@ -13,7 +13,7 @@ defmodule BlogWeb.ShowoffLive do
       |> assign(:room_id, room_id)
       |> assign(:drawing_text, "")
       |> assign(:err, "")
-      |> assign(:recent, RecentDrawings.list(room_id))
+      |> assign(:recent_ids, RecentDrawings.list(room_id))
       |> assign(:svg, nil)
       |> assign(:alt, false)
 
@@ -31,6 +31,13 @@ defmodule BlogWeb.ShowoffLive do
     {:noreply, socket}
   end
 
+  def handle_event("example", %{"id" => id}, socket) do
+    id = String.to_integer(id)
+    sketch = RecentDrawings.get(socket.assigns.room_name, id)
+    socket = assign(socket, %{err: nil, svg: sketch.svg, drawing_text: sketch.source})
+    {:noreply, socket}
+  end
+
   def handle_event("example", %{"text" => text}, socket) do
     socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
     {:noreply, socket}
@@ -42,7 +49,7 @@ defmodule BlogWeb.ShowoffLive do
     case Showoff.kid_text_to_drawing(text, "anonymous") do
       {:ok, drawing} ->
         case RecentDrawings.add_drawing(room_name, drawing) do
-          :ok ->
+          {:ok, _} ->
             {:noreply, assign(socket, :err, "")}
 
           {:error, changeset} ->
@@ -70,7 +77,7 @@ defmodule BlogWeb.ShowoffLive do
   end
 
   def handle_info(%{event: "update", payload: %{recent: recent}}, socket) do
-    socket = assign(socket, :recent, recent)
+    socket = assign(socket, :recent_ids, recent)
     {:noreply, socket}
   end
 

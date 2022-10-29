@@ -50,6 +50,13 @@ defmodule Showoff.LocalDrawings do
     end
   end
 
+  def get(_room_name, id) do
+    case Repo.get(Sketch, id) do
+      nil -> nil
+      sketch -> sketch
+    end
+  end
+
   def list(room_name) when is_binary(room_name) do
     room_name
     |> room_name_to_id()
@@ -59,7 +66,8 @@ defmodule Showoff.LocalDrawings do
   def list(room_id) when is_integer(room_id) do
     from(s in Sketch,
       where: s.room_id == ^room_id,
-      order_by: [desc: s.id]
+      order_by: [desc: s.id],
+      select: s.id
     )
     |> Repo.all()
   end
