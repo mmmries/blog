@@ -31,6 +31,13 @@ defmodule BlogWeb.ShowoffLive do
     {:noreply, socket}
   end
 
+  def handle_event("example", %{"id" => id}, socket) do
+    id = String.to_integer(id)
+    sketch = RecentDrawings.get(socket.assigns.room_name, id)
+    socket = assign(socket, %{err: nil, svg: sketch.svg, drawing_text: sketch.source})
+    {:noreply, socket}
+  end
+
   def handle_event("example", %{"text" => text}, socket) do
     socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
     {:noreply, socket}
