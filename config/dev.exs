@@ -17,7 +17,8 @@ config :blog, BlogWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
-path = Path.join([__DIR__, "..", "tmp", "sketches_dev.sqlite3"])
+database_filename = System.get_env("DB_FILE", "sketches_dev") <> ".sqlite3"
+path = Path.join([__DIR__, "..", "tmp", database_filename])
 config :blog, Showoff.Repo, database: path
 
 # ## SSL Support

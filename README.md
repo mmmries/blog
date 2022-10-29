@@ -40,15 +40,13 @@ DETS storage, and we use phoenix presence to coordinate which rooms are hosted o
 to simulate this locally, you can run multiple beams like this:
 
 ```
-$ mkdir tmp/lhr
-$ mkdir tmp/sfo
-$ PORT=4001 DETS_DIR=tmp/lhr iex --name lhr@127.0.0.1 -S mix
+$ PORT=4001 DB_FILE=lhr iex --name lhr@127.0.0.1 -S mix
 ```
 
 And in a separate console start the sfo node with:
 
 ```
-$ PORT=4002 DETS_DIR=tmp/sfo iex --name sfo@127.0.0.1 -S mix
+$ PORT=4002 DB_FILE=sfo iex --name sfo@127.0.0.1 -S mix
 ```
 
 Now you can access `http://showoff.local:4001` or `http://showoff.local:4002`.
