@@ -19,6 +19,7 @@ defmodule BlogWeb.Router do
 
     get "/", ShowoffController, :index
     live "/rooms/:room_name", ShowoffLive
+    get "/img/:room_name/:id", ShowoffController, :img
   end
 
   scope "/", BlogWeb do

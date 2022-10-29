@@ -17,6 +17,10 @@ defmodule Showoff.RecentDrawings do
     proxy(room_name, LocalDrawings, :delete, [room_name, id])
   end
 
+  def get(room_name, id) do
+    proxy(room_name, LocalDrawings, :get, [room_name, id])
+  end
+
   def list(room_name) do
     proxy(room_name, LocalDrawings, :list, [room_name])
   end
