@@ -13,7 +13,7 @@ defmodule BlogWeb.ShowoffLive do
       |> assign(:room_id, room_id)
       |> assign(:drawing_text, "")
       |> assign(:err, "")
-      |> assign(:recent, RecentDrawings.list(room_id))
+      |> assign(:recent_ids, RecentDrawings.list(room_id))
       |> assign(:svg, nil)
       |> assign(:alt, false)
 
@@ -42,7 +42,7 @@ defmodule BlogWeb.ShowoffLive do
     case Showoff.kid_text_to_drawing(text, "anonymous") do
       {:ok, drawing} ->
         case RecentDrawings.add_drawing(room_name, drawing) do
-          :ok ->
+          {:ok, _} ->
             {:noreply, assign(socket, :err, "")}
 
           {:error, changeset} ->
@@ -70,7 +70,7 @@ defmodule BlogWeb.ShowoffLive do
   end
 
   def handle_info(%{event: "update", payload: %{recent: recent}}, socket) do
-    socket = assign(socket, :recent, recent)
+    socket = assign(socket, :recent_ids, recent)
     {:noreply, socket}
   end
 
