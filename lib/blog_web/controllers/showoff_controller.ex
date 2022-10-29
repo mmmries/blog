@@ -8,7 +8,8 @@ defmodule BlogWeb.ShowoffController do
 
   def img(conn, %{"room_name" => room_name, "id" => id}) do
     case Showoff.RecentDrawings.get(room_name, id) do
-      nil -> send_resp(conn, 404, "")
+      nil ->
+        send_resp(conn, 404, "")
 
       sketch ->
         conn
