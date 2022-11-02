@@ -10,10 +10,9 @@ defmodule BlogWeb.ShowoffLive do
       socket
       |> update_drawing("")
       |> assign(:room_name, room_name)
-      |> assign(:room_id, room_id)
       |> assign(:drawing_text, "")
       |> assign(:err, "")
-      |> assign(:recent_ids, RecentDrawings.list(room_id))
+      |> assign(:recent_ids, RecentDrawings.list(room_name))
       |> assign(:svg, nil)
       |> assign(:alt, false)
 
