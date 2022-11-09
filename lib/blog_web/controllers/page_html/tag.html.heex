@@ -2,7 +2,7 @@
 <ul>
   <%= for post <- @posts do %>
     <li>
-      <%= post_link(post) %>
+      <.post_link post={post} />
       
 (<%= Date.to_iso8601(post.date) %> | Tags: <%= Enum.join(post.tags, ", ") %>)
     </li>

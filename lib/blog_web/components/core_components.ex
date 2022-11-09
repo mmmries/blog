@@ -117,6 +117,13 @@ defmodule BlogWeb.CoreComponents do
     """
   end
 
+  attr :post, Blog.Post, required: true
+  def post_link(assigns) do
+    ~H"""
+    <a class="post-link" href={"/#{String.replace(Date.to_iso8601(@post.date), "-", "/")}/#{@post.slug}.html"}><%= @post.title %></a>
+    """
+  end
+
   @doc """
   Renders a modal.
   ## Examples
