@@ -9,7 +9,6 @@ defmodule BlogWeb.CoreComponents do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  import BlogWeb.Gettext
 
 
   def blog_header(assigns) do
@@ -46,7 +45,7 @@ defmodule BlogWeb.CoreComponents do
             <h3>tags</h3>
             <div id="tag-cloud">
               <%= for tag <- Blog.list_tags() do %>
-                <%= link(tag, class: "set-1", to: "/tags/#{tag}.html") %>&nbsp;
+                <a href={"/tags/#{tag}.html"} class="set-1"><%= tag %></a>&nbsp;
               <% end %>
             </div>
           </div>
@@ -170,7 +169,7 @@ defmodule BlogWeb.CoreComponents do
                   phx-click={hide_modal(@on_cancel, @id)}
                   type="button"
                   class="-m-3 flex-none p-3 opacity-20 hover:opacity-40"
-                  aria-label={gettext("close")}
+                  aria-label="close"
                 >
                   <Heroicons.x_mark solid class="h-5 w-5 stroke-current" />
                 </button>
@@ -250,7 +249,7 @@ defmodule BlogWeb.CoreComponents do
         :if={@close}
         type="button"
         class="group absolute top-2 right-1 p-2"
-        aria-label={gettext("close")}
+        aria-label="close"
       >
         <Heroicons.x_mark solid class="h-5 w-5 stroke-current opacity-40 group-hover:opacity-70" />
       </button>
@@ -499,7 +498,7 @@ defmodule BlogWeb.CoreComponents do
         <thead class="text-left text-[0.8125rem] leading-6 text-zinc-500">
           <tr>
             <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal"><%= col[:label] %></th>
-            <th class="relative p-0 pb-4"><span class="sr-only"><%= gettext("Actions") %></span></th>
+            <th class="relative p-0 pb-4"><span class="sr-only">Actions</span></th>
           </tr>
         </thead>
         <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
@@ -622,33 +621,16 @@ defmodule BlogWeb.CoreComponents do
     |> JS.hide(to: "##{id}", transition: {"block", "block", "hidden"})
     |> JS.pop_focus()
   end
-  @doc """
-  Translates an error message using gettext.
-  """
+
   def translate_error({msg, opts}) do
-    # When using gettext, we typically pass the strings we want
-    # to translate as a static argument:
-    #
-    #     # Translate "is invalid" in the "errors" domain
-    #     dgettext("errors", "is invalid")
-    #
-    #     # Translate the number of files with plural rules
-    #     dngettext("errors", "1 file", "%{count} files", count)
-    #
-    # Because the error messages we show in our forms and APIs
-    # are defined inside Ecto, we need to translate them dynamically.
-    # This requires us to call the Gettext module passing our gettext
-    # backend as first argument.
-    #
-    # Note we use the "errors" domain, which means translations
-    # should be written to the errors.po file. The :count option is
-    # set by Ecto and indicates we should also apply plural rules.
+    # I'm not using gettext, but I want to handle replacing some templates like %{count}
     if count = opts[:count] do
-      Gettext.dngettext(BlogWeb.Gettext, "errors", msg, msg, count, opts)
+      String.replace(msg, "%{count}", count)
     else
-      Gettext.dgettext(BlogWeb.Gettext, "errors", msg, opts)
+      msg
     end
   end
+
   @doc """
   Translates the errors for a field from a keyword list of errors.
   """

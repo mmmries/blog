@@ -27,7 +27,7 @@ defmodule BlogWeb.ConnCase do
 
       # Import conveniences for testing with connections
       import Plug.Conn
-      use Phoenix.ConnTest
+      import Phoenix.ConnTest
       import BlogWeb.ConnCase
     end
   end
