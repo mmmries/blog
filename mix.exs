@@ -43,7 +43,6 @@ defmodule Blog.MixProject do
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 3.1"},
       {:phoenix_live_view, "~> 0.18.3"},
-      {:phoenix_live_dashboard, "~> 0.5"},
       {:ecto_sqlite3, "~> 0.8.2"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
