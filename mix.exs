@@ -5,9 +5,8 @@ defmodule Blog.MixProject do
     [
       app: :blog,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -40,10 +39,10 @@ defmodule Blog.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6"},
+      {:phoenix, "1.7.0-rc.0", override: true},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 3.1"},
-      {:phoenix_live_view, "~> 0.16"},
+      {:phoenix_live_view, "~> 0.18.3"},
       {:phoenix_live_dashboard, "~> 0.5"},
       {:ecto_sqlite3, "~> 0.8.2"},
       {:jason, "~> 1.0"},
@@ -54,6 +53,7 @@ defmodule Blog.MixProject do
       {:chunky_svg, "~> 0.2"},
       {:earmark, "~> 1.3"},
       {:floki, "~> 0.25"},
+      {:heroicons, "~> 0.5"},
       {:libcluster, "~> 3.3"},
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
@@ -61,7 +61,7 @@ defmodule Blog.MixProject do
       {:stemmer, "~> 1.0"},
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:toml, "~> 0.6.1"},
-      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev}
     ]
   end

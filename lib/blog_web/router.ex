@@ -11,7 +11,7 @@ defmodule BlogWeb.Router do
   end
 
   pipeline :showoff do
-    plug :put_root_layout, {BlogWeb.LayoutView, :showoff}
+    plug :put_root_layout, {BlogWeb.Layouts, :showoff}
   end
 
   scope host: "showoff.", alias: BlogWeb do

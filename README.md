@@ -2,6 +2,17 @@
 
 My personal blog
 
+## Phoenix 1.7 TODO list
+
+> Upgrade guide: https://phoenixframework.org/blog/phoenix-1.7-released
+> Generated app diff: https://utils.zest.dev/gendiff/phx_new/F4E340351339F05A7E0D1CDBA261290A
+
+* migration from LayoutView to Layouts components
+  * remove LayoutView module
+  * remove PageView module
+* remove error_json.ex since we don't use any JSON APIs?
+* remove BlogWeb.view/0
+
 ## Writing
 
 When I'm writing locally for this blog, I run the following steps to get the server up and running.

@@ -11,7 +11,11 @@ import Config
 config :blog, BlogWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "+rmNcXccumf9jILPNgtiD5Ib65c/aePwO+7+hh1wZrOIMFIlvUHgH3DoPtCaAYAs",
-  render_errors: [view: BlogWeb.ErrorView, accepts: ~w(html json)],
+  render_errors: [
+    view: BlogWeb.ErrorView,
+    formats: [html: BlogWeb.ErrorHTML, json: BlogWeb.ErrorJSON],
+    layout: false
+  ],
   pubsub_server: Blog.PubSub,
   live_view: [signing_salt: "P6O+KcdZ"]
 
@@ -36,7 +40,7 @@ config :esbuild,
   ]
 
 config :tailwind,
-  version: "3.1.6",
+  version: "3.1.8",
   default: [
     args: ~w(
       --config=tailwind.config.js

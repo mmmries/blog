@@ -29,7 +29,6 @@ config :blog, Showoff.Repo, database: path
 #
 #     mix phx.gen.cert
 #
-# Note that this task requires Erlang/OTP 20 or later.
 # Run `mix help phx.gen.cert` for more information.
 #
 # The `http:` config above can be replaced with:
@@ -57,6 +56,8 @@ config :blog, BlogWeb.Endpoint,
       ~r"priv/_posts/.*$"
     ]
   ]
+
+config :blog, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
