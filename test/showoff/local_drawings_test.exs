@@ -7,7 +7,8 @@ defmodule Showoff.LocalDrawingsTest do
     LocalDrawings.add_drawing("room", drawing)
 
     assert "room" in LocalDrawings.all_room_names()
-    assert [d1] = LocalDrawings.list("room")
+    assert [id] = LocalDrawings.list("room")
+    assert d1 = LocalDrawings.get("room", id)
     assert d1.source == "circle"
   end
 
