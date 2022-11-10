@@ -7,7 +7,8 @@ defmodule BlogWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_blog_key",
-    signing_salt: "Divtdc6m"
+    signing_salt: "Divtdc6m",
+    same_site: "Lax"
   ]
 
   socket "/socket", BlogWeb.UserSocket,
@@ -24,7 +25,7 @@ defmodule BlogWeb.Endpoint do
     at: "/",
     from: :blog,
     gzip: true,
-    only: ~w(assets fonts images favicon.ico robots.txt keybase.txt)
+    only: BlogWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

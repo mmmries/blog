@@ -16,7 +16,6 @@ defmodule Blog.Post do
   end
 
   defp parse_file_content(path) do
-    IO.inspect(path)
     {metadata, content} = read_file(path)
 
     %{
