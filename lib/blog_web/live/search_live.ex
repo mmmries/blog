@@ -1,15 +1,16 @@
 defmodule BlogWeb.SearchLive do
   use Phoenix.LiveView
+  import BlogWeb.CoreComponents, only: [post_link: 1]
 
   def render(assigns) do
-    ~L"""
+    ~H"""
     <form class="global-search" autocomplete="off" phx-change="search">
       <div class="autocomplete">
         <input type="text" name="search" placeholder="search" phx-blur="deactivate" />
         <%= if Enum.count(assigns.matches) > 0 do %>
           <div class="autocomplete-items">
             <%= for post <- assigns.matches do %>
-              <%= BlogWeb.PageView.post_link(post) %>
+              <.post_link post={post} />
             <% end %>
           </div>
         <% end %>
