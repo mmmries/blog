@@ -16,12 +16,6 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/plugins/autoloader/prism-autoloader.min.js"></script>
   </head>
   <body class="bg-white antialiased">
-    <.blog_header conn={@conn}></.blog_header>
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <%= @inner_content %>
-      </div>
-    </main>
-    <.blog_footer conn={@conn}></.blog_footer>
+    <%= @inner_content %>
   </body>
 </html>
