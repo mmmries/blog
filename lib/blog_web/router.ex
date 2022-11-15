@@ -11,12 +11,8 @@ defmodule BlogWeb.Router do
     plug :fetch_live_flash
   end
 
-  pipeline :showoff do
-    plug :put_root_layout, {BlogWeb.Layouts, :showoff}
-  end
-
   scope host: "showoff.", alias: BlogWeb do
-    pipe_through [:browser, :showoff]
+    pipe_through :browser
 
     get "/", ShowoffController, :index
     live "/rooms/:room_name", ShowoffLive

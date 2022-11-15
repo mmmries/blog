@@ -4,7 +4,6 @@
 
 /* This file is for your main application css. */
 
-@import "./liveview.css";
 @import "./showoff.css";
 
 /* Alerts and form errors used by phx.new */
