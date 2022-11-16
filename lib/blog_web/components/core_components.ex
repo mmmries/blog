@@ -9,7 +9,7 @@ defmodule BlogWeb.CoreComponents do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-
+  use BlogWeb, :verified_routes
 
   def blog_header(assigns) do
     ~H"""
@@ -17,12 +17,12 @@ defmodule BlogWeb.CoreComponents do
       <div class="wrapper">
         <div class="footer-col-wrapper">
           <div class="col col-1">
-            <a class="site-title" href="/">Geek-O-System</a>
+            <a class="site-title" href={~p(/)}>Geek-O-System</a>
           </div>
           <div class="col col-2">
             <nav class="site-nav">
               <div class="trigger">
-                <a class="page-link" href="/about/">About</a>
+                <a class="page-link" href={~p(/about/)}>About</a>
               </div>
             </nav>
           </div>
@@ -45,7 +45,7 @@ defmodule BlogWeb.CoreComponents do
             <h3>tags</h3>
             <div id="tag-cloud">
               <%= for tag <- Blog.list_tags() do %>
-                <a href={"/tags/#{tag}.html"} class="set-1"><%= tag %></a>&nbsp;
+                <a href={~p(/tags/#{tag})} class="set-1"><%= tag %></a>&nbsp;
               <% end %>
             </div>
           </div>
@@ -120,7 +120,7 @@ defmodule BlogWeb.CoreComponents do
   attr :post, Blog.Post, required: true
   def post_link(assigns) do
     ~H"""
-    <a class="post-link" href={"/#{String.replace(Date.to_iso8601(@post.date), "-", "/")}/#{@post.slug}.html"}><%= @post.title %></a>
+    <a class="post-link" href={@post.path}><%= @post.title %></a>
     """
   end
 
