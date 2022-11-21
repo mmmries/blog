@@ -8,9 +8,7 @@ config :blog, BlogWeb.Endpoint,
 
 path = Path.join([__DIR__, "..", "tmp", "sketches_test.sqlite3"])
 
-config :blog, Showoff.Repo,
-  database: path,
-  pool: Ecto.Adapters.SQL.Sandbox
+config :blog, Showoff.Repo, database: path
 
 # Print only warnings and errors during test
 config :logger, level: :warning
