@@ -24,15 +24,17 @@ defmodule BlogWeb.ConnCase do
 
       use BlogWeb, :verified_routes
 
-
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
+      import Phoenix.LiveViewTest
       import BlogWeb.ConnCase
     end
   end
 
   setup _tags do
+    %{} = Showoff.Repo.query!("DELETE FROM rooms", [])
+    %{} = Showoff.Repo.query!("DELETE FROM sketches", [])
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

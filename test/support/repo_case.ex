@@ -11,6 +11,8 @@ defmodule Showoff.RepoCase do
   end
 
   setup _tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Showoff.Repo)
+    %{} = Showoff.Repo.query!("DELETE FROM rooms", [])
+    %{} = Showoff.Repo.query!("DELETE FROM sketches", [])
+    :ok
   end
 end

@@ -9,7 +9,7 @@ defmodule BlogWeb.CoreComponents do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-
+  use BlogWeb, :verified_routes
 
   def blog_header(assigns) do
     ~H"""
@@ -17,12 +17,12 @@ defmodule BlogWeb.CoreComponents do
       <div class="wrapper">
         <div class="footer-col-wrapper">
           <div class="col col-1">
-            <a class="site-title" href="/">Geek-O-System</a>
+            <a class="site-title" href={~p(/)}>Geek-O-System</a>
           </div>
           <div class="col col-2">
             <nav class="site-nav">
               <div class="trigger">
-                <a class="page-link" href="/about/">About</a>
+                <a class="page-link" href={~p(/about/)}>About</a>
               </div>
             </nav>
           </div>
@@ -39,13 +39,12 @@ defmodule BlogWeb.CoreComponents do
     ~H"""
     <footer class="site-footer">
       <div class="wrapper">
-
         <div class="col-wrapper">
           <div class="col col-1">
             <h3>tags</h3>
             <div id="tag-cloud">
               <%= for tag <- Blog.list_tags() do %>
-                <a href={"/tags/#{tag}.html"} class="set-1"><%= tag %></a>&nbsp;
+                <a href={~p(/tags/#{tag})} class="set-1"><%= tag %></a>&nbsp;
               <% end %>
             </div>
           </div>
@@ -61,15 +60,28 @@ defmodule BlogWeb.CoreComponents do
               <li>
                 <a href="https://github.com/mmmries">
                   <span class="icon icon--github">
-                    <svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
+                    <svg viewBox="0 0 16 16" width="16px" height="16px">
+                      <path
+                        fill="#828282"
+                        d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"
+                      >
+                      </path>
+                    </svg>
                   </span>
-                  <span class="username">mmmries</span></a>
+                  <span class="username">mmmries</span>
+                </a>
               </li>
 
               <li>
                 <a href="https://twitter.com/mmmries">
                   <span class="icon icon--twitter">
-                    <svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"></path></svg>
+                    <svg viewBox="0 0 16 16" width="16px" height="16px">
+                      <path
+                        fill="#828282"
+                        d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"
+                      >
+                      </path>
+                    </svg>
                   </span>
                   <span class="username">mmmries</span>
                 </a>
@@ -91,8 +103,16 @@ defmodule BlogWeb.CoreComponents do
                   <circle cx="22" cy="22" r="15"></circle>
                   <circle cx="22" cy="22" fill="grey" r="9"></circle>
                 </g>
-                <polygon fill="black" points="5.00000000000000000000e+01 9.17000000000000028422e+01 7.73650324319193885003e+01 8.03650324319193885003e+01 8.87000000000000028422e+01 5.30000000000000000000e+01 7.73650324319193885003e+01 2.56349675680806114997e+01 5.00000000000000071054e+01 1.42999999999999971578e+01 2.26349675680806114997e+01 2.56349675680806043943e+01 1.12999999999999971578e+01 5.29999999999999928946e+01 2.26349675680806043943e+01 8.03650324319193885003e+01"></polygon>
-                <polygon fill="lightgrey" points="5.00000000000000000000e+01 9.00000000000000000000e+01 7.82842712474619020213e+01 7.82842712474619020213e+01 9.00000000000000000000e+01 5.00000000000000000000e+01 7.82842712474619020213e+01 2.17157287525381015314e+01 5.00000000000000071054e+01 1.00000000000000000000e+01 2.17157287525381015314e+01 2.17157287525380908733e+01 1.00000000000000000000e+01 4.99999999999999928946e+01 2.17157287525380908733e+01 7.82842712474619020213e+01"></polygon>
+                <polygon
+                  fill="black"
+                  points="5.00000000000000000000e+01 9.17000000000000028422e+01 7.73650324319193885003e+01 8.03650324319193885003e+01 8.87000000000000028422e+01 5.30000000000000000000e+01 7.73650324319193885003e+01 2.56349675680806114997e+01 5.00000000000000071054e+01 1.42999999999999971578e+01 2.26349675680806114997e+01 2.56349675680806043943e+01 1.12999999999999971578e+01 5.29999999999999928946e+01 2.26349675680806043943e+01 8.03650324319193885003e+01"
+                >
+                </polygon>
+                <polygon
+                  fill="lightgrey"
+                  points="5.00000000000000000000e+01 9.00000000000000000000e+01 7.82842712474619020213e+01 7.82842712474619020213e+01 9.00000000000000000000e+01 5.00000000000000000000e+01 7.82842712474619020213e+01 2.17157287525381015314e+01 5.00000000000000071054e+01 1.00000000000000000000e+01 2.17157287525381015314e+01 2.17157287525380908733e+01 1.00000000000000000000e+01 4.99999999999999928946e+01 2.17157287525380908733e+01 7.82842712474619020213e+01"
+                >
+                </polygon>
                 <g>
                   <circle cx="35" cy="40" r="10"></circle>
                   <circle cx="35" cy="40" fill="white" r="4"></circle>
@@ -103,24 +123,27 @@ defmodule BlogWeb.CoreComponents do
                   <circle cx="35" cy="40" fill="white" r="4"></circle>
                   <circle class="pupil" cx="33" cy="38" r="2"></circle>
                 </g>
-                <polygon points="5.00000000000000000000e+01 6.60000000000000000000e+01 5.77942286340599480354e+01 5.25000000000000000000e+01 4.22057713659400519646e+01 5.25000000000000000000e+01"></polygon>
-                <rect fill="black" height="2" transform="rotate(170, 50,71)" width="20" x="38" y="70"></rect>
+                <polygon points="5.00000000000000000000e+01 6.60000000000000000000e+01 5.77942286340599480354e+01 5.25000000000000000000e+01 4.22057713659400519646e+01 5.25000000000000000000e+01">
+                </polygon>
+                <rect fill="black" height="2" transform="rotate(170, 50,71)" width="20" x="38" y="70">
+                </rect>
                 <rect fill="black" height="1" width="20" x="25" y="28"></rect>
-                <rect fill="black" height="1" transform="rotate(195, 66,28)" width="20" x="55" y="28"></rect>
+                <rect fill="black" height="1" transform="rotate(195, 66,28)" width="20" x="55" y="28">
+                </rect>
               </svg>
             </a>
           </div>
         </div>
-
       </div>
     </footer>
     """
   end
 
   attr :post, Blog.Post, required: true
+
   def post_link(assigns) do
     ~H"""
-    <a class="post-link" href={"/#{String.replace(Date.to_iso8601(@post.date), "-", "/")}/#{@post.slug}.html"}><%= @post.title %></a>
+    <a class="post-link" href={@post.path}><%= @post.title %></a>
     """
   end
 
@@ -149,6 +172,7 @@ defmodule BlogWeb.CoreComponents do
   slot :subtitle
   slot :confirm
   slot :cancel
+
   def modal(assigns) do
     ~H"""
     <div id={@id} phx-mounted={@show && show_modal(@id)} class="relative z-50 hidden">
@@ -217,6 +241,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   @doc """
   Renders flash notices.
   ## Examples
@@ -231,6 +256,7 @@ defmodule BlogWeb.CoreComponents do
   attr :close, :boolean, default: true, doc: "whether the flash can be closed"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
   slot :inner_block, doc: "the optional inner block that renders the flash message"
+
   def flash(assigns) do
     ~H"""
     <div
@@ -252,17 +278,13 @@ defmodule BlogWeb.CoreComponents do
         <%= @title %>
       </p>
       <p class="mt-2 text-[0.8125rem] leading-5"><%= msg %></p>
-      <button
-        :if={@close}
-        type="button"
-        class="group absolute top-2 right-1 p-2"
-        aria-label="close"
-      >
+      <button :if={@close} type="button" class="group absolute top-2 right-1 p-2" aria-label="close">
         <Heroicons.x_mark solid class="h-5 w-5 stroke-current opacity-40 group-hover:opacity-70" />
       </button>
     </div>
     """
   end
+
   @doc """
   Renders a simple form.
   ## Examples
@@ -276,11 +298,14 @@ defmodule BlogWeb.CoreComponents do
   """
   attr :for, :any, default: nil, doc: "the datastructure for the form"
   attr :as, :any, default: nil, doc: "the server side parameter to collect all input under"
+
   attr :rest, :global,
     include: ~w(autocomplete name rel action enctype method novalidate target),
     doc: "the arbitrary HTML attributes to apply to the form tag"
+
   slot :inner_block, required: true
   slot :actions, doc: "the slot for form actions, such as a submit button"
+
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
@@ -293,6 +318,7 @@ defmodule BlogWeb.CoreComponents do
     </.form>
     """
   end
+
   @doc """
   Renders a button.
   ## Examples
@@ -303,6 +329,7 @@ defmodule BlogWeb.CoreComponents do
   attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
   slot :inner_block, required: true
+
   def button(assigns) do
     ~H"""
     <button
@@ -318,6 +345,7 @@ defmodule BlogWeb.CoreComponents do
     </button>
     """
   end
+
   @doc """
   Renders an input with label and error messages.
   A `%Phoenix.HTML.Form{}` and field name may be passed to the input
@@ -330,10 +358,12 @@ defmodule BlogWeb.CoreComponents do
   attr :id, :any
   attr :name, :any
   attr :label, :string, default: nil
+
   attr :type, :string,
     default: "text",
     values: ~w(checkbox color date datetime-local email file hidden month number password
                range radio search select tel text textarea time url week)
+
   attr :value, :any
   attr :field, :any, doc: "a %Phoenix.HTML.Form{}/field name tuple, for example: {f, :email}"
   attr :errors, :list
@@ -344,6 +374,7 @@ defmodule BlogWeb.CoreComponents do
   attr :rest, :global, include: ~w(autocomplete disabled form max maxlength min minlength
                                    pattern placeholder readonly required size step)
   slot :inner_block
+
   def input(%{field: {f, field}} = assigns) do
     assigns
     |> assign(field: nil)
@@ -356,8 +387,10 @@ defmodule BlogWeb.CoreComponents do
     |> assign_new(:errors, fn -> translate_errors(f.errors || [], field) end)
     |> input()
   end
+
   def input(%{type: "checkbox"} = assigns) do
     assigns = assign_new(assigns, :checked, fn -> input_equals?(assigns.value, "true") end)
+
     ~H"""
     <label phx-feedback-for={@name} class="flex items-center gap-4 text-sm leading-6 text-zinc-600">
       <input type="hidden" name={@name} value="false" />
@@ -374,6 +407,7 @@ defmodule BlogWeb.CoreComponents do
     </label>
     """
   end
+
   def input(%{type: "select"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
@@ -392,6 +426,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   def input(%{type: "textarea"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
@@ -412,6 +447,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   def input(assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
@@ -433,15 +469,19 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   defp input_border([] = _errors),
     do: "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5"
+
   defp input_border([_ | _] = _errors),
     do: "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
+
   @doc """
   Renders a label.
   """
   attr :for, :string, default: nil
   slot :inner_block, required: true
+
   def label(assigns) do
     ~H"""
     <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
@@ -449,10 +489,12 @@ defmodule BlogWeb.CoreComponents do
     </label>
     """
   end
+
   @doc """
   Generates a generic error message.
   """
   slot :inner_block, required: true
+
   def error(assigns) do
     ~H"""
     <p class="phx-no-feedback:hidden mt-3 flex gap-3 text-sm leading-6 text-rose-600">
@@ -461,6 +503,7 @@ defmodule BlogWeb.CoreComponents do
     </p>
     """
   end
+
   @doc """
   Renders a header with title.
   """
@@ -468,6 +511,7 @@ defmodule BlogWeb.CoreComponents do
   slot :inner_block, required: true
   slot :subtitle
   slot :actions
+
   def header(assigns) do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
@@ -483,6 +527,7 @@ defmodule BlogWeb.CoreComponents do
     </header>
     """
   end
+
   @doc ~S"""
   Renders a table with generic styling.
   ## Examples
@@ -494,10 +539,13 @@ defmodule BlogWeb.CoreComponents do
   attr :id, :string, required: true
   attr :row_click, :any, default: nil
   attr :rows, :list, required: true
+
   slot :col, required: true do
     attr :label, :string
   end
+
   slot :action, doc: "the slot for showing user actions in the last table column"
+
   def table(assigns) do
     ~H"""
     <div id={@id} class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
@@ -545,6 +593,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   @doc """
   Renders a data list.
   ## Examples
@@ -556,6 +605,7 @@ defmodule BlogWeb.CoreComponents do
   slot :item, required: true do
     attr :title, :string, required: true
   end
+
   def list(assigns) do
     ~H"""
     <div class="mt-14">
@@ -568,6 +618,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   @doc """
   Renders a back navigation link.
   ## Examples
@@ -575,6 +626,7 @@ defmodule BlogWeb.CoreComponents do
   """
   attr :navigate, :any, required: true
   slot :inner_block, required: true
+
   def back(assigns) do
     ~H"""
     <div class="mt-16">
@@ -588,6 +640,7 @@ defmodule BlogWeb.CoreComponents do
     </div>
     """
   end
+
   ## JS Commands
   def show(js \\ %JS{}, selector) do
     JS.show(js,
@@ -598,6 +651,7 @@ defmodule BlogWeb.CoreComponents do
          "opacity-100 translate-y-0 sm:scale-100"}
     )
   end
+
   def hide(js \\ %JS{}, selector) do
     JS.hide(js,
       to: selector,
@@ -608,6 +662,7 @@ defmodule BlogWeb.CoreComponents do
          "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
     )
   end
+
   def show_modal(js \\ %JS{}, id) when is_binary(id) do
     js
     |> JS.show(to: "##{id}")
@@ -618,6 +673,7 @@ defmodule BlogWeb.CoreComponents do
     |> show("##{id}-container")
     |> JS.focus_first(to: "##{id}-content")
   end
+
   def hide_modal(js \\ %JS{}, id) do
     js
     |> JS.hide(
@@ -644,6 +700,7 @@ defmodule BlogWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
   defp input_equals?(val1, val2) do
     Phoenix.HTML.html_escape(val1) == Phoenix.HTML.html_escape(val2)
   end

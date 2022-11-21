@@ -1,6 +1,6 @@
 defmodule Blog.Post do
-  @enforce_keys [:title, :body, :slug, :tags, :date]
-  defstruct [:title, :body, :slug, :tags, :date]
+  @enforce_keys [:title, :body, :slug, :tags, :date, :path]
+  defstruct [:title, :body, :slug, :tags, :date, :path]
 
   def parse!(path) do
     {date, slug} = parse_path(path)
@@ -11,7 +11,8 @@ defmodule Blog.Post do
       body: attributes.body,
       slug: slug,
       tags: attributes.tags,
-      date: date
+      date: date,
+      path: "/#{String.replace(Date.to_iso8601(date), "-", "/")}/#{slug}.html"
     }
   end
 
