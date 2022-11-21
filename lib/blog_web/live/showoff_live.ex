@@ -25,6 +25,11 @@ defmodule BlogWeb.ShowoffLive do
     {:noreply, socket}
   end
 
+  def handle_event("example", %{"text" => text}, socket) do
+    socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
+    {:noreply, socket}
+  end
+
   def handle_event("example", %{"id" => id}, %{assigns: %{alt: true}} = socket) do
     id = String.to_integer(id)
     RecentDrawings.delete(socket.assigns.room_name, id)
@@ -35,11 +40,6 @@ defmodule BlogWeb.ShowoffLive do
     id = String.to_integer(id)
     sketch = RecentDrawings.get(socket.assigns.room_name, id)
     socket = assign(socket, %{err: nil, svg: sketch.svg, drawing_text: sketch.source})
-    {:noreply, socket}
-  end
-
-  def handle_event("example", %{"text" => text}, socket) do
-    socket = socket |> update_drawing(text) |> assign(:drawing_text, text)
     {:noreply, socket}
   end
 
