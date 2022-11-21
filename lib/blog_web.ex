@@ -35,6 +35,7 @@ defmodule BlogWeb do
     quote do
       use Phoenix.LiveView,
         layout: {BlogWeb.Layouts, :app}
+
       unquote(html_helpers())
     end
   end
@@ -52,6 +53,7 @@ defmodule BlogWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller,
         only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
       # Include general helpers for rendering HTML
       unquote(html_helpers())
     end
@@ -78,7 +80,6 @@ defmodule BlogWeb do
         statics: BlogWeb.static_paths()
     end
   end
-
 
   def router do
     quote do

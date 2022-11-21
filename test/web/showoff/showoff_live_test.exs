@@ -13,7 +13,8 @@ defmodule BlogWeb.ShowoffLiveTest do
       |> element("#screen")
       |> render()
 
-    assert html == "<div class=\"screen\" id=\"screen\"><svg viewbox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" fill=\"black\" r=\"25\"></circle></svg></div>"
+    assert html ==
+             "<div class=\"screen\" id=\"screen\"><svg viewbox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" fill=\"black\" r=\"25\"></circle></svg></div>"
 
     html =
       view
@@ -39,7 +40,8 @@ defmodule BlogWeb.ShowoffLiveTest do
     |> element("form")
     |> render_submit()
 
-    :timer.sleep(20) # wait for the PubSub message to be published/received
+    # wait for the PubSub message to be published/received
+    :timer.sleep(20)
 
     html = render(view)
     assert [sketch] = Floki.find(html, "div#sketches div")
