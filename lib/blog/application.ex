@@ -9,7 +9,6 @@ defmodule Blog.Application do
     cluster_config = Application.get_env(:libcluster, :topologies)
 
     children = [
-      {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]},
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       Showoff.Repo,
       {Showoff.Migrator, nil},
@@ -20,6 +19,14 @@ defmodule Blog.Application do
       Showoff.RoomsPresence,
       Showoff.RoomRegistry
     ]
+
+    children =
+      if cluster_config do
+        child = {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]}
+        [child | children]
+      else
+        children
+      end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

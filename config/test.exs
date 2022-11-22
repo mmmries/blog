@@ -10,5 +10,7 @@ path = Path.join([__DIR__, "..", "tmp", "sketches_test.sqlite3"])
 
 config :blog, Showoff.Repo, database: path
 
+config :libcluster, topologies: nil
+
 # Print only warnings and errors during test
 config :logger, level: :warning
