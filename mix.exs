@@ -40,6 +40,8 @@ defmodule Blog.MixProject do
   defp deps do
     [
       {:phoenix, "1.7.0-rc.0", override: true},
+      # only needed because of the release candidate
+      {:phoenix_view, "2.0.2", override: true},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 3.1"},
       {:phoenix_live_view, "~> 0.18.3"},
