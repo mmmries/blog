@@ -7,7 +7,7 @@
       <div class="input">
         <textarea name="drawing_text"><%= @drawing_text %></textarea>
         <p class="error"><%= @err %></p>
-        <BlogWeb.DrawingsComponent.list message="Ohai" drawings={Showoff.Examples.list()} />
+        <BlogWeb.ExamplesComponent.list message="Ohai" drawings={Showoff.Examples.list()} />
         <br />
         <div class="row">
           <button id="share-drawing" value="publish">Share Your Drawing With The Class</button>

@@ -27,12 +27,19 @@ defmodule Showoff.Examples do
               {:ok, svg} = Showoff.kid_text_to_svg(text)
               %Showoff.Drawing{id: id, text: text, svg: svg}
             end)
+
+  @ids Enum.map(@drawings, & &1.id)
+
   @index Enum.reduce(@drawings, %{}, fn drawing, map ->
            Map.put(map, drawing.id, drawing)
          end)
 
   def get(id) do
     Map.fetch(@index, id)
+  end
+
+  def ids do
+    @ids
   end
 
   def list do
