@@ -39,13 +39,12 @@ defmodule Blog.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "1.7.0-rc.0", override: true},
-      # only needed because of the release candidate
-      {:phoenix_view, "2.0.2", override: true},
+      {:phoenix, "~> 1.7"},
+      {:phoenix_view, "~> 2.0"},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 3.1"},
       {:phoenix_live_view, "~> 0.18.3"},
-      {:ecto_sqlite3, "~> 0.8.2"},
+      {:ecto_sqlite3, "~> 0.9"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.6"},
@@ -60,8 +59,8 @@ defmodule Blog.MixProject do
       {:makeup_erlang, "~> 0.1.0"},
       {:nimble_parsec, "~> 1.2"},
       {:stemmer, "~> 1.0"},
-      {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
-      {:toml, "~> 0.6.1"},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:toml, "~> 0.7"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev}
     ]
