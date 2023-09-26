@@ -28,10 +28,8 @@ config :blog, BlogWeb.Endpoint,
   check_origin: false,
   server: true
 
-config :blog, :showoff_dets_dir, "/dets"
-
 config :blog, Showoff.Repo,
-  database: "/dets/sketches.sqlite3",
+  database: "/var/lib/litefs/sketches.sqlite3",
   auto_vacuum: :full,
   pool_size: 5
 

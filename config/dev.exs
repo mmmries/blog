@@ -17,8 +17,7 @@ config :blog, BlogWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
-database_filename = System.get_env("DB_FILE", "sketches_dev") <> ".sqlite3"
-path = Path.join([__DIR__, "..", "tmp", database_filename])
+path = Path.join([__DIR__, "..", "tmp", "unified.sqlite3"])
 config :blog, Showoff.Repo, database: path
 
 # ## SSL Support
@@ -68,7 +67,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-if System.get_env("DETS_DIR") do
-  config :blog, :showoff_dets_dir, System.get_env("DETS_DIR")
-end

@@ -1,43 +1,37 @@
-# fly.toml file generated for divine-dust-2370 on 2021-11-23T20:42:00Z
+# fly.toml app configuration file generated for showoff on 2023-09-24T18:09:05+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "divine-dust-2370"
-
+app = "showoff"
+primary_region = "den"
 kill_signal = "SIGTERM"
 kill_timeout = 5
-processes = []
+swap_size_mb = 512
+
+[build]
+
+# we don't use the migrate step because it won't mount the
+# volume with our sqlite database
+#[deploy]
+#  release_command = "/app/bin/migrate"
 
 [env]
+  PHX_HOST = "showoff.fly.dev"
+  PORT = "4000"
 
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
+[http_service]
+  internal_port = 4000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+  [http_service.concurrency]
+    type = "connections"
+    hard_limit = 1000
+    soft_limit = 1000
 
 [mounts]
-  source="drawings"
-  destination="/dets"
-
-[[services]]
-  http_checks = []
-  internal_port = 4000
-  processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
-
-  [services.concurrency]
-    hard_limit = 250
-    soft_limit = 200
-    type = "connections"
-
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "30s"
-    interval = "15s"
-    restart_limit = 5
-    timeout = "2s"
+  source = "litefs"
+  destination = "/var/lib/litefs"

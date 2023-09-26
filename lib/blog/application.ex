@@ -6,12 +6,12 @@ defmodule Blog.Application do
   use Application
 
   def start(_type, _args) do
+    Blog.Release.migrate()
     cluster_config = Application.get_env(:libcluster, :topologies)
 
     children = [
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
       Showoff.Repo,
-      {Showoff.Migrator, nil},
       # Start the endpoint when the application starts
       BlogWeb.Endpoint,
       {Blog.SearchServer, nil},
