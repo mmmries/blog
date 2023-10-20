@@ -14,7 +14,7 @@ defmodule BlogWeb.ShowoffLiveTest do
       |> render()
 
     assert html ==
-             "<div class=\"screen\" id=\"screen\"><svg viewbox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" fill=\"black\" r=\"25\"></circle></svg></div>"
+             "<div class=\"screen\" id=\"screen\"><svg viewbox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle r=\"25\" cx=\"50\" cy=\"50\" fill=\"black\"></circle></svg></div>"
 
     html =
       view
@@ -34,7 +34,7 @@ defmodule BlogWeb.ShowoffLiveTest do
 
     assert [{"div", _attrs, [{"svg", attrs, svg}]}] = Floki.find(html, "#screen")
     assert attrs == [{"viewbox", "0 0 100 100"}, {"xmlns", "http://www.w3.org/2000/svg"}]
-    assert svg == [{"circle", [{"cx", "50"}, {"cy", "50"}, {"fill", "blue"}, {"r", "25"}], []}]
+    assert svg == [{"circle",[{"r", "25"},{"cx", "50"},{"cy", "50"},{"fill", "blue"}],[]}]
 
     view
     |> element("form")
