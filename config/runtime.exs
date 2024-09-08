@@ -17,6 +17,14 @@ if config_env() == :prod do
     secret_key_base: secret_key_base,
     server: true
 
+  users =
+    "HOME_AUTHORIZED_USERS"
+    |> System.get_env("")
+    |> String.split(";")
+    |> Enum.map(&String.trim/1)
+
+  config :blog, authorized_users: users
+
   app_name =
     System.get_env("FLY_APP_NAME") ||
       raise "FLY_APP_NAME not available"
