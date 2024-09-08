@@ -9,6 +9,14 @@ defmodule BlogWeb.PageController do
     render(conn, "about.html")
   end
 
+  def privacy(conn, _param) do
+    render(conn, "privacy.html")
+  end
+
+  def terms(conn, _param) do
+    render(conn, "terms.html")
+  end
+
   def post(conn, %{"year" => year, "month" => month, "day" => day, "slug" => slug}) do
     with {:ok, date} <- date(year, month, day),
          slug <- trim_slug(slug),

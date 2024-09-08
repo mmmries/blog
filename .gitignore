@@ -39,3 +39,4 @@ npm-debug.log
 
 # We ignore this tmp directory which is used for development
 /tmp
+/.env

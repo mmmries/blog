@@ -8,7 +8,9 @@ defmodule BlogWeb.Endpoint do
     store: :cookie,
     key: "_blog_key",
     signing_salt: "Divtdc6m",
-    same_site: "Lax"
+    same_site: "Lax",
+    # 90 days
+    max_age: 60 * 60 * 24 * 90
   ]
 
   socket "/socket", BlogWeb.UserSocket,

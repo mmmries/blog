@@ -21,11 +21,8 @@ config :blog, BlogWeb.Endpoint,
   ],
   url: [host: "blog.riesd.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  # normally secret key base is not commmitted, but in our ase there is no app authentication and spoofing a session
-  # is not a security concern. This is also why we skip origin checks
-  secret_key_base:
-    "6twmBc5jsFuEW+UGTleRzieApmOpcx6mmvjvZrBHF7QYxj2LJ2d18ob0KgMfs+lozd8dQe7lmhVpUzdTHBid1w==",
-  check_origin: false,
+  # This secret_key_base value gets overriden in the runtime.exs file using a secure secret
+  check_origin: ["https://blog.riesd.com", "https://showoff.riesd.com", "https://home.riesd.com"],
   server: true
 
 config :blog, Showoff.Repo,

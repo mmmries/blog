@@ -62,7 +62,9 @@ defmodule Blog.MixProject do
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:toml, "~> 0.7"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "~> 1.2", only: :dev}
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:ueberauth, "~> 0.10"},
+      {:ueberauth_google, "~> 0.10"}
     ]
   end
 
