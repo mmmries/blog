@@ -39,10 +39,13 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
-users =
-  "HOME_AUTHORIZED_USERS"
-  |> System.get_env("")
-  |> String.split(";")
-  |> Enum.map(&String.trim/1)
+case System.get_env("HOME_AUTHORIZED_USERS") do
+  nil -> :ok
+  str ->
+    users =
+      str
+      |> String.split(";")
+      |> Enum.map(&String.trim/1)
 
-config :blog, authorized_users: users
+    config :blog, authorized_users: users
+end

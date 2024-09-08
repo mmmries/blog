@@ -4,12 +4,8 @@ defmodule BlogWeb.HomeDashboardLiveTest do
   test "Gives no access initially" do
     {:ok, view, _html} = conn() |> live(~p(/home))
 
-    html =
-      view
-      |> element("#no-access")
-      |> render()
-
-    assert html =~ "<h1 id=\"no-access\">No Access!</h1>"
+    assert has_element?(view, "#no-access")
+    refute has_element?(view, "#garage-door")
   end
 
   test "Authenticated Users can get access" do
@@ -18,12 +14,8 @@ defmodule BlogWeb.HomeDashboardLiveTest do
       |> init_test_session(%{current_user: "user@example.com"})
       |> live(~p(/home))
 
-    html =
-      view
-      |> element("#access")
-      |> render()
-
-    assert html =~ "<h1 id=\"access\">Access!</h1>"
+    refute has_element?(view, "#no-access")
+    assert has_element?(view, "#garage-door")
   end
 
   test "Authenticated Users that we don't know about get no access" do
@@ -32,12 +24,8 @@ defmodule BlogWeb.HomeDashboardLiveTest do
       |> init_test_session(%{current_user: "other_user@example.com"})
       |> live(~p(/home))
 
-    html =
-      view
-      |> element("#no-access")
-      |> render()
-
-    assert html =~ "<h1 id=\"no-access\">No Access!</h1>"
+    assert has_element?(view, "#no-access")
+    refute has_element?(view, "#garage-door")
   end
 
   def conn do

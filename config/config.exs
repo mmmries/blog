@@ -21,7 +21,7 @@ config :blog, BlogWeb.Endpoint,
 
 config :blog, ecto_repos: [Showoff.Repo]
 
-config :blog, authorized_users: ["user@example.com"]
+config :blog, authorized_users: []
 
 # Configures Elixir's Logger
 config :logger, :console,
