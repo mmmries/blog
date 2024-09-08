@@ -32,3 +32,10 @@ This application also hosts the showoff tool which is a tool to learn about prog
 In order to access it you need to make a request with a hostname prefixed by `showoff.*`.
 The easiest way to do this in development is to add an entry to `/etc/hosts` that points `showoff.local` to `127.0.0.1`.
 Then in your browser you can go to `http://showoff.local:4001`.
+
+## Home
+
+I've started to build out some functionality that I plan to use as a way to manage some home automation hobby projects.
+Ideally I would like these to be only available via the `home.riesd.com` domain, but I can't test OAuth flows via a `home.local` domain.
+I can only use public domains or `localhost`.
+To work around this problem for now all of the routes for the home app are available on any subdomain, but I'd love to find a better solution for this to isolate the functionality more cleanly.

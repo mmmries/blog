@@ -37,13 +37,18 @@ defmodule BlogWeb.Router do
     pipe_through :home
 
     live "/home", HomeDashboardLive
-    get "/privacy", PageController, :privacy
-    get "/terms", PageController, :terms
 
     # OAuth Login
     get "/auth/:provider", AuthController, :request
     get "/auth/:provider/callback", AuthController, :callback
     post "/auth/:provider/callback", AuthController, :callback
+  end
+
+  scope "/", BlogWeb do
+    pipe_through :browser
+
+    get "/privacy", PageController, :privacy
+    get "/terms", PageController, :terms
   end
 
   ## Blog Routes
