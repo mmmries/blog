@@ -23,18 +23,8 @@ defmodule BlogWeb.Router do
 
   ## Home App Routes
 
-  pipeline :home do
-    plug :accepts, ["html"]
-    plug :put_root_layout, {BlogWeb.Layouts, :home}
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :fetch_live_flash
-  end
-
   scope "/", BlogWeb do
-    pipe_through :home
+    pipe_through :browser
 
     live "/home", HomeDashboardLive
 

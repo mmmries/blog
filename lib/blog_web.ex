@@ -59,7 +59,7 @@ defmodule BlogWeb do
     end
   end
 
-  defp html_helpers do
+  def html_helpers do
     quote do
       # HTML escaping functionality
       import Phoenix.HTML
