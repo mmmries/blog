@@ -53,6 +53,7 @@ defmodule Blog.MixProject do
       {:chunky_svg, "~> 0.2"},
       {:earmark, "~> 1.3"},
       {:floki, "~> 0.25"},
+      {:gnat, "~> 1.8"},
       {:heroicons, "~> 0.5"},
       {:libcluster, "~> 3.3"},
       {:makeup_elixir, "~> 0.14"},

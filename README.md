@@ -9,8 +9,11 @@ It should reload immediately when changes are made.
 
 ```shell
 $ mix deps.get
+$ source .env
 $ iex --name blog@127.0.0.1 -S mix phx.server
 ```
+
+> The .env file contains sensitive credentials needed for the application. It is not committed to the git repo.
 
 ## Deploying
 

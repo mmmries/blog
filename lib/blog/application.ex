@@ -20,6 +20,8 @@ defmodule Blog.Application do
       Showoff.RoomRegistry
     ]
 
+    children = maybe_prepend_nats_connection(children)
+
     children =
       if cluster_config do
         child = {Cluster.Supervisor, [cluster_config, [name: Blog.ClusterSupervisor]]}
@@ -39,5 +41,29 @@ defmodule Blog.Application do
   def config_change(changed, _new, removed) do
     BlogWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp maybe_prepend_nats_connection(children) do
+    if System.get_env("NATS_JWT") do
+      [{Gnat.ConnectionSupervisor, nats_connection_settings()} | children]
+    else
+      children
+    end
+  end
+
+  defp nats_connection_settings do
+    %{
+      name: :gnat,
+      backoff_period: 5_000,
+      connection_settings: [
+        %{
+          host: "connect.ngs.global",
+          tls: true,
+          ssl_opts: [verify: :verify_none],
+          jwt: System.get_env("NATS_JWT"),
+          nkey_seed: System.get_env("NATS_NKEY_SEED")
+        }
+      ]
+    }
   end
 end
