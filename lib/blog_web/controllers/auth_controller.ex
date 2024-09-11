@@ -2,6 +2,13 @@ defmodule BlogWeb.AuthController do
   use BlogWeb, :controller
   plug Ueberauth
 
+  def logout(conn, _params) do
+    conn
+    |> put_session(:current_user, nil)
+    |> configure_session(renew: true)
+    |> redirect(to: "/home")
+  end
+
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case auth do
       %{provider: :google, info: %{email: email}} ->

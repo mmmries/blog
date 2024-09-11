@@ -1,7 +1,9 @@
-<%= if @authorized? do %>
-  <button id="garage-door" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="garage_door">
-    Garage Door
-  </button>
-<% else %>
-  <h1 id="no-access">No Access!</h1>
-<% end %>
+<div class="bg-white rounded-lg shadow-md p-6">
+  <%= if @authorized? do %>
+    <button id="garage-door" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="garage_door">
+      Garage Door
+    </button>
+  <% else %>
+    <h1 id="no-access">No Access!</h1>
+  <% end %>
+</div>

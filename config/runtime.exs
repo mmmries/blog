@@ -40,7 +40,9 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
 case System.get_env("HOME_AUTHORIZED_USERS") do
-  nil -> :ok
+  nil ->
+    :ok
+
   str ->
     users =
       str

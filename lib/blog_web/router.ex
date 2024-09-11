@@ -11,6 +11,16 @@ defmodule BlogWeb.Router do
     plug :fetch_live_flash
   end
 
+  pipeline :responsive do
+    plug :accepts, ["html"]
+    plug :put_root_layout, {BlogWeb.Layouts, :responsive}
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_live_flash
+  end
+
   ## Showoff Routes
 
   scope host: "showoff.", alias: BlogWeb do
@@ -24,11 +34,12 @@ defmodule BlogWeb.Router do
   ## Home App Routes
 
   scope "/", BlogWeb do
-    pipe_through :browser
+    pipe_through :responsive
 
     live "/home", HomeDashboardLive
 
     # OAuth Login
+    get "/logout", AuthController, :logout
     get "/auth/:provider", AuthController, :request
     get "/auth/:provider/callback", AuthController, :callback
     post "/auth/:provider/callback", AuthController, :callback

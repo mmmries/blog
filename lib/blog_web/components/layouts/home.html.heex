@@ -12,29 +12,22 @@
   Attempting to reconnect <Heroicons.arrow_path class="ml-1 w-3 h-3 inline animate-spin" />
 </.flash>
 
-<header class="site-header" role="banner">
-      <div class="wrapper">
-        <div class="footer-col-wrapper">
-          <div class="col col-3">
-            <a class="site-title" href={~p(/home)}>Home</a>
-          </div>
-          <div class="col col-9">
-            <nav class="site-nav">
-              <div class="trigger">
-                <%= if @username == nil do %>
-                  <a class="page-link" href={~p(/auth/google)}>Login</a>
-                <% else %>
-                  <span>Welcome <%= @username %></span>
-                <% end %>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
-
-<main class="page-content" aria-label="Content">
-  <div class="wrapper">
-    <%= @inner_content %>
+<header class="bg-blue-600 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="size-20"><img src={~p"/images/home.png"} alt="Home icon"></div>
+    <nav>
+      <ul class="flex space-x-4">
+        <%= if @username == nil do %>
+          <li><a class="page-link" href={~p(/auth/google)}>Login</a></li>
+        <% else %>
+          <li><span>Welcome <%= @username %></span></li>
+          <li><a class="page-link" href={~p(/logout)}>Logout</a></li>
+        <% end %>
+      </ul>
+    </nav>
   </div>
+</header>
+
+<main class="flex-grow container mx-auto mt-8 px-4">
+  <%= @inner_content %>
 </main>
