@@ -3,6 +3,9 @@
     <button id="garage-door" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="garage_door">
       Garage Door
     </button>
+    <span class="bg-slate-300 hover:bg-slate-400 text-white font-bold py-3 px-4 rounded">
+      <%= @garage_door_status %>
+    </span>
   <% else %>
     <h1 id="no-access">No Access!</h1>
   <% end %>

@@ -14,17 +14,15 @@
 
 <header class="bg-blue-600 text-white p-4">
   <div class="container mx-auto flex justify-between items-center">
-    <div class="size-20"><img src={~p"/images/home.png"} alt="Home icon"></div>
-    <nav>
-      <ul class="flex space-x-4">
-        <%= if @username == nil do %>
-          <li><a class="page-link" href={~p(/auth/google)}>Login</a></li>
-        <% else %>
-          <li><span>Welcome <%= @username %></span></li>
-          <li><a class="page-link" href={~p(/logout)}>Logout</a></li>
-        <% end %>
-      </ul>
-    </nav>
+    <div class="flex size-20"><img class="h-auto w-auto max-h-[50vh] max-w-[50vw] object-contain mr-4" src={~p"/images/home.png"} alt="Home icon"></div>
+    <%= if @username == nil do %>
+      <div><a class="page-link" href={~p(/auth/google)}>Login</a></div>
+    <% else %>
+      <div>
+        <span>Welcome <%= @username %></span>
+        <a class="page-link" href={~p(/logout)}>Logout</a>
+      </div>
+    <% end %>
   </div>
 </header>
 
