@@ -6,6 +6,8 @@ defmodule BlogWeb.HomeDashboardLive do
 
   require Logger
 
+  @status_topic "home.garage_door.status"
+
   def mount(_args, session, socket) do
     username = Map.get(session, "current_user")
 
@@ -17,6 +19,7 @@ defmodule BlogWeb.HomeDashboardLive do
 
     if connected?(socket) do
       Task.async(fn -> Home.GarageDoor.get_status() end)
+      Gnat.sub(:gnat, self(), @status_topic)
     end
 
     {:ok, socket}
@@ -45,7 +48,12 @@ defmodule BlogWeb.HomeDashboardLive do
 
   def handle_info({:DOWN, _ref, :process, _pid, reason}, socket) do
     Logger.error("Async task failed: #{inspect(reason)}")
-    {:noreply, socket}
+    {:noreply, put_flash(socket, :error, "Failed to get door status: #{inspect(reason)}")}
+  end
+
+  # Subscription updates
+  def handle_info({:msg, %{topic: @status_topic, body: status}}, socket) do
+    {:noreply, assign(socket, garage_door_status: status)}
   end
 
   defp authorized?(username) do
