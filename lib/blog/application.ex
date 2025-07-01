@@ -11,7 +11,7 @@ defmodule Blog.Application do
 
     children = [
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
-      Blog.Repo,
+#      Blog.Repo,
       Showoff.Repo,
       # Start the endpoint when the application starts
     BlogWeb.Endpoint,
