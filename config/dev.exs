@@ -20,6 +20,17 @@ config :blog, BlogWeb.Endpoint,
 path = Path.join([__DIR__, "..", "tmp", "unified.sqlite3"])
 config :blog, Showoff.Repo, database: path
 
+postgres_url =
+  Path.join([__DIR__, "..", "tmp", "neon_development_credentials.txt"])
+  |> File.read!()
+
+config :blog, Blog.Repo,
+  url: postgres_url,
+  ssl: true,
+  ssl_opts: [
+    verify: :verify_none
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

@@ -64,6 +64,7 @@ defmodule Blog.MixProject do
       {:toml, "~> 0.7"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:postgrex, "~> 0.17.0"},
       {:ueberauth, "~> 0.10"},
       {:ueberauth_google, "~> 0.10"}
     ]
