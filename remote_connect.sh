@@ -24,7 +24,7 @@ ip_array=( $(fly ips private | awk '(NR>1){ print $3 }') )
 IP=${ip_array[0]}
 
 # Get the Fly app name. Assumes it is used as part of the full node name
-APP_NAME="divine-dust-2370"
+APP_NAME="showoff"
 FULL_NODE_NAME="${APP_NAME}@${IP}"
 echo Attempting to connect to $FULL_NODE_NAME
 
