@@ -5,7 +5,7 @@ defmodule Blog.MixProject do
     [
       app: :blog,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -39,12 +39,12 @@ defmodule Blog.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7"},
+      {:phoenix, "~> 1.8"},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_html, "~> 3.1"},
-      {:phoenix_live_view, "~> 0.20.1"},
-      {:ecto_sqlite3, "~> 0.9"},
+      {:phoenix_live_view, "~> 1.1"},
+      {:ecto_sqlite3, "~> 0.21"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.6"},
@@ -59,12 +59,13 @@ defmodule Blog.MixProject do
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
       {:nimble_parsec, "~> 1.2"},
-      {:stemmer, "~> 1.0"},
+      {:stemmer, "~> 1.2"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:toml, "~> 0.7"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:postgrex, "~> 0.17.0"},
+      {:lazy_html, ">= 0.1.0", only: :test},
+      {:postgrex, "~> 0.21"},
       {:ueberauth, "~> 0.10"},
       {:ueberauth_google, "~> 0.10"}
     ]
