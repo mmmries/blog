@@ -70,10 +70,20 @@ This Phoenix application includes:
 When upgrading Phoenix and Phoenix LiveView:
 - Phoenix LiveView upgrades often introduce breaking changes
 - **IMPORTANT**: Update Dockerfile versions to match `.tool-versions`
+- **IMPORTANT**: Update GitHub Actions CI configuration in `.github/workflows/elixir.yml`
+- Match the `elixir-version` and `otp-version` to values in `.tool-versions`
+
 - Test all three main features after upgrades:
   1. Blog functionality
   2. SVG generation tool
   3. Garage automation interface
+
+When upgrading Erlang/OTP or Elixir versions:
+- **IMPORTANT**: Update GitHub Actions CI configuration in `.github/workflows/elixir.yml`
+- Match the `elixir-version` and `otp-version` to values in `.tool-versions`
+- Update `erlef/setup-beam` action to latest version if needed (check Ubuntu compatibility)
+- Also update the erland and elixir versions in the Dockerfile.
+- You may need to search for a support debian version by searching hub.docker.com
 
 ## Development Requirements
 
