@@ -21,6 +21,18 @@ defmodule BlogWeb.Router do
     plug :fetch_live_flash
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  ## Health Check Routes
+
+  scope "/", BlogWeb do
+    pipe_through :api
+    
+    get "/health", HealthController, :check
+  end
+
   ## Showoff Routes
 
   scope host: "showoff.", alias: BlogWeb do

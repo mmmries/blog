@@ -13,7 +13,8 @@ config :blog, BlogWeb.Endpoint,
   force_ssl: [
     host: nil,
     hsts: true,
-    rewrite_on: [:x_forwarded_proto]
+    rewrite_on: [:x_forwarded_proto],
+    exclude: ["/health"]
   ],
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
