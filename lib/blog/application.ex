@@ -10,10 +10,10 @@ defmodule Blog.Application do
 
     children = [
       {Phoenix.PubSub, [name: Blog.PubSub, adapter: Phoenix.PubSub.PG2]},
-#      Blog.Repo,
+      #      Blog.Repo,
       Showoff.Repo,
       # Start the endpoint when the application starts
-    BlogWeb.Endpoint,
+      BlogWeb.Endpoint,
       {Blog.SearchServer, nil},
       # Keep track of which servers are hosting which rooms
       Showoff.RoomsPresence,

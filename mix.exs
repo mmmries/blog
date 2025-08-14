@@ -10,7 +10,8 @@ defmodule Blog.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      releases: releases()
+      releases: releases(),
+      listeners: [Phoenix.CodeReloader]
     ]
   end
 
@@ -59,9 +60,9 @@ defmodule Blog.MixProject do
       {:makeup_erlang, "~> 0.1.0"},
       {:nimble_parsec, "~> 1.2"},
       {:stemmer, "~> 1.2"},
-      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
       {:toml, "~> 0.7"},
-      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:lazy_html, ">= 0.1.0", only: :test},
       {:postgrex, "~> 0.21"},

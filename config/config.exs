@@ -42,7 +42,7 @@ config :esbuild,
   ]
 
 config :tailwind,
-  version: "3.1.8",
+  version: "3.4.16",
   default: [
     args: ~w(
       --config=tailwind.config.js
@@ -51,7 +51,6 @@ config :tailwind,
     ),
     cd: Path.expand("../assets", __DIR__)
   ]
-
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),

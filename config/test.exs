@@ -12,6 +12,5 @@ config :blog, Showoff.Repo, database: path
 
 config :blog, authorized_users: ["user@example.com"]
 
-
 # Print only warnings and errors during test
 config :logger, level: :warning

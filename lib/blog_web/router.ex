@@ -29,7 +29,7 @@ defmodule BlogWeb.Router do
 
   scope "/", BlogWeb do
     pipe_through :api
-    
+
     get "/health", HealthController, :check
   end
 
