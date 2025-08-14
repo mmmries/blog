@@ -69,8 +69,6 @@ config :blog, BlogWeb.Endpoint,
 
 config :blog, dev_routes: true
 
-# Disable libcluster in development
-config :libcluster, topologies: nil
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

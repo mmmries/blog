@@ -52,12 +52,6 @@ config :tailwind,
     cd: Path.expand("../assets", __DIR__)
   ]
 
-config :libcluster,
-  topologies: [
-    local: [
-      strategy: Cluster.Strategy.LocalEpmd
-    ]
-  ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),

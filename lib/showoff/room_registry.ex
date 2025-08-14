@@ -3,14 +3,14 @@ defmodule Showoff.RoomRegistry do
   alias Showoff.{RoomsPresence, LocalDrawings}
   @topic "rooms"
 
-  @spec lookup_name(String.t()) :: list(node())
+  @spec lookup_name(String.t()) :: list(String.t())
   def lookup_name(name) do
     case RoomsPresence.get_by_key(@topic, name) do
       [] ->
         []
 
-      %{metas: metas} ->
-        Enum.map(metas, & &1.node)
+      %{metas: _metas} ->
+        [name]
     end
   end
 
@@ -39,6 +39,6 @@ defmodule Showoff.RoomRegistry do
   end
 
   defp track_presence(name) do
-    RoomsPresence.track(self(), @topic, name, %{node: Node.self()})
+    RoomsPresence.track(self(), @topic, name, %{room: name})
   end
 end

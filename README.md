@@ -15,6 +15,17 @@ $ iex --name blog@127.0.0.1 -S mix phx.server
 
 > The .env file contains sensitive credentials needed for the application. It is not committed to the git repo.
 
+## Testing
+
+To run the full test suite, you'll need a local NATS server running:
+
+```shell
+$ nats-server
+$ mix test
+```
+
+The application expects a NATS server running on the default port (4222) for development and testing. In production, it uses NGS Global with JWT authentication.
+
 ## Deploying
 
 This blog is deployed using [Fly](https://fly.io).

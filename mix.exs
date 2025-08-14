@@ -55,7 +55,6 @@ defmodule Blog.MixProject do
       {:floki, "~> 0.25"},
       {:gnat, "~> 1.8"},
       {:heroicons, "~> 0.5"},
-      {:libcluster, "~> 3.3"},
       {:makeup_elixir, "~> 0.14"},
       {:makeup_erlang, "~> 0.1.0"},
       {:nimble_parsec, "~> 1.2"},

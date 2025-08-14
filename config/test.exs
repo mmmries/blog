@@ -12,7 +12,6 @@ config :blog, Showoff.Repo, database: path
 
 config :blog, authorized_users: ["user@example.com"]
 
-config :libcluster, topologies: nil
 
 # Print only warnings and errors during test
 config :logger, level: :warning
