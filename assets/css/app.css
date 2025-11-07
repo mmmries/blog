@@ -505,7 +505,7 @@
    .highlight .il {
      color: #099; }
 
-/* Global Search */
+/* Legacy Global Search - keeping for backward compatibility if needed */
 .global-search {
   width: 100%;
   position: relative;
