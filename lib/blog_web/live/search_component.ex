@@ -1,9 +1,9 @@
-defmodule BlogWeb.SearchLive do
-  use Phoenix.LiveView
+defmodule BlogWeb.SearchComponent do
+  use BlogWeb, :live_component
 
   attr :post, Blog.Post, required: true
 
-  def modern_post_link(assigns) do
+  def search_result(assigns) do
     ~H"""
     <a
       class="block px-4 py-3 text-decoration-none border-b border-gray-100 last:border-b-0 transition-colors duration-150 ease-in-out hover:bg-gray-50"
@@ -19,7 +19,13 @@ defmodule BlogWeb.SearchLive do
 
   def render(assigns) do
     ~H"""
-    <form class="w-full relative" autocomplete="off" phx-change="search">
+    <form
+      class="w-full relative"
+      id="search"
+      autocomplete="off"
+      phx-change="search"
+      phx-target={@myself}
+    >
       <div class="relative w-full">
         <div class="relative flex items-center">
           <svg
@@ -42,13 +48,18 @@ defmodule BlogWeb.SearchLive do
             name="search"
             placeholder="Search posts..."
             phx-blur="deactivate"
+            phx-target={@myself}
+            phx-debounce="200"
             class="w-full py-2.5 pl-11 pr-4 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm transition-all duration-150 ease-in-out focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-100 placeholder-gray-400"
           />
         </div>
-        <%= if Enum.count(assigns.matches) > 0 do %>
-          <div class="absolute top-full left-0 right-0 z-50 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto">
-            <%= for post <- assigns.matches do %>
-              <.modern_post_link post={post} />
+        <%= if Enum.count(@matches) > 0 do %>
+          <div
+            id="search-results"
+            class="absolute top-full left-0 right-0 z-50 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto"
+          >
+            <%= for post <- @matches do %>
+              <.search_result post={post} />
             <% end %>
           </div>
         <% end %>
@@ -57,38 +68,23 @@ defmodule BlogWeb.SearchLive do
     """
   end
 
-  def mount(_params, _session, socket) do
-    socket = socket |> assign(:matches, []) |> assign(:turning_off, false)
+  def update(assigns, socket) do
+    socket =
+      socket
+      |> assign(assigns)
+      |> assign_new(:matches, fn -> [] end)
+
     {:ok, socket}
   end
 
   def handle_event("search", %{"search" => query}, socket) do
     socket = socket |> assign(:matches, Blog.SearchServer.query(query))
 
-    socket =
-      if socket.assigns.turning_off do
-        socket |> assign(:turning_off, false)
-      else
-        socket
-      end
-
     {:noreply, socket}
   end
 
   def handle_event("deactivate", _params, socket) do
-    Process.send_after(self(), :turn_off, 500)
-    socket = socket |> assign(:turning_off, true)
-    {:noreply, socket}
-  end
-
-  def handle_info(:turn_off, socket) do
-    socket =
-      if socket.assigns.turning_off do
-        socket |> assign(:turning_off, false) |> assign(:matches, [])
-      else
-        socket
-      end
-
+    socket = socket |> assign(:matches, [])
     {:noreply, socket}
   end
 end

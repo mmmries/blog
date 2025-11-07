@@ -7,4 +7,10 @@ defmodule BlogWeb.PostTest do
 
     assert html_response(conn, 200) =~ "Full Text Search In Memory"
   end
+
+  test "it handles invalid post routes", %{conn: conn} do
+    conn = get(conn, ~p(/2030/01/01/nonexistent))
+    assert conn.assigns.flash == %{"error" => "Couldn't find post"}
+    assert html_response(conn, 302) =~ "redirected"
+  end
 end
