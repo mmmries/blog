@@ -30,7 +30,7 @@ defmodule Blog.SearchServer do
         Blog.Search.search(index, query)
       end)
 
-    Logger.info("it took #{micros}µs to query")
+    Logger.info("it took #{micros}µs to query #{Enum.count(response)}")
     {:reply, response, index}
   end
 end

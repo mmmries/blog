@@ -47,7 +47,6 @@ defmodule BlogWeb.SearchComponent do
             type="text"
             name="search"
             placeholder="Search posts..."
-            phx-blur="deactivate"
             phx-target={@myself}
             phx-debounce="200"
             class="w-full py-2.5 pl-11 pr-4 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm transition-all duration-150 ease-in-out focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-100 placeholder-gray-400"
@@ -56,6 +55,8 @@ defmodule BlogWeb.SearchComponent do
         <%= if Enum.count(@matches) > 0 do %>
           <div
             id="search-results"
+            phx-click-away="deactivate"
+            phx-target={@myself}
             class="absolute top-full left-0 right-0 z-50 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto"
           >
             <%= for post <- @matches do %>
