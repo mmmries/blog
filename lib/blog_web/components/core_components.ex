@@ -27,7 +27,7 @@ defmodule BlogWeb.CoreComponents do
             </nav>
           </div>
           <div class="col col-3">
-            {live_render(@conn, BlogWeb.SearchLive)}
+            <.live_component module={BlogWeb.SearchComponent} id="header-search" />
           </div>
         </div>
       </div>

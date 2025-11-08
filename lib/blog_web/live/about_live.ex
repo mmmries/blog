@@ -1,0 +1,42 @@
+defmodule BlogWeb.AboutLive do
+  use BlogWeb, :live_view
+
+  def render(assigns) do
+    ~H"""
+    <article class="post">
+      <header class="post-header">
+        <h1 class="post-title">About</h1>
+      </header>
+
+      <div class="post-content">
+        <p>
+          A place to explore some ideas by writing.
+          In general you will find that most of my thoughts are about software engineering, robots and software teams.
+        </p>
+
+        <p>Some of these ideas have turned into talks:</p>
+
+        <ul>
+          <li><a href="https://youtu.be/46fZEm4SWL8">Nerves Takes to the Sky @ Empex LA 2020</a></li>
+          <li><a href="https://youtu.be/BfWac2y7cJM">5 Easy Nerves Projects @ Empex LA 2019</a></li>
+          <li>
+            <a href="https://youtu.be/kdIkSv1Gulk?list=PLItFDtW5mcKqFLPvWfomJW5KJ62XeR2oo">
+              Robots and Fun @ MountainWestRubyConf 2016
+            </a>
+          </li>
+          <li>
+            <a href="https://youtu.be/efwZwalqTP0?list=PLItFDtW5mcKqFLPvWfomJW5KJ62XeR2oo">
+              Conventions Between Applications @ MountainWestRubyConf 2015
+            </a>
+          </li>
+          <li>
+            <a href="https://youtu.be/c6rtwWy5V8w?list=PLItFDtW5mcKqFLPvWfomJW5KJ62XeR2oo">
+              How I Accidentally Wrote the Best Code of my Career @ Arrrrcamp 2014
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+    """
+  end
+end

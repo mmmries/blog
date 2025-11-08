@@ -1,22 +1,43 @@
 defmodule BlogWeb.HomepageTest do
   use BlogWeb.ConnCase
 
-  test "it renders successfully", %{conn: conn} do
-    conn = get(conn, ~p(/))
+  import Phoenix.LiveViewTest
 
-    assert html_response(conn, 200) =~ "Build Your Own Blinky"
+  test "it renders successfully", %{conn: conn} do
+    {:ok, _view, html} = live(conn, ~p(/))
+
+    assert html =~ "Build Your Own Blinky"
   end
 
-  # TODO: find a way to test the LiveSearch component which is mounted into the statically rendered homepage
-  # test "searching for blog posts", %{conn: conn} do
-  #   assert {:ok, view, _html} = get(conn, ~p(/)) |> live()
-  #   # => {:error, :nosession}
-  #
-  #   html =
-  #     view
-  #     |> element("form.global-search")
-  #     |> render_change(%{search: "water"})
-  #
-  #   IO.inspect(html)
-  # end
+  test "homepage contains search functionality", %{conn: conn} do
+    {:ok, view, _html} = live(conn, ~p(/))
+
+    # Should have search input with our placeholder
+    assert has_element?(view, "input[placeholder='Search posts...']")
+    # Should have the search icon
+    assert has_element?(view, "svg")
+  end
+
+  test "search functionality works end-to-end", %{conn: conn} do
+    {:ok, view, _html} = live(conn, ~p(/))
+
+    refute has_element?(view, "#search-results")
+
+    # Test searching for content
+    view
+    |> form("form", search: "elixir")
+    |> render_change()
+
+    # Should have search results
+    assert has_element?(view, "#search-results")
+    assert has_element?(view, "#search-results a[href*='/']")
+
+    # Test clearing search
+    view
+    |> form("form", search: "")
+    |> render_change()
+
+    # Results should be cleared
+    refute has_element?(view, "#search-results")
+  end
 end
